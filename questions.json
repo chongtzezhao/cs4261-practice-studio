@@ -1,0 +1,1794 @@
+{
+  "course": "CS4261 / CS5461 Algorithmic Mechanism Design",
+  "questions": [
+    {
+      "id": "P1-Q1",
+      "paper": 1,
+      "set": 1,
+      "week": 1,
+      "topic": "Game Theory & Strictly Dominated Strategies",
+      "difficulty": "Intermediate",
+      "type": "mcq",
+      "marks": 8,
+      "prompt": "Consider the two-player normal-form game given by the payoff matrix, where Player 1 (Row) chooses from $\\{T, M, B\\}$ and Player 2 (Column) chooses from $\\{L, C, R\\}$:\n\n$$\\begin{array}{c|ccc} & L & C & R \\\\ \\hline T & (2, 4) & (2, 2) & (4, 1) \\\\ M & (5, 4) & (1, 2) & (6, 1) \\\\ B & (1, 1) & (5, 5) & (3, 0) \\end{array}$$",
+      "subparts": [
+        {
+          "id": "P1-Q1-a",
+          "label": "(a)",
+          "marks": 2,
+          "prompt": "Which action of Player 1 is strictly dominated by a mixed strategy, and which mixture strictly dominates it?",
+          "options": [
+            "Row T is strictly dominated by the mixture 0.5 M + 0.5 B",
+            "Row M is strictly dominated by the mixture 0.5 T + 0.5 B",
+            "Row B is strictly dominated by the mixture 0.5 T + 0.5 M",
+            "No action is strictly dominated because pure actions have crossing payoffs"
+          ],
+          "answer": 0,
+          "explanation": "Row T yields payoffs (2, 2, 4). The 50/50 mixture 0.5 M + 0.5 B yields: against L: 0.5(5)+0.5(1) = 3 > 2; against C: 0.5(1)+0.5(5) = 3 > 2; against R: 0.5(6)+0.5(3) = 4.5 > 4. Thus (3, 3, 4.5) > (2, 2, 4) strictly across all 3 columns!",
+          "misconception": "Common trap: checking only pure strategies. Row T beats M on C (2 > 1) and beats B on L (2 > 1), so no pure strategy dominates T. But testing convex combinations reveals 0.5 M + 0.5 B strictly dominates T!"
+        },
+        {
+          "id": "P1-Q1-b",
+          "label": "(b)",
+          "marks": 2,
+          "prompt": "After eliminating strictly dominated actions iteratively (IESDS), what are the remaining actions for Player 1 and Player 2?",
+          "options": [
+            "Player 1: {M, B}; Player 2: {L, C}",
+            "Player 1: {T, M}; Player 2: {L, R}",
+            "Player 1: {M}; Player 2: {L}",
+            "Player 1: {T, M, B}; Player 2: {L, C}"
+          ],
+          "answer": 0,
+          "explanation": "1. Eliminate row T. 2. In the remaining 2x3 matrix with rows {M, B}, column R yields payoffs (1, 0), which is strictly dominated by column L yielding (4, 1) or column C yielding (2, 5). Eliminate R. 3. Remaining actions: P1 has {M, B}, P2 has {L, C}.",
+          "misconception": "Trap: eliminating column R in the original 3x3 game before eliminating row T. In the full game against row T, column R gives payoff 1 while L gives 4 and C gives 2, but you must be disciplined and eliminate row T first!"
+        },
+        {
+          "id": "P1-Q1-c",
+          "label": "(c)",
+          "marks": 2,
+          "prompt": "What are all the pure-strategy Nash equilibria of this game?",
+          "options": [
+            "(M, L) and (B, C)",
+            "(T, L) and (M, R)",
+            "(B, C) only",
+            "(M, L) only"
+          ],
+          "answer": 0,
+          "explanation": "In the reduced 2x2 game with {M, B} and {L, C}: (M, L) yields (5, 4) where M beats B (5>1) and L beats C (4>2). (B, C) yields (5, 5) where B beats M (5>1) and C beats L (5>1). Both are mutual pure best responses.",
+          "misconception": "Trap: missing (B, C) by failing to check the bottom-middle cell, or incorrectly keeping an equilibrium containing the eliminated action T."
+        },
+        {
+          "id": "P1-Q1-d",
+          "label": "(d)",
+          "marks": 2,
+          "prompt": "What is the complete set of all Nash equilibria (pure and mixed) in simplest form?",
+          "options": [
+            "(M, L), (B, C), and (2/3 M + 1/3 B, 1/2 L + 1/2 C)",
+            "(M, L) and (B, C) only (no mixed equilibrium exists)",
+            "(1/2 M + 1/2 B, 1/2 L + 1/2 C) only",
+            "(M, L), (B, C), and (1/2 M + 1/2 B, 2/3 L + 1/3 C)"
+          ],
+          "answer": 0,
+          "explanation": "Player 2 indifference: 4p + 1(1-p) = 2p + 5(1-p) => 6p = 4 => p = 2/3. Player 1 indifference: 5q + 1(1-q) = 1q + 5(1-q) => 8q = 4 => q = 1/2. Thus the complete set contains the two pure NE plus the mixed NE (2/3 M + 1/3 B, 1/2 L + 1/2 C).",
+          "misconception": "Trap: confusing p and q! Player 1's probability p is determined by Player 2's payoffs (to make P2 indifferent), while Player 2's probability q is determined by Player 1's payoffs."
+        }
+      ],
+      "solution": "<p><strong>Complete Breakdown:</strong> Action T is strictly dominated by 0.5 M + 0.5 B. Eliminating T leaves columns {L, C, R}, where column R is strictly dominated by L and C. In the resulting 2x2 game, mutual best responses give pure equilibria (M, L) and (B, C), and indifference equations yield the mixed equilibrium (2/3 M + 1/3 B, 1/2 L + 1/2 C).</p>"
+    },
+    {
+      "id": "P1-Q2",
+      "paper": 1,
+      "set": 1,
+      "week": 2,
+      "topic": "Combinatorial Auction & VCG Mechanism",
+      "difficulty": "Intermediate",
+      "type": "mcq",
+      "marks": 8,
+      "prompt": "Three bidders compete for two indivisible items, $X$ and $Y$ ($v_i(\\emptyset) = 0$):\n- Bidder 1: $v_1(X) = 7, v_1(Y) = 6, v_1(XY) = 10$\n- Bidder 2: $v_2(X) = 8, v_2(Y) = 3, v_2(XY) = 9$\n- Bidder 3: $v_3(X) = 5, v_3(Y) = 7, v_3(XY) = 11$\nAll bidders report truthfully to the VCG mechanism (Clarke pivot rule).",
+      "subparts": [
+        {
+          "id": "P1-Q2-a",
+          "label": "(a)",
+          "marks": 2,
+          "prompt": "Which allocation of items $X$ and $Y$ maximizes reported social welfare?",
+          "options": [
+            "Item X to Bidder 2 (value 8), Item Y to Bidder 3 (value 7), Bidder 1 gets nothing (Welfare = 15)",
+            "Both items XY to Bidder 3 (Welfare = 11)",
+            "Item X to Bidder 1, Item Y to Bidder 3 (Welfare = 14)",
+            "Both items XY to Bidder 1 (Welfare = 10)"
+          ],
+          "answer": 0,
+          "explanation": "Feasible bundle allocations: XY to B3 (11), XY to B1 (10), X to B1 and Y to B3 (7+7=14), X to B2 and Y to B1 (8+6=14), X to B2 and Y to B3 (8+7=15). Maximum social welfare is 15.",
+          "misconception": "Trap: assuming that bundle bidders (like Bidder 3 who values XY at 11) must win the bundle over individual item bidders. 8 + 7 = 15 strictly beats 11!"
+        },
+        {
+          "id": "P1-Q2-b",
+          "label": "(b)",
+          "marks": 3,
+          "prompt": "Under the VCG Clarke pivot rule, what are the payments $(p_1, p_2, p_3)$ charged to the bidders?",
+          "options": [
+            "p1 = 0, p2 = 7, p3 = 6",
+            "p1 = 0, p2 = 8, p3 = 7",
+            "p1 = 0, p2 = 4, p3 = 4",
+            "p1 = 2, p2 = 5, p3 = 4"
+          ],
+          "answer": 0,
+          "explanation": "p1 = 0 (losing bidder pays 0). For Bidder 2: without 2, max welfare of {1, 3} is X->1, Y->3 (7+7=14); with 2, Bidder 3 gets 7. Thus p2 = 14 - 7 = 7. For Bidder 3: without 3, max welfare of {1, 2} is X->2, Y->1 (8+6=14); with 3, Bidder 2 gets 8. Thus p3 = 14 - 8 = 6.",
+          "misconception": "Critical trap: forgetting Bidder 1's impact! Without Bidder 2, Bidder 1 wins X (value 7) while Bidder 3 wins Y (value 7), achieving welfare 14. If you forgot Bidder 1, you would think Bidder 3 takes XY for 11 and compute p2 = 11 - 7 = 4, which is WRONG!"
+        },
+        {
+          "id": "P1-Q2-c",
+          "label": "(c)",
+          "marks": 1,
+          "prompt": "What are the net utilities $u_i = v_i(\\text{bundle}) - p_i$ of each of the three bidders?",
+          "options": [
+            "u1 = 0, u2 = 1, u3 = 1",
+            "u1 = 0, u2 = 8, u3 = 7",
+            "u1 = 0, u2 = 0, u3 = 0",
+            "u1 = 1, u2 = 2, u3 = 1"
+          ],
+          "answer": 0,
+          "explanation": "u1 = 0 - 0 = 0. u2 = 8 - 7 = 1. u3 = 7 - 6 = 1.",
+          "misconception": "Remember: VCG guarantees individual rationality (u_i >= 0), so winning bidders retain positive surplus!"
+        },
+        {
+          "id": "P1-Q2-d",
+          "label": "(d)",
+          "marks": 2,
+          "prompt": "What is total seller revenue, and what would Bidder 2's payment become if Bidder 1 were completely absent?",
+          "options": [
+            "Revenue = 13; if Bidder 1 is absent, Bidder 2's payment drops to 4",
+            "Revenue = 15; if Bidder 1 is absent, Bidder 2's payment remains 7",
+            "Revenue = 13; if Bidder 1 is absent, Bidder 2's payment rises to 9",
+            "Revenue = 11; if Bidder 1 is absent, Bidder 2's payment drops to 0"
+          ],
+          "answer": 0,
+          "explanation": "Total revenue = 0 + 7 + 6 = 13. If Bidder 1 is absent, remaining bidders are {2, 3}. Without Bidder 2, Bidder 3 gets XY for value 11. With Bidder 2, Bidder 3 gets Y (value 7). Thus Bidder 2's payment becomes 11 - 7 = 4.",
+          "misconception": "Deep VCG insight: Even though Bidder 1 won nothing, her presence exerted price pressure, forcing Bidder 2's payment up from 4 to 7!"
+        }
+      ],
+      "solution": "<p><strong>Complete Breakdown:</strong> Social welfare is maximized by allocating X to Bidder 2 (value 8) and Y to Bidder 3 (value 7) for total welfare 15. Clarke pivot payments charge externalities: p1 = 0, p2 = 14 - 7 = 7, p3 = 14 - 8 = 6. Net utilities are u1 = 0, u2 = 1, u3 = 1. Total revenue is 13. Without Bidder 1, Bidder 2's payment drops to 4.</p>"
+    },
+    {
+      "id": "P1-Q3",
+      "paper": 1,
+      "set": 1,
+      "week": 3,
+      "topic": "Facility Location: Asymmetric Mechanism",
+      "difficulty": "Intermediate",
+      "type": "mcq",
+      "marks": 6,
+      "prompt": "Three agents are located on the real line at coordinates $x_1 \\le x_2 \\le x_3$. The cost of agent $i$ is her distance $|f(x) - x_i|$ to the facility. A designer proposes the deterministic mechanism:\n$$f(x) = \\frac{x_1 + 2x_3}{3}$$",
+      "subparts": [
+        {
+          "id": "P1-Q3-a",
+          "label": "(a)",
+          "marks": 2,
+          "prompt": "For the location profile $x = (0, 3, 6)$, calculate the facility location $f(x)$, the total cost $\\sum_{i=1}^3 |f(x) - x_i|$, and the optimal total cost.",
+          "options": [
+            "f = 4, Total Cost = 7, Optimal Total Cost = 6 (at median 3)",
+            "f = 3, Total Cost = 6, Optimal Total Cost = 6",
+            "f = 4.5, Total Cost = 8, Optimal Total Cost = 6",
+            "f = 2, Total Cost = 8, Optimal Total Cost = 4"
+          ],
+          "answer": 0,
+          "explanation": "f(0, 3, 6) = (0 + 2*6)/3 = 4. Total cost = |4-0| + |4-3| + |4-6| = 4 + 1 + 2 = 7. Optimal total cost places the facility at median x2 = 3: |3-0| + |3-3| + |3-6| = 3 + 0 + 3 = 6.",
+          "misconception": "Trap: confusing the median mechanism with the proposed mechanism. The proposed mechanism places the facility at 4 (not 3), incurring total cost 7."
+        },
+        {
+          "id": "P1-Q3-b",
+          "label": "(b)",
+          "marks": 2,
+          "prompt": "Is the mechanism $f$ strategyproof (truthful)? Which beneficial misreport exists?",
+          "options": [
+            "No; Agent 3 at 6 can misreport x3' = 9 to pull the facility to 6, reducing her cost from 2 to 0",
+            "Yes; it is a linear combination of reports so no agent can strictly profit",
+            "No; Agent 2 at 3 can misreport 0 to pull the facility to 3",
+            "No; Agent 1 at 0 can misreport 3 to reduce her cost to 1"
+          ],
+          "answer": 0,
+          "explanation": "Agent 3 is at 6 and incurs cost |4 - 6| = 2. If Agent 3 reports x3' = 9, the new facility location is f(0, 3, 9) = (0 + 2*9)/3 = 6. Agent 3's cost becomes |6 - 6| = 0 < 2! Thus f is not strategyproof.",
+          "misconception": "Trap: thinking Agent 2 can manipulate. Notice that f(x) = (x1 + 2x3)/3 does not depend on x2 AT ALL! Agent 2 has zero influence on the facility location. The manipulation comes from extreme agents (Agent 3 or Agent 1) exaggerating outward!"
+        },
+        {
+          "id": "P1-Q3-c",
+          "label": "(c)",
+          "marks": 2,
+          "prompt": "What is the worst-case approximation ratio of $f$ with respect to the maximum cost objective $\\max_{i \\in \\{1,2,3\\}} |f(x) - x_i|$?",
+          "options": [
+            "4/3",
+            "3/2",
+            "2",
+            "5/3"
+          ],
+          "answer": 0,
+          "explanation": "Let d = x3 - x1. Optimal max cost is d/2 (at midpoint). Under f, distance to Agent 1 is (2/3)d, distance to Agent 3 is (1/3)d. Maximum cost under f is (2/3)d. Approximation ratio = ((2/3)d) / ((1/2)d) = 4/3.",
+          "misconception": "Trap: confusing the maximum cost approximation ratio (4/3) with the total cost ratio or the deterministic strategyproof lower bound (2). The ratio here is (2/3)/(1/2) = 4/3."
+        }
+      ],
+      "solution": "<p><strong>Complete Breakdown:</strong> At (0, 3, 6), f = 4 giving total cost 7 vs optimal 6. The mechanism is NOT strategyproof because Agent 3 can report 9 to pull the facility to 6, reducing cost from 2 to 0. The max-cost approximation ratio is ((2/3)d)/(d/2) = 4/3.</p>"
+    },
+    {
+      "id": "P1-Q4",
+      "paper": 1,
+      "set": 1,
+      "week": 3,
+      "topic": "Non-Atomic Routing Game",
+      "difficulty": "Intermediate",
+      "type": "mcq",
+      "marks": 6,
+      "prompt": "One unit of traffic ($r = 1$) needs to be routed from origin $s$ to destination $t$ across two parallel edges:\n- Top edge $e_1$: latency function $c_1(x) = 2x + 1$\n- Bottom edge $e_2$: latency function $c_2(x) = x + 2$\nwhere $x$ denotes the traffic on that edge.",
+      "subparts": [
+        {
+          "id": "P1-Q4-a",
+          "label": "(a)",
+          "marks": 2,
+          "prompt": "Determine the Wardrop equilibrium flow $(x_1, x_2)$ and the equilibrium travel latency.",
+          "options": [
+            "x1 = 2/3, x2 = 1/3; Latency = 7/3 ≈ 2.333",
+            "x1 = 1/2, x2 = 1/2; Latency = 2.0",
+            "x1 = 3/4, x2 = 1/4; Latency = 2.5",
+            "x1 = 1/3, x2 = 2/3; Latency = 8/3 ≈ 2.667"
+          ],
+          "answer": 0,
+          "explanation": "Wardrop equilibrium equates used path latencies: 2x1 + 1 = x2 + 2. With x2 = 1 - x1: 2x1 + 1 = (1 - x1) + 2 => 3x1 = 2 => x1 = 2/3, x2 = 1/3. Common latency: c1(2/3) = 2(2/3) + 1 = 7/3.",
+          "misconception": "Trap: assuming traffic splits equally (1/2, 1/2) because latency coefficients look balanced. But at (1/2, 1/2), c1(1/2) = 2 while c2(1/2) = 2.5, so commuters would switch to edge 1 until latencies equalize at 7/3!"
+        },
+        {
+          "id": "P1-Q4-b",
+          "label": "(b)",
+          "marks": 2,
+          "prompt": "Determine the socially optimal flow $(x_1^*, x_2^*)$ that minimizes total travel cost, and find the minimum social cost.",
+          "options": [
+            "x1* = 1/2, x2* = 1/2; Minimum Social Cost = 9/4 = 2.25",
+            "x1* = 2/3, x2* = 1/3; Minimum Social Cost = 7/3 ≈ 2.333",
+            "x1* = 3/5, x2* = 2/5; Minimum Social Cost = 2.28",
+            "x1* = 1, x2* = 0; Minimum Social Cost = 3.0"
+          ],
+          "answer": 0,
+          "explanation": "Total social cost C(x1) = x1(2x1+1) + (1-x1)(3-x1) = 3x1^2 - 3x1 + 3. Setting dC/dx1 = 6x1 - 3 = 0 yields x1* = 1/2, x2* = 1/2. Minimum cost C(1/2) = 3(1/4) - 3(1/2) + 3 = 9/4 = 2.25.",
+          "misconception": "Crucial distinction: Wardrop equilibrium equates average costs c(x), whereas the social optimum equates marginal costs c(x) + x c'(x)! For linear costs, marginal latency is 4x1 + 1 = 2x2 + 2, which gives x1* = 1/2."
+        },
+        {
+          "id": "P1-Q4-c",
+          "label": "(c)",
+          "marks": 2,
+          "prompt": "Calculate the Price of Anarchy (PoA) of this network.",
+          "options": [
+            "PoA = (7/3) / (9/4) = 28/27 ≈ 1.037",
+            "PoA = 4/3 ≈ 1.333",
+            "PoA = 1.0",
+            "PoA = 3/2 = 1.5"
+          ],
+          "answer": 0,
+          "explanation": "PoA = Equilibrium Cost / Optimal Cost = (7/3) / (9/4) = (7*4)/(3*9) = 28/27 ≈ 1.037.",
+          "misconception": "Trap: blindly answering 4/3 because 4/3 is the theoretical maximum bound for linear latencies. The question asks for the EXACT PoA of this specific game, which is 28/27!"
+        }
+      ],
+      "solution": "<p><strong>Complete Breakdown:</strong> Wardrop equilibrium equates path latencies: 2x1 + 1 = (1-x1) + 2 => x1 = 2/3, x2 = 1/3, latency = 7/3. Social optimum minimizes x1(2x1+1) + x2(x2+2), giving x1* = 1/2, x2* = 1/2 with cost 9/4. PoA = (7/3)/(9/4) = 28/27 ≈ 1.037.</p>"
+    },
+    {
+      "id": "P1-Q5",
+      "paper": 1,
+      "set": 1,
+      "week": 2,
+      "topic": "Conceptual Analysis (First-Price Auctions & Routing)",
+      "difficulty": "Foundational",
+      "type": "mcq",
+      "marks": 4,
+      "prompt": "Conceptual Yes/No with penalty scoring: <strong>Correct = +2 pts, Don't Know = +1 pt, Incorrect = 0 pts</strong>.",
+      "subparts": [
+        {
+          "id": "P1-Q5-a",
+          "label": "(a)",
+          "marks": 2,
+          "prompt": "In a single-item first-price sealed-bid auction with complete information and at least two bidders, can there exist a pure-strategy Nash equilibrium where the winning bidder bids and pays strictly more than the second-highest true valuation?",
+          "options": [
+            "Yes",
+            "No",
+            "Don't know"
+          ],
+          "answer": "Yes",
+          "explanation": "YES (+2 Marks): Under complete info, if v1 = 10, v2 = 6, the profile b1 = 7, b2 = 7 is a pure Nash equilibrium! Bidder 1 wins and gets utility 10 - 7 = 3 > 0. Lowering bid below 7 loses the item; raising pays more. Bidder 2 gets 0 and cannot profit by bidding higher (>10 gives negative utility, >6 gives negative utility). The winner pays 7 > 6 = v_{(2)}!",
+          "misconception": "Trap: confusing dominant strategies with Nash equilibria. Truthful bidding is not dominant in first-price auctions, but under complete information, coordinated high bids can be pure Nash equilibria!"
+        },
+        {
+          "id": "P1-Q5-b",
+          "label": "(b)",
+          "marks": 2,
+          "prompt": "In a non-atomic routing game, can the addition of a new directed edge strictly decrease the equilibrium travel latency for every commuter?",
+          "options": [
+            "Yes",
+            "No",
+            "Don't know"
+          ],
+          "answer": "Yes",
+          "explanation": "YES (+2 Marks): Adding a fast bypass highway relieves bottleneck congestion and strictly reduces travel time for all commuters! Braess's paradox proves that adding an edge CAN worsen latency, but it certainly does NOT prevent well-designed edges from strictly improving it.",
+          "misconception": "Trap: over-generalizing Braess's paradox to think that adding edges always hurts or cannot help everyone. Braess's paradox is a cautionary counterexample, not an impossibility theorem!"
+        }
+      ],
+      "solution": "<p><strong>Answers:</strong> (a) Yes (+2 Marks). (b) Yes (+2 Marks).</p>"
+    },
+    {
+      "id": "P1-Q6",
+      "paper": 1,
+      "set": 1,
+      "week": 2,
+      "topic": "Strategyproofness of Second-Price Auction with Reserve Price",
+      "difficulty": "Challenging",
+      "type": "mcq",
+      "marks": 8,
+      "prompt": "In a single-item second-price auction with reserve price $r > 0$, bidder $i$ with valuation $v_i$ faces opposing bids $b_{-i}$. Let $B_{-i} = \\max_{j \\ne i} b_j$ and clearing price $P = \\max(r, B_{-i})$. Test your mastery of the exact mathematical proof mechanics below:",
+      "subparts": [
+        {
+          "id": "P1-Q6-a",
+          "label": "(a)",
+          "marks": 2,
+          "prompt": "What is the exact critical market-clearing threshold price $P$ that bidder $i$ must meet to win the item, and what does she pay upon winning?",
+          "options": [
+            "Threshold is P = max(r, max_{j!=i} b_j); she pays exactly P (completely independent of her own bid b_i)",
+            "Threshold is P = r + max_{j!=i} b_j; she pays her own bid b_i",
+            "Threshold is P = max_{j!=i} b_j; she pays r if b_i > r",
+            "Threshold is P = min(r, max_{j!=i} b_j); she pays the second-highest bid"
+          ],
+          "answer": 0,
+          "explanation": "The auction rules state: if at least one bid meets r, the highest bidder wins and pays max(r, max_{j!=i} b_j). The price paid P is completely independent of bidder i's own bid b_i as long as b_i > P.",
+          "misconception": "Critical insight: Payment independence is the fundamental mathematical backbone of all second-price / VCG proofs!"
+        },
+        {
+          "id": "P1-Q6-b",
+          "label": "(b)",
+          "marks": 2,
+          "prompt": "Suppose bidder $i$'s true valuation satisfies $v_i > P$. What is her payoff under truthful bidding $b_i = v_i$, and what happens if she deviates to a losing bid $b_i' < P$?",
+          "options": [
+            "Truthful utility is v_i - P > 0; bidding b_i' < P causes her to lose, strictly lowering utility to 0",
+            "Truthful utility is v_i - r; bidding b_i' < P still wins at price r",
+            "Truthful utility is v_i; bidding b_i' < P lowers the price paid",
+            "Truthful utility is 0; bidding b_i' < P earns positive utility"
+          ],
+          "answer": 0,
+          "explanation": "When v_i > P, bidding truthfully b_i = v_i > P wins the item at price P, yielding utility v_i - P > 0. Any deviation that still wins (b_i' > P) pays the same price P; any deviation that loses (b_i' < P) drops utility from v_i - P strictly down to 0!",
+          "misconception": "Trap: thinking that shading a winning bid can lower the price paid. In a second-price auction, price paid is P = max(r, B_{-i}), which does not depend on b_i!"
+        },
+        {
+          "id": "P1-Q6-c",
+          "label": "(c)",
+          "marks": 2,
+          "prompt": "Suppose bidder $i$'s true valuation satisfies $v_i < P$. What happens if she deviates to an aggressive winning bid $b_i' > P$?",
+          "options": [
+            "She wins the item but pays P > v_i, receiving strictly negative utility v_i - P < 0",
+            "She wins the item and pays her bid b_i', earning positive surplus",
+            "She pays the reserve price r, which is always less than v_i",
+            "The seller disqualifies her bid and confiscates her deposit"
+          ],
+          "answer": 0,
+          "explanation": "When v_i < P, truthful bidding loses for utility 0. If she bids high enough to win (b_i' > P), she must pay the clearing price P. Since P > v_i, her net utility is v_i - P < 0, which is strictly worse than losing (utility 0)!",
+          "misconception": "Trap: assuming winning the item is always desirable. Winning at a price exceeding your valuation destroys utility!"
+        },
+        {
+          "id": "P1-Q6-d",
+          "label": "(d)",
+          "marks": 2,
+          "prompt": "Why does this proof establish that truthful bidding is WEAKLY dominant rather than strictly dominant?",
+          "options": [
+            "Because for many opponent bid profiles (e.g. b_i and b_i' both winning above P, or both losing below P), both bids yield identical payoffs",
+            "Because truthful bidding is only optimal when other bidders also bid truthfully",
+            "Because the reserve price introduces a random tie-breaker",
+            "Because dominant strategies only exist in zero-sum games"
+          ],
+          "answer": 0,
+          "explanation": "Weak dominance means u_i(v_i, b_{-i}) >= u_i(b_i', b_{-i}) for all b_{-i}, with strict inequality for at least one profile. It is weak because whenever both bids lie on the same side of P (both win or both lose), payoffs are identically equal.",
+          "misconception": "Common exam pitfall: claiming truthful bidding is 'strictly' dominant. If an opponent bids 1,000,000, bidding 10 or 20 both yield utility 0 (indifference). Dominance is weak, not strict!"
+        }
+      ],
+      "solution": "<p><strong>Complete Proof Rationale:</strong> Define clearing price P = max(r, max_{j!=i} b_j). If v_i > P, bidding v_i wins at price P yielding v_i - P > 0; misreporting to lose gives 0 < v_i - P. If v_i < P, bidding v_i loses giving 0; misreporting to win pays P giving v_i - P < 0. In all cases, truthful bidding weakly dominates all other bids.</p>"
+    },
+    {
+      "id": "P2-Q1",
+      "paper": 2,
+      "set": 2,
+      "week": 1,
+      "topic": "Normal-Form Game & Infinite Nash Continua",
+      "difficulty": "Intermediate",
+      "type": "short",
+      "marks": 8,
+      "prompt": "Consider the two-player normal-form game where both players choose between Cooperate ($C$) and Defect ($D$):\n\n$$\\begin{array}{c|cc} & C & D \\\\ \\hline C & (6, 6) & (0, 8) \\\\ D & (8, 0) & (0, 0) \\end{array}$$",
+      "subparts": [
+        {
+          "id": "P2-Q1-a",
+          "label": "(a)",
+          "marks": 2,
+          "prompt": "Identify all pure-strategy Nash equilibria of this game.",
+          "placeholder": "e.g. (D, D)",
+          "accepted": [
+            "(d, d)",
+            "(d,d)",
+            "d, d",
+            "defect, defect"
+          ]
+        },
+        {
+          "id": "P2-Q1-b",
+          "label": "(b)",
+          "marks": 2,
+          "prompt": "Does either player have a strictly dominated strategy? Does either player have a weakly dominated strategy?",
+          "placeholder": "e.g. No strictly dominated; C is weakly dominated by D",
+          "accepted": [
+            "no strictly dominated, c is weakly dominated by d",
+            "no strict, c weakly dominated by d",
+            "c is weakly dominated by d, no strictly dominated",
+            "no strictly dominated; c is weakly dominated"
+          ]
+        },
+        {
+          "id": "P2-Q1-c",
+          "label": "(c)",
+          "marks": 4,
+          "prompt": "Determine all Nash equilibria (pure and mixed) in simplest form.",
+          "placeholder": "e.g. (p C + (1-p) D, D) and (D, q C + (1-q) D) for p, q in [0, 1]",
+          "accepted": [
+            "(p c + (1-p) d, d) and (d, q c + (1-q) d)",
+            "(p c + (1-p) d, d) and (d, q c + (1-q) d) for all p, q in [0, 1]",
+            "(p c + (1-p) d, d), (d, q c + (1-q) d)",
+            "two continua: (mix, d) and (d, mix)"
+          ]
+        }
+      ],
+      "solution": "<div class=\"sol-body\">\n<p><strong>(a) Pure Nash equilibrium:</strong> $(D, D)$.\nCheck best responses:\n- Against $C$: Row prefers $D$ ($8 > 6$).\n- Against $D$: Row gets $0$ from $C$ and $0$ from $D$. Both are best responses!\n- Symmetrically for Column.\nThe only mutual pure best-response profile is $(D, D)$.</p>\n<p><strong>(b) Domination:</strong>\n- Neither player has a strictly dominated strategy because against $D$, $u(D, D) = 0 = u(C, D)$ (equality, not strict).\n- However, $C$ is <strong>weakly dominated</strong> by $D$ for both players since $u(D, C) = 8 > 6 = u(C, C)$ and $u(D, D) = 0 = u(C, D)$.</p>\n<p><strong>(c) All Nash equilibria:</strong>\n- If Player 2 plays pure $D$, Player 1's expected payoff from any mixture $p C + (1-p) D$ is $0$. Player 2's payoff from $D$ against $p C + (1-p) D$ is $8p + 0(1-p) = 8p$, while from $C$ is $6p$. Since $8p \\ge 6p$ for all $p \\in [0, 1]$, $D$ is indeed a best response for Player 2.\nHence $(p C + (1-p) D, D)$ is a Nash equilibrium for all $p \\in [0, 1]$.\n- Symmetrically, $(D, q C + (1-q) D)$ is a Nash equilibrium for all $q \\in [0, 1]$.\n- Can both players mix strictly ($p > 0$ and $q > 0$)? No, because if $q > 0$, Row strictly prefers $D$ ($8q > 6q$), forcing $p = 0$.\nAll Nash equilibria in simplest form:\n$$(p C + (1-p) D, D) \\quad \\text{and} \\quad (D, q C + (1-q) D) \\quad \\text{for any } p, q \\in [0, 1].$$</p>\n<div class=\"edge-box\"><strong>The Edge / Pro-Tip Insight:</strong> Weak domination does NOT allow you to discard strategies when finding all equilibria! Weak indifference at $D$ creates infinite continua of equilibria where the weakly dominated strategy is played with positive probability.</div>\n</div>",
+      "reference": "(a) Pure NE: (D, D). (b) No strictly dominated strategies; C is weakly dominated by D. (c) All NE: (p C + (1-p) D, D) for p in [0, 1] and (D, q C + (1-q) D) for q in [0, 1].",
+      "rubric": [
+        "2 marks: Identifies unique pure equilibrium (D, D)",
+        "2 marks: Explains C is weakly dominated by D, but not strictly dominated due to equality at D",
+        "4 marks: Formally derives both continua (p C + (1-p) D, D) and (D, q C + (1-q) D) and rules out interior mixtures"
+      ]
+    },
+    {
+      "id": "P2-Q2",
+      "paper": 2,
+      "set": 2,
+      "week": 2,
+      "topic": "Multi-Unit Auction & Collusion Under VCG",
+      "difficulty": "Intermediate",
+      "type": "short",
+      "marks": 8,
+      "prompt": "A seller has $k = 2$ identical items for sale. 4 unit-demand bidders have true valuations:\n$$v_1 = 80, \\quad v_2 = 60, \\quad v_3 = 45, \\quad v_4 = 20$$\nThe seller uses the multi-unit Vickrey auction (Clarke pivot rule), where the 2 highest bidders win and each winner pays the 3rd highest bid.",
+      "subparts": [
+        {
+          "id": "P2-Q2-a",
+          "label": "(a)",
+          "marks": 2,
+          "prompt": "Under truthful bidding, which bidders receive items and what payment does each winning bidder make?",
+          "placeholder": "e.g. Bidders 1 and 2 win, pay 45 each",
+          "accepted": [
+            "bidders 1 and 2 win, pay 45 each",
+            "1 and 2 win, pay 45 each",
+            "b1 and b2 win, pay 45",
+            "1 and 2 win, p1 = 45, p2 = 45",
+            "b1, b2 win, 45 each"
+          ]
+        },
+        {
+          "id": "P2-Q2-b",
+          "label": "(b)",
+          "marks": 2,
+          "prompt": "What is the total social welfare and total revenue collected by the seller under truthful bidding?",
+          "placeholder": "e.g. Welfare = 140, Revenue = 90",
+          "accepted": [
+            "welfare = 140, revenue = 90",
+            "140, 90",
+            "welfare 140, revenue 90",
+            "140 and 90"
+          ]
+        },
+        {
+          "id": "P2-Q2-c",
+          "label": "(c)",
+          "marks": 2,
+          "prompt": "Suppose Bidders 1 and 2 form a collusive coalition. Can they manipulate their bids so that both win but their total combined payment strictly decreases?",
+          "placeholder": "e.g. No, to reduce payment below 45 one must bid below 45, losing to Bidder 3",
+          "accepted": [
+            "no",
+            "no, because third highest bid is bidder 3's 45",
+            "no, bidder 3 bids 45",
+            "no, one would lose to bidder 3"
+          ]
+        },
+        {
+          "id": "P2-Q2-d",
+          "label": "(d)",
+          "marks": 2,
+          "prompt": "Now suppose the coalition only cares about maximizing their joint net utility $u_1 + u_2$. Can Bidder 2 sacrifice her item (bidding 0) to lower Bidder 1's payment? Is this strictly profitable for the coalition?",
+          "placeholder": "e.g. Joint utility truthful = 50. If B2 bids 0, joint utility = 60. Strictly profitable!",
+          "accepted": [
+            "yes, joint utility increases from 50 to 60",
+            "yes, strictly profitable",
+            "yes, increases to 60",
+            "yes, 50 to 60",
+            "yes"
+          ]
+        }
+      ],
+      "solution": "<div class=\"sol-body\">\n<p><strong>(a) Truthful outcome:</strong>\nTop 2 bidders are Bidder 1 ($v_1 = 80$) and Bidder 2 ($v_2 = 60$).\nBoth win an item. The 3rd highest bid is $v_3 = 45$.\nEach winner pays $p_1 = 45, p_2 = 45$.</p>\n<p><strong>(b) Welfare and revenue:</strong>\nTotal welfare = $v_1 + v_2 = 80 + 60 = 140$.\nTotal revenue = $p_1 + p_2 = 45 + 45 = 90$.</p>\n<p><strong>(c) Coalition maintaining both items:</strong>\n<strong>No.</strong> In order for both Bidders 1 and 2 to win, both must bid higher than Bidder 3's bid ($45$) and Bidder 4's bid ($20$).\nThus Bidder 3 remains the 3rd highest bidder with bid 45!\nEach winner must continue to pay at least the 3rd highest bid, which is 45. They cannot reduce total payment while both winning.</p>\n<p><strong>(d) Sacrifice manipulation:</strong>\n<strong>Yes!</strong>\nUnder truthful bidding: $u_1 = 80 - 45 = 35$, $u_2 = 60 - 45 = 15$. Joint utility = $35 + 15 = 50$.\nIf Bidder 2 bids $0$ (sacrificing her item) while Bidder 1 bids $80$:\nThe bids are $b_1 = 80, b_3 = 45, b_4 = 20, b_2 = 0$.\nThe top 2 bidders are Bidder 1 and Bidder 3.\nThe 3rd highest bid is now Bidder 4's bid $b_4 = 20$!\nBidder 1 pays only $20$!\nBidder 1's utility is $80 - 20 = 60$. Bidder 2 gets $0$.\nJoint utility = $60 + 0 = 60 > 50$.\nThe coalition strictly gains $10$ in joint surplus!\n<div class=\"edge-box\"><strong>The Edge / Pro-Tip Insight:</strong> VCG is DSIC for individuals, but NOT coalition-proof! A bidder can drop out to remove competitive pressure, drastically lowering the market-clearing price for her partner.</div>\n</div>",
+      "reference": "(a) Bidders 1 and 2 win, each pays 45. (b) Welfare = 140, Revenue = 90. (c) No, maintaining both items requires both bids > 45, so 3rd price is still 45. (d) Yes! If B2 bids 0, B1 pays 20, joint utility rises from 50 to 60.",
+      "rubric": [
+        "2 marks: Identifies winners 1 and 2 paying 45 each",
+        "2 marks: Computes welfare 140 and revenue 90",
+        "2 marks: Explains why keeping both items cannot lower payments below 45",
+        "2 marks: Demonstrates B2 bidding 0 raises joint surplus from 50 to 60"
+      ]
+    },
+    {
+      "id": "P2-Q3",
+      "paper": 2,
+      "set": 2,
+      "week": 3,
+      "topic": "Randomized Facility Location Mechanism",
+      "difficulty": "Challenging",
+      "type": "short",
+      "marks": 6,
+      "prompt": "Two agents are located at $x_1 \\le x_2$ on the real line. The designer uses the randomized mechanism:\n$$f(x) = \\begin{cases} x_1 & \\text{with probability } 1/4 \\\\ x_2 & \\text{with probability } 1/4 \\\\ \\frac{x_1 + x_2}{2} & \\text{with probability } 1/2 \\end{cases}$$",
+      "subparts": [
+        {
+          "id": "P2-Q3-a",
+          "label": "(a)",
+          "marks": 2,
+          "prompt": "For $x_1 = 0$ and $x_2 = 10$, calculate the expected facility location and the expected cost for each agent.",
+          "placeholder": "e.g. E[f] = 5; E[cost_1] = 5, E[cost_2] = 5",
+          "accepted": [
+            "e[f] = 5, e[cost_1] = 5, e[cost_2] = 5",
+            "5, 5, 5",
+            "e[f] = 5; 5, 5",
+            "5 and 5"
+          ]
+        },
+        {
+          "id": "P2-Q3-b",
+          "label": "(b)",
+          "marks": 2,
+          "prompt": "Is this mechanism strategyproof in expectation? Briefly explain.",
+          "placeholder": "e.g. Yes, truthful expected cost is d/2; any deviation gives >= d/2",
+          "accepted": [
+            "yes",
+            "yes, strategyproof in expectation",
+            "yes, expected cost is d/2"
+          ]
+        },
+        {
+          "id": "P2-Q3-c",
+          "label": "(c)",
+          "marks": 2,
+          "prompt": "What is the worst-case approximation ratio of this mechanism for the maximum cost objective?",
+          "placeholder": "e.g. 3/2",
+          "accepted": [
+            "3/2",
+            "1.5",
+            "3 / 2"
+          ]
+        }
+      ],
+      "solution": "<div class=\"sol-body\">\n<p><strong>(a) Profile $(0, 10)$:</strong>\n$E[f] = \\frac{1}{4}(0) + \\frac{1}{4}(10) + \\frac{1}{2}(5) = 2.5 + 2.5 = 5$.\nExpected cost of Agent 1: $\\frac{1}{4}|0 - 0| + \\frac{1}{4}|10 - 0| + \\frac{1}{2}|5 - 0| = 0 + 2.5 + 2.5 = 5$.\nExpected cost of Agent 2: $\\frac{1}{4}|0 - 10| + \\frac{1}{4}|10 - 10| + \\frac{1}{2}|5 - 10| = 2.5 + 0 + 2.5 = 5$.</p>\n<p><strong>(b) Strategyproofness in expectation:</strong>\n<strong>Yes</strong>. Let $d = x_2 - x_1$.\nUnder truthful reporting, Agent 1's expected cost is $\\frac{1}{4}(0) + \\frac{1}{4}(d) + \\frac{1}{2}(d/2) = \\frac{d}{4} + \\frac{d}{4} = \\frac{d}{2}$.\nIf Agent 1 reports $x_1' = x_1 - \\delta$ with $\\delta > 0$ (outward):\nThe facility is at $x_1'$ with prob $1/4$, at $x_2$ with prob $1/4$, and at $\\frac{x_1' + x_2}{2} = x_1 + \\frac{d-\\delta}{2}$ with prob $1/2$.\nExpected cost $= \\frac{1}{4}\\delta + \\frac{1}{4}d + \\frac{1}{2}\\frac{d-\\delta}{2} = \\frac{d}{2} + \\delta(\\frac{1}{4} - \\frac{1}{4}) = \\frac{d}{2}$.\nThe outward deviation yields exactly the same cost $\\frac{d}{2}$!\nIf Agent 1 reports inward, her expected cost strictly increases. Thus no deviation can strictly decrease expected cost.</p>\n<p><strong>(c) Maximum-cost approximation ratio:</strong>\nThe optimal maximum cost is at the midpoint $\\frac{x_1 + x_2}{2}$, where max cost is $\\frac{d}{2}$.\nUnder mechanism $f$:\n- With prob $1/4$, facility is at $x_1$: max cost is $d$.\n- With prob $1/4$, facility is at $x_2$: max cost is $d$.\n- With prob $1/2$, facility is at midpoint: max cost is $\\frac{d}{2}$.\nExpected maximum cost:\n$$E[\\max_i |f - x_i|] = \\frac{1}{4}d + \\frac{1}{4}d + \\frac{1}{2}\\frac{d}{2} = \\frac{d}{2} + \\frac{d}{4} = \\frac{3}{4}d$$\nApproximation ratio:\n$$\\frac{\\frac{3}{4}d}{\\frac{1}{2}d} = \\frac{3}{2} = 1.5$$\n<div class=\"edge-box\"><strong>The Edge / Pro-Tip Insight:</strong> Deterministic strategyproof mechanisms cannot achieve a maximum-cost ratio better than 2. Randomization breaks this barrier, achieving ratio 3/2! Notice how the 1/4 weight perfectly balances the 1/2 weight on the midpoint ($1/4 - (1/2)(1/2) = 0$).</div>\n</div>",
+      "reference": "(a) E[f] = 5, E[cost_1] = 5, E[cost_2] = 5. (b) Yes, expected cost is d/2 and cannot be lowered by any misreport. (c) Approximation ratio = (3d/4) / (d/2) = 3/2.",
+      "rubric": [
+        "2 marks: Correctly evaluates expected location 5 and expected costs 5 for both agents",
+        "2 marks: Concludes Yes and explains invariance of expected cost d/2 under misreporting",
+        "2 marks: Calculates expected max cost 3d/4, optimal max cost d/2, and ratio 3/2"
+      ]
+    },
+    {
+      "id": "P2-Q4",
+      "paper": 2,
+      "set": 2,
+      "week": 3,
+      "topic": "Atomic Routing Game & Potential Function",
+      "difficulty": "Intermediate",
+      "type": "short",
+      "marks": 6,
+      "prompt": "Two atomic players each route 1 indivisible unit of traffic between $s$ and $t$ on two parallel edges:\n- Top edge $e_1$: latency function $c_1(x) = 2x$\n- Bottom edge $e_2$: latency function $c_2(x) = x + 3$\nwhere $x \\in \\{1, 2\\}$ is the number of players choosing that edge.",
+      "subparts": [
+        {
+          "id": "P2-Q4-a",
+          "label": "(a)",
+          "marks": 2,
+          "prompt": "Write down Rosenthal's potential function $\\Phi(s)$ for each of the three load profiles $(2, 0)$, $(1, 1)$, and $(0, 2)$, where $(x_1, x_2)$ denotes loads on edges 1 and 2.",
+          "placeholder": "e.g. Phi(2,0) = 6, Phi(1,1) = 6, Phi(0,2) = 9",
+          "accepted": [
+            "phi(2,0) = 6, phi(1,1) = 6, phi(0,2) = 9",
+            "6, 6, 9",
+            "(2,0): 6, (1,1): 6, (0,2): 9",
+            "phi(2,0)=6, phi(1,1)=6, phi(0,2)=9"
+          ]
+        },
+        {
+          "id": "P2-Q4-b",
+          "label": "(b)",
+          "marks": 2,
+          "prompt": "Determine all pure-strategy Nash equilibria of this game.",
+          "placeholder": "e.g. (e1, e1), (e1, e2), (e2, e1)",
+          "accepted": [
+            "(e1, e1), (e1, e2), (e2, e1)",
+            "(1, 1) and (2, 0)",
+            "loads (2, 0) and (1, 1)",
+            "(e1, e1), (e1, e2), and (e2, e1)"
+          ]
+        },
+        {
+          "id": "P2-Q4-c",
+          "label": "(c)",
+          "marks": 2,
+          "prompt": "What is the social cost of the worst pure Nash equilibrium, and what is the Price of Anarchy?",
+          "placeholder": "e.g. Worst Cost = 8, PoA = 8/6 = 4/3",
+          "accepted": [
+            "worst cost = 8, poa = 4/3",
+            "8, 4/3",
+            "worst cost 8, poa 4/3",
+            "8, 1.333"
+          ]
+        }
+      ],
+      "solution": "<div class=\"sol-body\">\n<p><strong>(a) Rosenthal's Potential:</strong>\n$\\Phi(s) = \\sum_{e} \\sum_{k=1}^{f_e} c_e(k)$.\n- For load profile $(2, 0)$:\n  $\\Phi(2, 0) = c_1(1) + c_1(2) = 2(1) + 2(2) = 2 + 4 = 6$.\n- For load profile $(1, 1)$:\n  $\\Phi(1, 1) = c_1(1) + c_2(1) = 2(1) + (1 + 3) = 2 + 4 = 6$.\n- For load profile $(0, 2)$:\n  $\\Phi(0, 2) = c_2(1) + c_2(2) = (1 + 3) + (2 + 3) = 4 + 5 = 9$.</p>\n<p><strong>(b) Pure Nash equilibria:</strong>\nCheck unilateral deviations:\n- At $(2, 0)$ (both on $e_1$): current latency is $c_1(2) = 4$. If one player switches to $e_2$, her new latency is $c_2(1) = 1 + 3 = 4$. Since $4 \\ngtr 4$, no strictly profitable deviation! So $(e_1, e_1)$ is a pure NE.\n- At $(1, 1)$ (one on $e_1$, one on $e_2$):\n  Player on $e_1$ pays $c_1(1) = 2$. Moving to $e_2$ gives $c_2(2) = 5 > 2$. No incentive.\n  Player on $e_2$ pays $c_2(1) = 4$. Moving to $e_1$ gives $c_1(2) = 4$. No strictly profitable deviation!\n  So $(e_1, e_2)$ and $(e_2, e_1)$ are pure Nash equilibria.\n- At $(0, 2)$: both pay $c_2(2) = 5$. Switching to $e_1$ gives $c_1(1) = 2 < 5$. Unstable.\nPure Nash equilibria: $(e_1, e_1)$, $(e_1, e_2)$, and $(e_2, e_1)$ (corresponding to load profiles $(2, 0)$ and $(1, 1)$).</p>\n<p><strong>(c) Social cost & PoA:</strong>\nSocial cost is $\\sum_i \\text{latency}_i$:\n- At $(2, 0)$: social cost = $2 \\times c_1(2) = 2 \\times 4 = 8$.\n- At $(1, 1)$: social cost = $c_1(1) + c_2(1) = 2 + 4 = 6$.\nSocial optimum is at load $(1, 1)$ with minimum cost $6$.\nWorst Nash equilibrium is $(2, 0)$ with social cost $8$.\n$\\text{PoA} = \\frac{8}{6} = \\frac{4}{3} \\approx 1.333$.\n<div class=\"edge-box\"><strong>The Edge / Pro-Tip Insight:</strong> Notice both $(2, 0)$ and $(1, 1)$ have the exact same potential $\\Phi = 6$! The potential minimizer is a pure NE, but local minima of the potential also yield pure equilibria.</div>\n</div>",
+      "reference": "(a) Phi(2,0) = 6, Phi(1,1) = 6, Phi(0,2) = 9. (b) Pure NE: (e1, e1), (e1, e2), (e2, e1). (c) Worst social cost = 8, Optimal = 6, PoA = 8/6 = 4/3.",
+      "rubric": [
+        "2 marks: Correctly evaluates potential function: 6, 6, 9",
+        "2 marks: Identifies all pure equilibria: (e1, e1) and (e1, e2), (e2, e1)",
+        "2 marks: Calculates worst equilibrium cost 8, optimal cost 6, and PoA 4/3"
+      ]
+    },
+    {
+      "id": "P2-Q5",
+      "paper": 2,
+      "set": 2,
+      "week": 1,
+      "topic": "Conceptual Analysis (Weak Domination & Atomic PoA)",
+      "difficulty": "Foundational",
+      "type": "mcq",
+      "marks": 4,
+      "prompt": "Conceptual Yes/No with penalty scoring: <strong>Correct = +2 pts, Don't Know = +1 pt, Incorrect = 0 pts</strong>.",
+      "subparts": [
+        {
+          "id": "P2-Q5-a",
+          "label": "(a)",
+          "marks": 2,
+          "prompt": "In any finite normal-form game, if an action is weakly dominated, does there always exist at least one pure Nash equilibrium where this action is not played?",
+          "options": [
+            "Yes",
+            "No",
+            "Don't know"
+          ],
+          "answer": "No",
+          "explanation": "<strong>NO:</strong> A game can have NO pure Nash equilibrium at all (e.g. Matching Pennies extended with a weakly dominated action), meaning zero pure Nash equilibria exist where it is not played. Furthermore, in games where all pure Nash equilibria involve weakly dominated actions, none exist without them!"
+        },
+        {
+          "id": "P2-Q5-b",
+          "label": "(b)",
+          "marks": 2,
+          "prompt": "In an unweighted atomic congestion game with affine latency functions ($c_e(x) = a_e x + b_e, a_e \\ge 0, b_e \\ge 0$), can the Price of Anarchy ever exceed 5/2?",
+          "options": [
+            "Yes",
+            "No",
+            "Don't know"
+          ],
+          "answer": "No",
+          "explanation": "<strong>NO:</strong> By Christodoulou & Koutsoupias (2005), the Price of Anarchy of any unweighted atomic congestion game with affine latency functions is strictly bounded above by exactly 5/2!"
+        }
+      ],
+      "solution": "<div class=\"sol-body\">\n<p><strong>(a) Answer: NO (+2 Marks).</strong>\nA finite game with a weakly dominated action might have no pure Nash equilibria at all (e.g., Matching Pennies with an extra redundant dominated row). Hence, there cannot exist a pure Nash equilibrium where the action is omitted.</p>\n<p><strong>(b) Answer: NO (+2 Marks).</strong>\nThe famous theorem by Christodoulou and Koutsoupias (2005) proves that the Price of Anarchy for unweighted atomic congestion games with affine latencies is at most $\\frac{5}{2}$. It can never exceed $5/2$.</p>\n</div>",
+      "reference": "(a) No. The game might have no pure Nash equilibria at all. (b) No. The PoA for unweighted atomic congestion games with affine latencies is at most 5/2.",
+      "rubric": [
+        "2 marks: Correct No on (a) recognizing games may have no pure Nash equilibria",
+        "2 marks: Correct No on (b) citing Christodoulou-Koutsoupias bound of 5/2"
+      ]
+    },
+    {
+      "id": "P2-Q6",
+      "paper": 2,
+      "set": 2,
+      "week": 3,
+      "topic": "Proof that Rosenthal Potential Minimizer is Pure Nash Equilibrium",
+      "difficulty": "Challenging",
+      "type": "proof",
+      "marks": 8,
+      "prompt": "Consider an unweighted atomic congestion game $\\Gamma = (N, E, (S_i)_{i \\in N}, (c_e)_{e \\in E})$, where each player $i \\in N$ selects a subset of edges (path) $s_i \\in S_i \\subseteq 2^E$. For a strategy profile $s = (s_1, \\dots, s_n)$, the load on edge $e$ is $f_e(s) = |\\{i \\in N : e \\in s_i\\}|$, and player $i$'s latency cost is $C_i(s) = \\sum_{e \\in s_i} c_e(f_e(s))$.\n\nRosenthal's potential function is defined as:\n$$\\Phi(s) = \\sum_{e \\in E} \\sum_{k=1}^{f_e(s)} c_e(k)$$\n\n<strong>Prove that any global minimizer $s^* \\in \\arg\\min_{s \\in S} \\Phi(s)$ is a pure-strategy Nash equilibrium of the game.</strong>",
+      "blueprint": "<div class=\"proof-blueprint\">\n<h4>Proof Blueprint (Exact Assignment Style)</h4>\n<p><strong>Step 1: Setup and Definition of Potential Function</strong><br>\nLet $S = \\prod_{i=1}^n S_i$ be the finite set of all pure strategy profiles.\nSince $S$ is finite, the function $\\Phi: S \\to \\mathbb{R}$ attains a global minimum. Let $s^* = (s_1^*, \\dots, s_n^*) \\in \\arg\\min_{s \\in S} \\Phi(s)$.</p>\n\n<p><strong>Step 2: Analysis of a Unilateral Deviation</strong><br>\nFix an arbitrary player $i \\in N$, and consider an arbitrary alternative strategy $s_i' \\in S_i, s_i' \\ne s_i^*$.\nLet $s' = (s_i', s_{-i}^*)$ denote the profile resulting from player $i$'s unilateral deviation.</p>\n<p>We examine how the edge loads change from $s^*$ to $s'$:\n<ul>\n<li>For any edge $e \\in s_i^* \\cap s_i'$ (edges in both old and new paths): load is unchanged, $f_e(s') = f_e(s^*)$.</li>\n<li>For any edge $e \\in s_i^* \\setminus s_i'$ (edges vacated by player $i$): load decreases by 1, $f_e(s') = f_e(s^*) - 1$.</li>\n<li>For any edge $e \\in s_i' \\setminus s_i^*$ (edges newly joined by player $i$): load increases by 1, $f_e(s') = f_e(s^*) + 1$.</li>\n<li>For any edge $e \\notin s_i^* \\cup s_i'$: load is unchanged, $f_e(s') = f_e(s^*)$.</li>\n</ul>\n</p>\n\n<p><strong>Step 3: Calculating the Change in Potential $\\Delta \\Phi$</strong><br>\n$$\\Phi(s') - \\Phi(s^*) = \\sum_{e \\in E} \\left( \\sum_{k=1}^{f_e(s')} c_e(k) - \\sum_{k=1}^{f_e(s^*)} c_e(k) \\right)$$\nThe edges with unchanged loads contribute $0$.\n- For each edge $e \\in s_i' \\setminus s_i^*$, the upper limit increases from $f_e(s^*)$ to $f_e(s^*) + 1 = f_e(s')$, adding the single term:\n$$+c_e(f_e(s'))$$\n- For each edge $e \\in s_i^* \\setminus s_i'$, the upper limit decreases from $f_e(s^*)$ to $f_e(s^*) - 1$, subtracting the top term:\n$$-c_e(f_e(s^*))$$\nCombining these:\n$$\\Phi(s') - \\Phi(s^*) = \\sum_{e \\in s_i' \\setminus s_i^*} c_e(f_e(s')) - \\sum_{e \\in s_i^* \\setminus s_i^*} c_e(f_e(s^*))$$\nNow add and subtract the common edges $\\sum_{e \\in s_i' \\cap s_i^*} c_e(f_e(s')) = \\sum_{e \\in s_i' \\cap s_i^*} c_e(f_e(s^*))$:\n$$\\Phi(s') - \\Phi(s^*) = \\sum_{e \\in s_i'} c_e(f_e(s')) - \\sum_{e \\in s_i^*} c_e(f_e(s^*)) = C_i(s') - C_i(s^*)$$\nThus, $\\Gamma$ is an exact potential game with potential function $\\Phi$.</p>\n\n<p><strong>Step 4: Concluding Nash Equilibrium</strong><br>\nSince $s^*$ is a global minimizer of $\\Phi$, for any unilateral deviation $s_i'$, we have:\n$$\\Phi(s_i', s_{-i}^*) \\ge \\Phi(s^*)$$\n$$\\implies \\Phi(s') - \\Phi(s^*) \\ge 0$$\nUsing the exact potential property:\n$$C_i(s_i', s_{-i}^*) - C_i(s^*) = \\Phi(s') - \\Phi(s^*) \\ge 0$$\n$$\\implies C_i(s^*) \\le C_i(s_i', s_{-i}^*)$$\nSince this holds for every player $i \\in N$ and every unilateral deviation $s_i' \\in S_i$, no player can strictly lower their cost by deviating unilaterally.\nTherefore, $s^*$ is a pure-strategy Nash equilibrium. $\\blacksquare$</p>\n</div>",
+      "reference": "Let s* minimize Phi. For any unilateral deviation of player i from s_i* to s_i', edges common to both have no load change. Edges in s_i' \\ s_i* have load increase by 1 contributing +c_e(f_e(s')), while edges in s_i* \\ s_i' have load decrease by 1 contributing -c_e(f_e(s*)). Adding common edges gives Phi(s') - Phi(s*) = C_i(s') - C_i(s*). Since s* minimizes Phi, Phi(s') - Phi(s*) >= 0, hence C_i(s*) <= C_i(s'). Thus no profitable unilateral deviation exists, establishing pure NE.",
+      "rubric": [
+        "2 marks: Correctly writes the definition of Rosenthal's potential function and partitions edges into 4 sets",
+        "3 marks: Rigorously proves the exact potential identity Phi(s') - Phi(s*) = C_i(s') - C_i(s*) for unilateral deviations",
+        "2 marks: Uses the global minimality of s* to deduce Phi(s') - Phi(s*) >= 0",
+        "1 mark: Concludes C_i(s*) <= C_i(s') for all players and strategies, confirming pure Nash equilibrium"
+      ]
+    },
+    {
+      "id": "P3-Q1",
+      "paper": 3,
+      "set": 3,
+      "week": 1,
+      "topic": "Game Theory & Iterated Elimination",
+      "difficulty": "Intermediate",
+      "type": "short",
+      "marks": 8,
+      "prompt": "Consider the two-player normal-form game where Player 1 chooses from $\\{U, M, D\\}$ and Player 2 chooses from $\\{L, C, R\\}$:\n\n$$\\begin{array}{c|ccc} & L & C & R \\\\ \\hline U & (4, 4) & (3, 3) & (2, 1) \\\\ M & (3, 2) & (5, 4) & (1, 1) \\\\ D & (1, 3) & (2, 2) & (0, 0) \\end{array}$$",
+      "subparts": [
+        {
+          "id": "P3-Q1-a",
+          "label": "(a)",
+          "marks": 2,
+          "prompt": "Identify which action of Player 2 is strictly dominated by another pure action. Which action strictly dominates it?",
+          "placeholder": "e.g. Action R is strictly dominated by L",
+          "accepted": [
+            "action r is strictly dominated by l",
+            "r is strictly dominated by l",
+            "r dominated by l",
+            "r by l",
+            "r, l"
+          ]
+        },
+        {
+          "id": "P3-Q1-b",
+          "label": "(b)",
+          "marks": 2,
+          "prompt": "In the game that results after removing this strictly dominated action, identify which action of Player 1 is strictly dominated.",
+          "placeholder": "e.g. Action D is strictly dominated by U",
+          "accepted": [
+            "action d is strictly dominated by u",
+            "d is strictly dominated by u",
+            "d dominated by u",
+            "d by u",
+            "d, u"
+          ]
+        },
+        {
+          "id": "P3-Q1-c",
+          "label": "(c)",
+          "marks": 2,
+          "prompt": "Determine all pure Nash equilibria of the original game.",
+          "placeholder": "e.g. (U, L) and (M, C)",
+          "accepted": [
+            "(u, l) and (m, c)",
+            "(u, l), (m, c)",
+            "(u,l), (m,c)",
+            "(m, c), (u, l)"
+          ]
+        },
+        {
+          "id": "P3-Q1-d",
+          "label": "(d)",
+          "marks": 2,
+          "prompt": "Determine all Nash equilibria (pure and mixed) in simplest form.",
+          "placeholder": "e.g. (U, L), (M, C), and (2/3 U + 1/3 M, 2/3 L + 1/3 C)",
+          "accepted": [
+            "(u, l), (m, c), and (2/3 u + 1/3 m, 2/3 l + 1/3 c)",
+            "(u, l), (m, c), (2/3 u + 1/3 m, 2/3 l + 1/3 c)",
+            "(u,l), (m,c), (2/3u + 1/3m, 2/3l + 1/3c)"
+          ]
+        }
+      ],
+      "solution": "<div class=\"sol-body\">\n<p><strong>(a) Player 2 domination:</strong>\nCompare $L$ vs $R$ across rows:\n- Against $U$: $4 > 1$\n- Against $M$: $2 > 1$\n- Against $D$: $3 > 0$\nThus, column $R$ is strictly dominated by column $L$.</p>\n<p><strong>(b) Player 1 domination:</strong>\nEliminating $R$ leaves columns $\\{L, C\\}$.\nCompare row $U$ vs row $D$:\n- Against $L$: $4 > 1$\n- Against $C$: $3 > 2$\nThus, row $D$ is strictly dominated by row $U$.</p>\n<p><strong>(c) Pure Nash equilibria:</strong>\nIn the reduced $2 \\times 2$ game with $\\{U, M\\}$ and $\\{L, C\\}$:\n$$(U, L) \\quad \\text{and} \\quad (M, C)$$\nBoth are mutual best responses.</p>\n<p><strong>(d) Mixed Nash equilibrium:</strong>\nLet Player 1 play $p U + (1-p) M$ and Player 2 play $q L + (1-q) C$:\n- Player 1 indifference: $4q + 3(1-q) = 3q + 5(1-q) \\implies q + 3 = 5 - 2q \\implies 3q = 2 \\implies q = 2/3$.\n- Player 2 indifference: $4p + 2(1-p) = 3p + 4(1-p) \\implies 2p + 2 = 4 - p \\implies 3p = 2 \\implies p = 2/3$.\nAll equilibria: $(U, L)$, $(M, C)$, and $(\\frac{2}{3} U + \\frac{1}{3} M, \\frac{2}{3} L + \\frac{1}{3} C)$.</p>\n<div class=\"edge-box\"><strong>The Edge / Pro-Tip Insight:</strong> Strict dominance elimination preserves ALL Nash equilibria (pure and mixed). Removing $R$ and $D$ reduces a $3 \\times 3$ matrix directly into an elementary $2 \\times 2$ game!</div>\n</div>",
+      "reference": "(a) R is strictly dominated by L. (b) D is strictly dominated by U. (c) Pure NE: (U, L) and (M, C). (d) All NE: (U, L), (M, C), and (2/3 U + 1/3 M, 2/3 L + 1/3 C).",
+      "rubric": [
+        "2 marks: Identifies R strictly dominated by L",
+        "2 marks: Identifies D strictly dominated by U in reduced game",
+        "2 marks: Identifies pure equilibria (U, L) and (M, C)",
+        "2 marks: Computes mixed NE p=2/3, q=2/3 and states all three equilibria"
+      ]
+    },
+    {
+      "id": "P3-Q2",
+      "paper": 3,
+      "set": 3,
+      "week": 2,
+      "topic": "VCG Revenue Non-Monotonicity Paradox",
+      "difficulty": "Intermediate",
+      "type": "short",
+      "marks": 8,
+      "prompt": "Two items, $A$ and $B$, are auctioned using VCG. All bidders are truthful.\nInitially, there are 2 bidders:\n- Bidder 1: $v_1(AB) = 12, v_1(A) = 0, v_1(B) = 0$\n- Bidder 2: $v_2(AB) = 12, v_2(A) = 12, v_2(B) = 0$",
+      "subparts": [
+        {
+          "id": "P3-Q2-a",
+          "label": "(a)",
+          "marks": 2,
+          "prompt": "Determine the allocation, individual payments, and total revenue before Bidder 3 arrives (breaking ties in favor of Bidder 1 getting AB).",
+          "placeholder": "e.g. B1 gets AB; p1 = 12, p2 = 0; Revenue = 12",
+          "accepted": [
+            "b1 gets ab; p1 = 12, p2 = 0; revenue = 12",
+            "b1 gets ab, p1=12, p2=0, revenue=12",
+            "p1=12, p2=0, revenue 12",
+            "12, 0, 12"
+          ]
+        },
+        {
+          "id": "P3-Q2-b",
+          "label": "(b)",
+          "marks": 3,
+          "prompt": "Now Bidder 3 enters with $v_3(B) = 12, v_3(A) = 0, v_3(AB) = 12$. Find the new allocation, each bidder's payment, and total seller revenue.",
+          "placeholder": "e.g. B2 gets A, B3 gets B; p1 = 0, p2 = 0, p3 = 0; Revenue = 0",
+          "accepted": [
+            "b2 gets a, b3 gets b; p1 = 0, p2 = 0, p3 = 0; revenue = 0",
+            "p1=0, p2=0, p3=0; revenue=0",
+            "0, 0, 0, revenue 0",
+            "all payments 0, revenue 0"
+          ]
+        },
+        {
+          "id": "P3-Q2-c",
+          "label": "(c)",
+          "marks": 1,
+          "prompt": "Compare social welfare and seller revenue before and after Bidder 3's entry.",
+          "placeholder": "e.g. Welfare doubled from 12 to 24; Revenue collapsed from 12 to 0",
+          "accepted": [
+            "welfare doubled from 12 to 24, revenue collapsed from 12 to 0",
+            "welfare 12 to 24, revenue 12 to 0",
+            "welfare rises to 24, revenue falls to 0"
+          ]
+        },
+        {
+          "id": "P3-Q2-d",
+          "label": "(d)",
+          "marks": 2,
+          "prompt": "Explain the intuitive reason why adding a bidder caused seller revenue to collapse to zero.",
+          "placeholder": "e.g. B2 and B3 together substitute for B1; without B2, B1 gives 12, matching B3's 12 so externality is 0",
+          "accepted": [
+            "b2 and b3 substitute for b1, zero externality",
+            "b2 and b3 together achieve 24, removing one leaves 12 achievable by b1, externality 0",
+            "externality is zero"
+          ]
+        }
+      ],
+      "solution": "<div class=\"sol-body\">\n<p><strong>(a) Initial state (Bidders 1 and 2):</strong>\n- Allocation: Bidder 1 gets $AB$ (welfare 12).\n- Payments: Without Bidder 1, Bidder 2 gets $A$ for value 12. With Bidder 1 present, others get 0. Thus $p_1 = 12 - 0 = 12$.\nWithout Bidder 2, Bidder 1 gets $AB$ for value 12. With Bidder 2 present, others get 12. Thus $p_2 = 12 - 12 = 0$.\n- Total revenue = $12$.</p>\n<p><strong>(b) Bidder 3 added ($v_3(B) = 12$):</strong>\n- Allocation: Bidder 2 gets $A$ and Bidder 3 gets $B$ (total welfare = $12 + 12 = 24 > 12$).\n- Payments:\n  - Without Bidder 2: Max welfare of $\\{1, 3\\}$ is Bidder 1 getting $AB$ for 12 (or B3 getting B for 12). With Bidder 2 present, Bidder 3 gets 12. Externality: $p_2 = 12 - 12 = 0$.\n  - Without Bidder 3: Max welfare of $\\{1, 2\\}$ is Bidder 1 getting $AB$ for 12. With Bidder 3 present, Bidder 2 gets 12. Externality: $p_3 = 12 - 12 = 0$.\n  - Bidder 1 gets nothing, pays $p_1 = 0$.\n- Total revenue = $0 + 0 + 0 = 0$!</p>\n<p><strong>(c) Comparison:</strong>\nSocial welfare doubled from $12$ to $24$, while seller revenue collapsed from $12$ to $0$.</p>\n<p><strong>(d) Economic intuition:</strong>\nBidders 2 and 3 collectively satisfy both items. When both are present, neither is indispensable: if either one leaves, Bidder 1 can step in to provide welfare 12, which exactly equals the welfare that the other single-item bidder provides. Hence neither bidder imposes any positive externality on the other agents!</p>\n<div class=\"edge-box\"><strong>The Edge / Pro-Tip Insight:</strong> VCG revenue non-monotonicity is a core vulnerability in combinatorial auctions. Adding competition can eliminate monopoly power and reduce revenue to zero!</div>\n</div>",
+      "reference": "(a) B1 gets AB; p1 = 12, p2 = 0; Revenue = 12. (b) B2 gets A, B3 gets B; p1 = 0, p2 = 0, p3 = 0; Revenue = 0. (c) Welfare doubles (12 to 24), Revenue drops to 0. (d) B2 and B3 substitute for B1; removing either leaves welfare 12, exactly matching the remaining bidder's welfare, so externality is 0.",
+      "rubric": [
+        "2 marks: Derives initial outcome B1 gets AB, p1=12, revenue 12",
+        "3 marks: Computes new allocation A->2, B->3, payments p1=p2=p3=0, revenue 0",
+        "1 mark: States welfare doubles (12 to 24) and revenue collapses to 0",
+        "2 marks: Explains externality drops to 0 because B1 serves as a perfect backup"
+      ]
+    },
+    {
+      "id": "P3-Q3",
+      "paper": 3,
+      "set": 3,
+      "week": 3,
+      "topic": "Facility Location: Comparing Social Objectives",
+      "difficulty": "Intermediate",
+      "type": "short",
+      "marks": 6,
+      "prompt": "Four agents are located on the real line at coordinates:\n$$x = (1, 2, 8, 9)$$\nConsider three mechanisms:\n- $f_1(x) = x_1$ (Leftmost agent)\n- $f_2(x) = x_2$ (Left-median agent)\n- $f_3(x) = \\frac{x_1 + x_4}{2}$ (Midpoint of extreme agents)",
+      "subparts": [
+        {
+          "id": "P3-Q3-a",
+          "label": "(a)",
+          "marks": 2,
+          "prompt": "Compute the total cost $\\sum_{i=1}^4 |f(x) - x_i|$ under each of the three mechanisms. Which mechanism(s) minimize total cost?",
+          "placeholder": "e.g. f1: 16, f2: 14, f3: 14. f2 and f3 minimize total cost",
+          "accepted": [
+            "f1: 16, f2: 14, f3: 14",
+            "16, 14, 14",
+            "f2 and f3 minimize total cost (14)",
+            "16, 14, 14; f2 and f3 tie"
+          ]
+        },
+        {
+          "id": "P3-Q3-b",
+          "label": "(b)",
+          "marks": 2,
+          "prompt": "Compute the maximum cost $\\max_{i} |f(x) - x_i|$ under each of the three mechanisms. Which mechanism minimizes maximum cost?",
+          "placeholder": "e.g. f1: 8, f2: 7, f3: 4. f3 minimizes maximum cost",
+          "accepted": [
+            "f1: 8, f2: 7, f3: 4",
+            "8, 7, 4",
+            "f3 minimizes maximum cost (4)",
+            "8, 7, 4; f3 is best"
+          ]
+        },
+        {
+          "id": "P3-Q3-c",
+          "label": "(c)",
+          "marks": 2,
+          "prompt": "Which of these three mechanisms are strategyproof? For any non-strategyproof mechanism, identify an agent and a profitable deviation.",
+          "placeholder": "e.g. f1 and f2 are strategyproof. f3 is not: Agent 4 reports 15 to pull midpoint to 8, reducing cost to 1",
+          "accepted": [
+            "f1 and f2 are strategyproof, f3 is not",
+            "f1, f2 strategyproof; f3 not strategyproof",
+            "f3 is not strategyproof"
+          ]
+        }
+      ],
+      "solution": "<div class=\"sol-body\">\n<p><strong>(a) Total cost calculation:</strong>\n- Under $f_1(x) = 1$: $|1-1| + |1-2| + |1-8| + |1-9| = 0 + 1 + 7 + 8 = 16$.\n- Under $f_2(x) = 2$: $|2-1| + |2-2| + |2-8| + |2-9| = 1 + 0 + 6 + 7 = 14$.\n- Under $f_3(x) = \\frac{1 + 9}{2} = 5$: $|5-1| + |5-2| + |5-8| + |5-9| = 4 + 3 + 3 + 4 = 14$.\nMechanisms $f_2$ and $f_3$ tie for minimum total cost ($14$).</p>\n<p><strong>(b) Maximum cost calculation:</strong>\n- Under $f_1(x) = 1$: $\\max = |1 - 9| = 8$.\n- Under $f_2(x) = 2$: $\\max = |2 - 9| = 7$.\n- Under $f_3(x) = 5$: $\\max = |5 - 1| = |5 - 9| = 4$.\nMechanism $f_3$ strictly minimizes maximum cost ($4$).</p>\n<p><strong>(c) Strategyproofness:</strong>\n- $f_1$ and $f_2$ are order statistics (leftmost and left-median), which are strategyproof.\n- $f_3$ is the midpoint mechanism, which is <strong>not strategyproof</strong>!\nFor Agent 4 at $x_4 = 9$, current cost under $f_3$ is $|5 - 9| = 4$.\nIf Agent 4 misreports $x_4' = 15$, the reported midpoint becomes $\\frac{1 + 15}{2} = 8$.\nAgent 4's true cost becomes $|8 - 9| = 1 < 4$, a strictly profitable manipulation!</p>\n<div class=\"edge-box\"><strong>The Edge / Pro-Tip Insight:</strong> For even $n$, ANY point in the interval $[x_{n/2}, x_{n/2 + 1}]$ minimizes total cost. The midpoint lies in this interval, so it optimizes total cost AND max cost on this profile, but it sacrifices strategyproofness!</div>\n</div>",
+      "reference": "(a) Total costs: f1=16, f2=14, f3=14. f2 and f3 tie for optimal. (b) Max costs: f1=8, f2=7, f3=4. f3 uniquely minimizes max cost. (c) f1 and f2 are strategyproof; f3 is not (Agent 4 can report 15 to reduce cost from 4 to 1).",
+      "rubric": [
+        "2 marks: Correctly evaluates total costs 16, 14, 14 and identifies optimal tie",
+        "2 marks: Correctly evaluates max costs 8, 7, 4 and identifies f3 as optimal",
+        "2 marks: Correctly states f1, f2 are SP, while f3 is not and gives a valid profitable misreport"
+      ]
+    },
+    {
+      "id": "P3-Q4",
+      "paper": 3,
+      "set": 3,
+      "week": 3,
+      "topic": "Braess's Paradox in Non-Atomic Routing",
+      "difficulty": "Intermediate",
+      "type": "short",
+      "marks": 6,
+      "prompt": "Consider the classic Braess network with 1 unit of non-atomic traffic from $s$ to $t$:\n- Path 1: $s \\to u \\to t$ with $c_{su}(x) = x, c_{ut}(x) = 1$\n- Path 2: $s \\to v \\to t$ with $c_{sv}(x) = 1, c_{vt}(x) = x$\nA zero-latency directed bridge edge $e = (u, v)$ with $c_{uv}(x) = 0$ is constructed.",
+      "subparts": [
+        {
+          "id": "P3-Q4-a",
+          "label": "(a)",
+          "marks": 2,
+          "prompt": "Before the bridge edge is built, determine the equilibrium flow on both paths and the equilibrium travel time.",
+          "placeholder": "e.g. 0.5 on top, 0.5 on bottom; travel time = 1.5",
+          "accepted": [
+            "0.5 on top, 0.5 on bottom; travel time = 1.5",
+            "0.5, 0.5; latency = 1.5",
+            "1/2, 1/2; 3/2",
+            "flow 0.5 each, time 1.5"
+          ]
+        },
+        {
+          "id": "P3-Q4-b",
+          "label": "(b)",
+          "marks": 2,
+          "prompt": "After the zero-latency bridge $(u, v)$ is added, determine the new equilibrium flow and the new equilibrium travel time.",
+          "placeholder": "e.g. 1.0 on s -> u -> v -> t; travel time = 2.0",
+          "accepted": [
+            "1.0 on s -> u -> v -> t; travel time = 2.0",
+            "all flow on s-u-v-t, time 2.0",
+            "1 on s-u-v-t, time 2",
+            "flow 1, latency 2"
+          ]
+        },
+        {
+          "id": "P3-Q4-c",
+          "label": "(c)",
+          "marks": 2,
+          "prompt": "Compute the Braess degradation ratio $\\frac{\\text{Latency}_{\\text{new}}}{\\text{Latency}_{\\text{old}}}$ and explain why commuters all switch to the new path.",
+          "placeholder": "e.g. Ratio = 2.0 / 1.5 = 4/3. Selfish commuters find u -> v faster (0 vs 1), overloading s-u and v-t",
+          "accepted": [
+            "4/3",
+            "2.0/1.5 = 4/3",
+            "1.333",
+            "ratio 4/3"
+          ]
+        }
+      ],
+      "solution": "<div class=\"sol-body\">\n<p><strong>(a) Before bridge:</strong>\nTop path latency: $x_1 + 1$. Bottom path latency: $1 + x_2$.\nBy symmetry, $x_1 = 0.5, x_2 = 0.5$.\nEquilibrium latency $= 0.5 + 1 = 1.5 = \\frac{3}{2}$.</p>\n<p><strong>(b) After bridge $(u, v)$ with $c_{uv}(x) = 0$:</strong>\nConsider the zigzag path $s \\to u \\to v \\to t$:\nIts latency is $c_{su}(x_{su}) + 0 + c_{vt}(x_{vt}) = x_{su} + x_{vt}$.\nEven when ALL traffic ($x = 1$) uses this path:\nLatency on $s \\to u \\to v \\to t$ is $1 + 0 + 1 = 2$.\nCompare this to the old paths at full load on the bridge:\n- Top path $s \\to u \\to t$: $c_{su}(1) + c_{ut}(0) = 1 + 1 = 2$.\n- Bottom path $s \\to v \\to t$: $c_{sv}(0) + c_{vt}(1) = 1 + 1 = 2$.\nFor any split where some flow uses the old paths, the zigzag path is strictly cheaper! Thus all $1.0$ unit of traffic routes along $s \\to u \\to v \\to t$.\nNew equilibrium latency $= 2.0$.</p>\n<p><strong>(c) Braess degradation ratio:</strong>\n$$\\frac{\\text{New Latency}}{\\text{Old Latency}} = \\frac{2.0}{1.5} = \\frac{4}{3} \\approx 1.333$$\nIntuition: Commuters act selfishly. From $u$, the bridge edge offers $0$ latency compared to $1$ along $u \\to t$. Every commuter diverts through $v$, creating massive mutual congestion on both $s \\to u$ and $v \\to t$!</p>\n<div class=\"edge-box\"><strong>The Edge / Pro-Tip Insight:</strong> Adding network capacity can strictly increase latency for EVERY commuter! The maximum Braess ratio for linear latencies is exactly $4/3$.</div>\n</div>",
+      "reference": "(a) Flow 0.5 on each path; latency = 1.5. (b) All 1.0 unit on s->u->v->t; latency = 2.0. (c) Ratio = 2.0/1.5 = 4/3 approx 1.333; selfish routing causes overcongestion on shared edges.",
+      "rubric": [
+        "2 marks: Finds initial symmetric flow 0.5 each with latency 1.5",
+        "2 marks: Shows all flow routes on s->u->v->t with latency 2.0",
+        "2 marks: Computes ratio 4/3 and explains selfish congestion externality"
+      ]
+    },
+    {
+      "id": "P3-Q5",
+      "paper": 3,
+      "set": 3,
+      "week": 1,
+      "topic": "Conceptual Analysis (Atomic Efficiency & Japanese Auctions)",
+      "difficulty": "Foundational",
+      "type": "mcq",
+      "marks": 4,
+      "prompt": "Conceptual Yes/No with penalty scoring: <strong>Correct = +2 pts, Don't Know = +1 pt, Incorrect = 0 pts</strong>.",
+      "subparts": [
+        {
+          "id": "P3-Q5-a",
+          "label": "(a)",
+          "marks": 2,
+          "prompt": "In an atomic routing game, does every pure-strategy Nash equilibrium minimize the total social cost?",
+          "options": [
+            "Yes",
+            "No",
+            "Don't know"
+          ],
+          "answer": "No",
+          "explanation": "<strong>NO:</strong> In atomic routing games, players selfishly minimize individual latency without internalizing the externality they impose on others. Nash equilibria generally fail to minimize total social cost (PoA > 1)."
+        },
+        {
+          "id": "P3-Q5-b",
+          "label": "(b)",
+          "marks": 2,
+          "prompt": "In a single-item Japanese (ascending clock) auction with private values, does truthful dropout behavior yield the exact same winner and payment as the second-price sealed-bid Vickrey auction?",
+          "options": [
+            "Yes",
+            "No",
+            "Don't know"
+          ],
+          "answer": "Yes",
+          "explanation": "<strong>YES:</strong> In a Japanese auction, each bidder drops out when price reaches her valuation $v_i$. The last remaining bidder wins at the dropout price of the second-highest bidder ($v_{(2)}$), perfectly replicating the Vickrey auction!"
+        }
+      ],
+      "solution": "<div class=\"sol-body\">\n<p><strong>(a) Answer: NO (+2 Marks).</strong>\nNash equilibria in atomic routing games represent selfish behavior and do not minimize total social cost in general. For example, in Paper 2 Question 4, load $(1, 1)$ had cost 6 while load $(2, 0)$ was also a pure NE with cost 8.</p>\n<p><strong>(b) Answer: YES (+2 Marks).</strong>\nIn a Japanese auction, each bidder stays until the clock price reaches her true valuation $v_i$. The highest-value bidder wins the instant the second-highest bidder drops out at price $v_{(2)}$, exactly matching the Vickrey auction winner and payment.</p>\n</div>",
+      "reference": "(a) No. Selfish routing does not minimize social cost (PoA > 1). (b) Yes. Winner is highest bidder and pays second-highest valuation v_{(2)}.",
+      "rubric": [
+        "2 marks: Correct No on (a) explaining selfish vs social mismatch",
+        "2 marks: Correct Yes on (b) explaining equivalence of Japanese auction and Vickrey"
+      ]
+    },
+    {
+      "id": "P3-Q6",
+      "paper": 3,
+      "set": 3,
+      "week": 3,
+      "topic": "Proof that Midpoint Mechanism is Strictly Manipulable",
+      "difficulty": "Challenging",
+      "type": "proof",
+      "marks": 8,
+      "prompt": "Consider the facility location problem with two agents on the real line $\\mathbb{R}$. A designer proposes the midpoint mechanism:\n$$f(x_1, x_2) = \\frac{x_1 + x_2}{2}$$\nEach agent $i \\in \\{1, 2\\}$ has cost $|f(x_1, x_2) - x_i|$.\n\n<strong>(a) Provide a concrete numerical counterexample with explicit locations showing that this mechanism is not strategyproof.</strong>\n\n<strong>(b) Prove that for ANY true profile with $x_1 \\ne x_2$, both agents can strictly profit by misreporting, and derive the exact optimal misreport that achieves cost zero.</strong>",
+      "blueprint": "<div class=\"proof-blueprint\">\n<h4>Proof Blueprint (Exact Assignment Style)</h4>\n<p><strong>Part (a): Concrete Counterexample (3 Marks)</strong><br>\nLet Agent 1 be at $x_1 = 0$ and Agent 2 be at $x_2 = 4$.\nUnder truthful reporting, the facility is placed at:\n$$f(0, 4) = \\frac{0 + 4}{2} = 2$$\nAgent 2's cost is $|f(0, 4) - x_2| = |2 - 4| = 2$.\nNow suppose Agent 2 misreports her location as $x_2' = 8$.\nThe facility is now placed at:\n$$f(0, 8) = \\frac{0 + 8}{2} = 4$$\nAgent 2's true cost becomes:\n$$|f(0, 8) - x_2| = |4 - 4| = 0 < 2$$\nSince Agent 2 strictly reduced her cost from $2$ to $0$, the midpoint mechanism is not strategyproof. $\\blacksquare$</p>\n\n<p><strong>Part (b): General Proof and Optimal Misreport Derivation (5 Marks)</strong><br>\nConsider two arbitrary agents with true locations $x_1, x_2 \\in \\mathbb{R}$ with $x_1 \\ne x_2$.\nWithout loss of generality, assume Agent 1 reports some $x_1$ and Agent 2 considers her report.</p>\n<p>Under truthful reporting, Agent 2's cost is:\n$$\\text{Cost}_2(x_2) = \\left| \\frac{x_1 + x_2}{2} - x_2 \\right| = \\left| \\frac{x_1 - x_2}{2} \\right| = \\frac{|x_1 - x_2|}{2} > 0$$</p>\n<p>Agent 2 seeks a reported location $x_2' \\in \\mathbb{R}$ that achieves the global minimum cost of $0$:\n$$\\text{Cost}_2(x_2') = \\left| \\frac{x_1 + x_2'}{2} - x_2 \\right| = 0$$\n$$\\iff \\frac{x_1 + x_2'}{2} = x_2$$\nMultiplying both sides by 2:\n$$x_1 + x_2' = 2x_2 \\implies x_2' = 2x_2 - x_1$$\nNotice that:\n$$x_2' - x_2 = (2x_2 - x_1) - x_2 = x_2 - x_1 \\ne 0$$\nThus $x_2'$ is a genuine misreport that pushes the facility precisely to Agent 2's true position $x_2$, reducing her cost from $\\frac{|x_1 - x_2|}{2}$ strictly down to $0$!</p>\n<p>By exact symmetry, if Agent 2 reports $x_2$, Agent 1 can report:\n$$x_1' = 2x_1 - x_2$$\nwhich places the facility at $\\frac{(2x_1 - x_2) + x_2}{2} = x_1$, reducing Agent 1's cost to $0$.</p>\n<p><strong>Conclusion:</strong> For any profile with distinct true locations $x_1 \\ne x_2$, both agents can unilaterally misreport to achieve cost $0$, strictly dominating truthful reporting. Hence the midpoint mechanism is universally manipulable. $\\blacksquare$</p>\n</div>",
+      "reference": "Part (a): At x1=0, x2=4, truthful f=2, cost=2. If Agent 2 reports x2'=8, f=4, cost=0 < 2. Part (b): Truthful cost is |x1-x2|/2 > 0. Setting (x1+x2')/2 = x2 yields x2' = 2x2 - x1, placing facility at x2 for cost 0. Symmetrically Agent 1 reports 2x1 - x2. Thus both agents can strictly profit whenever x1 != x2.",
+      "rubric": [
+        "3 marks: Complete numerical counterexample showing truthful cost vs reduced cost under deviation",
+        "3 marks: Formally sets (x1 + x2')/2 = x2 and derives the exact optimal misreport x2' = 2x2 - x1",
+        "2 marks: Demonstrates truthful cost |x1-x2|/2 > 0 and proves cost drops to 0 for both agents"
+      ]
+    },
+    {
+      "id": "P4-Q1",
+      "paper": 4,
+      "set": 4,
+      "week": 1,
+      "topic": "Game Theory & Mixed Equilibrium Paradox",
+      "difficulty": "Intermediate",
+      "type": "short",
+      "marks": 8,
+      "prompt": "Consider a penalty-shootout / cybersecurity game between Player 1 (Row) and Player 2 (Column):\n\n$$\\begin{array}{c|cc} & L & R \\\\ \\hline L & (0, 5) & (4, 0) \\\\ R & (3, 0) & (0, 2) \\end{array}$$",
+      "subparts": [
+        {
+          "id": "P4-Q1-a",
+          "label": "(a)",
+          "marks": 2,
+          "prompt": "Show why there is no pure-strategy Nash equilibrium.",
+          "placeholder": "e.g. Best response cycle: (L, L) -> (R, L) -> (R, R) -> (L, R) -> (L, L)",
+          "accepted": [
+            "best response cycle",
+            "no mutual best response",
+            "cycle (l,l)->(r,l)->(r,r)->(l,r)->(l,l)",
+            "no pure ne exists"
+          ]
+        },
+        {
+          "id": "P4-Q1-b",
+          "label": "(b)",
+          "marks": 3,
+          "prompt": "Determine the unique mixed Nash equilibrium $(p L + (1-p) R, q L + (1-q) R)$ where $p$ is Player 1's probability of playing $L$ and $q$ is Player 2's probability of playing $L$.",
+          "placeholder": "e.g. p = 2/7, q = 4/7",
+          "accepted": [
+            "p = 2/7, q = 4/7",
+            "p=2/7, q=4/7",
+            "2/7, 4/7",
+            "(2/7 L + 5/7 R, 4/7 L + 3/7 R)",
+            "p: 2/7, q: 4/7"
+          ]
+        },
+        {
+          "id": "P4-Q1-c",
+          "label": "(c)",
+          "marks": 1,
+          "prompt": "What are the expected equilibrium payoffs for Player 1 and Player 2?",
+          "placeholder": "e.g. Player 1: 12/7, Player 2: 10/7",
+          "accepted": [
+            "player 1: 12/7, player 2: 10/7",
+            "12/7, 10/7",
+            "12/7 and 10/7",
+            "u1 = 12/7, u2 = 10/7"
+          ]
+        },
+        {
+          "id": "P4-Q1-d",
+          "label": "(d)",
+          "marks": 2,
+          "prompt": "Suppose Player 1 trains hard and increases her payoff at $(L, R)$ from 4 to 6. What is Player 1's probability $p$ in the new equilibrium? Does Player 1's own strategy change?",
+          "placeholder": "e.g. p = 2/7; Player 1's strategy does not change (q changes to 2/3)",
+          "accepted": [
+            "p = 2/7; player 1's strategy does not change",
+            "p = 2/7, does not change",
+            "p=2/7, no change",
+            "2/7, no",
+            "p remains 2/7"
+          ]
+        }
+      ],
+      "solution": "<div class=\"sol-body\">\n<p><strong>(a) Cycle of best responses:</strong>\nCheck best responses:\n- Against $L$: Row prefers $R$ ($3 > 0$).\n- Against $R$: Row prefers $L$ ($4 > 0$).\n- Against $L$: Col prefers $L$ ($5 > 0$).\n- Against $R$: Col prefers $R$ ($2 > 0$).\nTracing best responses gives the cycle: $(L, L) \\to (R, L) \\to (R, R) \\to (L, R) \\to (L, L)$. No cell has mutual best responses, so no pure NE exists.</p>\n<p><strong>(b) Mixed Nash equilibrium:</strong>\n- Player 1 indifference (determines $q$):\n  $u_1(L, q) = 0(q) + 4(1-q) = 4 - 4q = u_1(R, q) = 3q + 0(1-q) = 3q$\n  $4 - 4q = 3q \\implies 7q = 4 \\implies q = 4/7$.\n- Player 2 indifference (determines $p$):\n  $u_2(p, L) = 5p + 0(1-p) = 5p = u_2(p, R) = 0(p) + 2(1-p) = 2 - 2p$\n  $5p = 2 - 2p \\implies 7p = 2 \\implies p = 2/7$.\nUnique mixed equilibrium: $(\\frac{2}{7} L + \\frac{5}{7} R, \\frac{4}{7} L + \\frac{3}{7} R)$.</p>\n<p><strong>(c) Expected payoffs:</strong>\n- Player 1: $u_1 = 3q = 3(4/7) = 12/7 \\approx 1.714$.\n- Player 2: $u_2 = 5p = 5(2/7) = 10/7 \\approx 1.429$.</p>\n<p><strong>(d) The Mixed Strategy Paradox:</strong>\nIf Player 1's payoff at $(L, R)$ changes to $6$:\nPlayer 2's indifference equation remains: $5p = 2 - 2p \\implies p = 2/7$!\nPlayer 1's own probability $p$ is entirely determined by Player 2's payoffs, so $p$ remains $2/7$!\nMeanwhile, Player 2's mixture shifts: $6 - 6q = 3q \\implies 9q = 6 \\implies q = 2/3$.\nPlayer 1's own training changes ONLY the opponent's strategy, leaving her own probability unchanged!</p>\n<div class=\"edge-box\"><strong>The Edge / Pro-Tip Insight:</strong> In 2x2 mixed equilibria, your probabilities are determined by the OPPONENT's payoffs (to make the opponent indifferent). Changing your own payoffs alters only your opponent's equilibrium mixture!</div>\n</div>",
+      "reference": "(a) No pure NE (best response cycle). (b) p = 2/7, q = 4/7. (c) Player 1: 12/7, Player 2: 10/7. (d) p = 2/7; Player 1's strategy does not change (Player 1 mixes to keep Player 2 indifferent, so P1's strategy depends on P2's payoffs).",
+      "rubric": [
+        "2 marks: Demonstrates the strict best response cycle and rules out pure NE",
+        "3 marks: Correctly equates expected payoffs to find p=2/7 and q=4/7",
+        "1 mark: Computes expected payoffs 12/7 and 10/7",
+        "2 marks: Explains p=2/7 is unchanged because P1's mixture is governed by P2's payoffs"
+      ]
+    },
+    {
+      "id": "P4-Q2",
+      "paper": 4,
+      "set": 4,
+      "week": 2,
+      "topic": "Auction Formats & Ascending Dynamics",
+      "difficulty": "Intermediate",
+      "type": "short",
+      "marks": 8,
+      "prompt": "A single item is auctioned among 3 bidders with private valuations:\n$$v_1 = 70, \\quad v_2 = 50, \\quad v_3 = 30$$",
+      "subparts": [
+        {
+          "id": "P4-Q2-a",
+          "label": "(a)",
+          "marks": 2,
+          "prompt": "In a continuous Japanese auction, at what price does Bidder 3 drop out? At what price does Bidder 2 drop out? Who wins, and what does the winner pay?",
+          "placeholder": "e.g. B3 drops out at 30, B2 at 50; B1 wins and pays 50",
+          "accepted": [
+            "b3 drops out at 30, b2 at 50; b1 wins and pays 50",
+            "30, 50; bidder 1 wins, pays 50",
+            "b3: 30, b2: 50; winner b1 pays 50",
+            "b1 wins, pays 50"
+          ]
+        },
+        {
+          "id": "P4-Q2-b",
+          "label": "(b)",
+          "marks": 2,
+          "prompt": "In an English ascending-bid auction with starting price 0 and minimum bid increment $\\delta = 4$, who wins and what is the final winning bid?",
+          "placeholder": "e.g. Bidder 1 wins, final bid = 48 or 52",
+          "accepted": [
+            "bidder 1 wins, final bid = 52",
+            "bidder 1 wins, final bid = 48",
+            "bidder 1 wins, 52",
+            "bidder 1 wins, 48",
+            "b1 wins, 52",
+            "b1 wins, 48"
+          ]
+        },
+        {
+          "id": "P4-Q2-c",
+          "label": "(c)",
+          "marks": 2,
+          "prompt": "Compare the communication complexity (number of broadcast messages) of the Japanese auction vs. the English auction with increment $\\delta = 1$.",
+          "placeholder": "e.g. Japanese: 2 messages (dropouts); English: 50 messages",
+          "accepted": [
+            "japanese: 2 messages, english: 50 messages",
+            "japanese 2, english 50",
+            "2 vs 50",
+            "japanese: n-1 = 2 messages, english: 50 messages"
+          ]
+        },
+        {
+          "id": "P4-Q2-d",
+          "label": "(d)",
+          "marks": 2,
+          "prompt": "Explain why truthful bidding ($b_i = v_i$) is NOT a dominant strategy in a first-price sealed-bid auction.",
+          "placeholder": "e.g. Bidding true value yields utility 0 whether winning or losing; shading bid gives positive utility",
+          "accepted": [
+            "bidding true value yields utility 0, shading bid gives positive utility",
+            "shading bid gives positive utility",
+            "utility is 0 if winning at true value",
+            "winner pays own bid, shading gives positive surplus"
+          ]
+        }
+      ],
+      "solution": "<div class=\"sol-body\">\n<p><strong>(a) Continuous Japanese Auction:</strong>\n- Price starts at 0 and rises continuously.\n- Bidder 3 drops out the instant price reaches $v_3 = 30$.\n- Bidder 2 drops out the instant price reaches $v_2 = 50$.\n- Bidder 1 remains as the sole active bidder, winning the item at price $p = 50$.</p>\n<p><strong>(b) English Auction with increment $\\delta = 4$:</strong>\nBids increase by 4: $0, 4, 8, \\dots, 28$ (B3 drops out), $\\dots, 44, 48$.\nAt price 48, Bidder 1 bids 48. Bidder 2 cannot match or exceed with 52 since $52 > v_2 = 50$, so Bidder 2 drops out.\nIf Bidder 2 had bid 48, Bidder 1 would bid 52, winning at 52.\nEither 48 or 52 is accepted depending on bid order; Bidder 1 wins!</p>\n<p><strong>(c) Communication Complexity:</strong>\n- Japanese auction: Only dropouts are transmitted $\\implies n - 1 = 3 - 1 = 2$ messages total!\n- English auction with increment $\\delta = 1$: Every increment from 0 to 50 is a broadcast bid $\\implies 50$ messages!</p>\n<p><strong>(d) Why First-Price Auctions are not DSIC:</strong>\nIn a first-price auction, the winner pays her own bid: $u_i = v_i - b_i$.\nIf a bidder bids truthfully ($b_i = v_i$), her utility is $v_i - v_i = 0$ if she wins, and $0$ if she loses!\nBy shading her bid to $b_i = v_i - \\epsilon$, she secures positive profit $\\epsilon > 0$ when winning. Truthful bidding is never optimal!</p>\n<div class=\"edge-box\"><strong>The Edge / Pro-Tip Insight:</strong> The Japanese ascending auction has minimal communication complexity $O(n)$, while English auctions require $O(v_{(2)}/\\delta)$ messages. Both implement Vickrey outcome in dominant strategies.</div>\n</div>",
+      "reference": "(a) B3 drops at 30, B2 at 50; B1 wins and pays 50. (b) B1 wins, final bid 48 or 52. (c) Japanese: 2 messages; English: 50 messages. (d) In first-price, bidding true value yields utility 0 whether you win or lose; shading bid gives positive profit.",
+      "rubric": [
+        "2 marks: Identifies dropouts at 30 and 50, winner B1 paying 50",
+        "2 marks: Identifies winner B1 and winning bid 48 or 52",
+        "2 marks: Compares 2 messages (Japanese) vs 50 messages (English)",
+        "2 marks: Explains bid shading yields strictly positive utility vs 0 under truthful bidding"
+      ]
+    },
+    {
+      "id": "P4-Q3",
+      "paper": 4,
+      "set": 4,
+      "week": 3,
+      "topic": "Facility Location: Even n Median Analysis",
+      "difficulty": "Intermediate",
+      "type": "short",
+      "marks": 6,
+      "prompt": "Consider facility location with 4 agents on $\\mathbb{R}$ at coordinates $x_1 \\le x_2 \\le x_3 \\le x_4$.",
+      "subparts": [
+        {
+          "id": "P4-Q3-a",
+          "label": "(a)",
+          "marks": 2,
+          "prompt": "Show that ANY point $y \\in [x_2, x_3]$ achieves the exact same optimal total cost, and express this optimal total cost in terms of the coordinates.",
+          "placeholder": "e.g. Total Cost = (x4 - x1) + (x3 - x2)",
+          "accepted": [
+            "(x4 - x1) + (x3 - x2)",
+            "x4 - x1 + x3 - x2",
+            "(x4-x1)+(x3-x2)",
+            "optimal cost is (x4 - x1) + (x3 - x2)"
+          ]
+        },
+        {
+          "id": "P4-Q3-b",
+          "label": "(b)",
+          "marks": 2,
+          "prompt": "Explain why the lower-median mechanism $f(x) = x_2$ is strategyproof.",
+          "placeholder": "e.g. Agents left of x2 can only move it right; agents right can only move it left; neither can profit",
+          "accepted": [
+            "agents left of x2 can only move it right, agents right can only move it left",
+            "order statistic is strategyproof",
+            "agents <= x2 can only shift it right, agents >= x3 can only shift it left"
+          ]
+        },
+        {
+          "id": "P4-Q3-c",
+          "label": "(c)",
+          "marks": 2,
+          "prompt": "Now consider the midpoint-of-medians mechanism $g(x) = \\frac{x_2 + x_3}{2}$. Is $g$ strategyproof? Provide a brief proof or counterexample.",
+          "placeholder": "e.g. No; at (0, 2, 4, 10), g = 3. Agent 3 at 4 reports 6 to get g = 4, reducing cost from 1 to 0",
+          "accepted": [
+            "no",
+            "no, agent 3 can misreport",
+            "no, at (0,2,4,10) agent 3 reports 6 to get cost 0",
+            "not strategyproof"
+          ]
+        }
+      ],
+      "solution": "<div class=\"sol-body\">\n<p><strong>(a) Total cost invariance on $[x_2, x_3]$:</strong>\nFor any $y$ satisfying $x_2 \\le y \\le x_3$:\n- $y \\ge x_1 \\implies |y - x_1| = y - x_1$.\n- $y \\ge x_2 \\implies |y - x_2| = y - x_2$.\n- $y \\le x_3 \\implies |y - x_3| = x_3 - y$.\n- $y \\le x_4 \\implies |y - x_4| = x_4 - y$.\nSumming all four distances:\n$$\\sum_{i=1}^4 |y - x_i| = (y - x_1) + (y - x_2) + (x_3 - y) + (x_4 - y) = (x_4 - x_1) + (x_3 - x_2)$$\nThe variable $y$ completely cancels out! Every point in $[x_2, x_3]$ attains this exact same minimal total cost.</p>\n<p><strong>(b) Strategyproofness of lower median $f(x) = x_2$:</strong>\n- For Agents 1 and 2 ($x_i \\le x_2$): Reporting a smaller value keeps $x_2$ unchanged. Reporting a larger value can only increase $x_2$ (moving it further right, away from $x_i$), which strictly increases their distance.\n- For Agents 3 and 4 ($x_i \\ge x_3$): Reporting a larger value keeps $x_2$ unchanged. Reporting a smaller value can only decrease $x_2$ (moving it further left, away from $x_i$), strictly increasing their distance.\nHence, no agent can move $x_2$ closer to her true position. $f(x) = x_2$ is strategyproof.</p>\n<p><strong>(c) Midpoint of medians $g(x) = \\frac{x_2 + x_3}{2}$:</strong>\n<strong>No</strong>, it is not strategyproof.\nConsider $x = (0, 2, 4, 10)$.\nThe medians are $x_2 = 2, x_3 = 4 \\implies g(x) = \\frac{2 + 4}{2} = 3$.\nAgent 3 is at $x_3 = 4$ and incurs cost $|3 - 4| = 1$.\nIf Agent 3 misreports $x_3' = 6$, the reported profile becomes $(0, 2, 6, 10)$.\nThe new medians are $2$ and $6 \\implies g(x') = \\frac{2 + 6}{2} = 4$.\nAgent 3's true cost becomes $|4 - 4| = 0 < 1$. Profitable manipulation!</p>\n<div class=\"edge-box\"><strong>The Edge / Pro-Tip Insight:</strong> For even $n$, any selection rule that averages the medians (like $(x_2+x_3)/2$) is manipulable. To guarantee strategyproofness, you MUST pick a fixed order statistic (e.g. the $k$-th order statistic)!</div>\n</div>",
+      "reference": "(a) Total cost = (x4 - x1) + (x3 - x2) (y cancels out). (b) Lower median is an order statistic; agents to the left can only push it right, agents to the right can only push it left. (c) No, not strategyproof; at (0, 2, 4, 10) Agent 3 reports 6 to move facility to 4, reducing cost from 1 to 0.",
+      "rubric": [
+        "2 marks: Derives total cost sum showing y cancels out to (x4-x1)+(x3-x2)",
+        "2 marks: Explains lower median monotonicity and inability of agents to shift it beneficially",
+        "2 marks: Correctly concludes No for midpoint-of-medians and supplies a valid profitable misreport"
+      ]
+    },
+    {
+      "id": "P4-Q4",
+      "paper": 4,
+      "set": 4,
+      "week": 3,
+      "topic": "Atomic Routing Game with Bottleneck Capacity",
+      "difficulty": "Intermediate",
+      "type": "short",
+      "marks": 6,
+      "prompt": "Four atomic commuters ($n = 4$) each route 1 unit of traffic on two parallel routes:\n- Route 1 (Highway): $c_1(x) = x^2 + 2$\n- Route 2 (Local road): $c_2(x) = 3x + 4$\nwhere $x \\in \\{0, 1, 2, 3, 4\\}$ is the number of commuters on that route.",
+      "subparts": [
+        {
+          "id": "P4-Q4-a",
+          "label": "(a)",
+          "marks": 2,
+          "prompt": "Fill in the latency costs $c_1(x)$ and $c_2(x)$ for loads $x \\in \\{1, 2, 3, 4\\}$.",
+          "placeholder": "e.g. c1: 3, 6, 11, 18; c2: 7, 10, 13, 16",
+          "accepted": [
+            "c1: 3, 6, 11, 18; c2: 7, 10, 13, 16",
+            "c1: 3, 6, 11, 18 and c2: 7, 10, 13, 16",
+            "3, 6, 11, 18; 7, 10, 13, 16"
+          ]
+        },
+        {
+          "id": "P4-Q4-b",
+          "label": "(b)",
+          "marks": 2,
+          "prompt": "Determine all pure-strategy Nash equilibrium load splits $(x_1, x_2)$ with $x_1 + x_2 = 4$.",
+          "placeholder": "e.g. (2, 2)",
+          "accepted": [
+            "(2, 2)",
+            "(2,2)",
+            "x1 = 2, x2 = 2",
+            "2 on route 1, 2 on route 2"
+          ]
+        },
+        {
+          "id": "P4-Q4-c",
+          "label": "(c)",
+          "marks": 2,
+          "prompt": "Determine the socially optimal flow $(x_1^*, x_2^*)$ and compute the Price of Anarchy (PoA).",
+          "placeholder": "e.g. Social optimum = (2, 2), PoA = 1",
+          "accepted": [
+            "social optimum = (2, 2), poa = 1",
+            "(2, 2), poa = 1",
+            "optimum (2,2), poa 1",
+            "poa = 1"
+          ]
+        }
+      ],
+      "solution": "<div class=\"sol-body\">\n<p><strong>(a) Latency evaluation table:</strong>\n- Route 1: $c_1(1) = 1^2 + 2 = 3$, $c_1(2) = 2^2 + 2 = 6$, $c_1(3) = 3^2 + 2 = 11$, $c_1(4) = 4^2 + 2 = 18$.\n- Route 2: $c_2(1) = 3(1) + 4 = 7$, $c_2(2) = 3(2) + 4 = 10$, $c_2(3) = 3(3) + 4 = 13$, $c_2(4) = 3(4) + 4 = 16$.</p>\n<p><strong>(b) Checking pure Nash equilibria:</strong>\n- At $(4, 0)$: Route 1 user pays $18$. Switching to Route 2 pays $c_2(1) = 7 < 18$. Unstable.\n- At $(3, 1)$: Route 1 user pays $11$. Switching to Route 2 pays $c_2(2) = 10 < 11$. Unstable.\n- At $(2, 2)$:\n  - Route 1 user pays $c_1(2) = 6$. Switching to Route 2 pays $c_2(3) = 13 > 6$ (No incentive!).\n  - Route 2 user pays $c_2(2) = 10$. Switching to Route 1 pays $c_1(3) = 11 > 10$ (No incentive!).\n  Both conditions hold $\\implies (2, 2)$ is a pure Nash equilibrium!\n- At $(1, 3)$: Route 2 user pays $13$. Switching to Route 1 pays $c_1(2) = 6 < 13$. Unstable.\n- At $(0, 4)$: Route 2 user pays $16$. Switching to Route 1 pays $c_1(1) = 3 < 16$. Unstable.\nThe unique pure NE is $(2, 2)$.</p>\n<p><strong>(c) Social Optimum and PoA:</strong>\nSocial cost = $x_1 c_1(x_1) + x_2 c_2(x_2)$:\n- At $(2, 2)$: $2(6) + 2(10) = 12 + 20 = 32$.\n- At $(3, 1)$: $3(11) + 1(7) = 33 + 7 = 40$.\n- At $(1, 3)$: $1(3) + 3(13) = 3 + 39 = 42$.\nSocial optimum is $(2, 2)$ with minimum cost 32.\nSince the unique Nash equilibrium coincides with the social optimum:\n$$\\text{PoA} = \\frac{32}{32} = 1$$\n<div class=\"edge-box\"><strong>The Edge / Pro-Tip Insight:</strong> Remember to evaluate deviations at post-deviation load $x+1$! A commuter on Route 1 pays $c_1(2) = 6$, and when checking Route 2 she faces $c_2(2+1) = c_2(3) = 13$, NOT $c_2(2) = 10$.</div>\n</div>",
+      "reference": "(a) c1: 3, 6, 11, 18; c2: 7, 10, 13, 16. (b) Unique pure NE: (2, 2). (c) Social optimum is (2, 2) with cost 32; PoA = 1.",
+      "rubric": [
+        "2 marks: Correctly computes latency tables for all loads 1 to 4",
+        "2 marks: Verifies deviations using post-deviation loads to find unique NE (2, 2)",
+        "2 marks: Calculates social costs to confirm (2, 2) is optimal and PoA = 1"
+      ]
+    },
+    {
+      "id": "P4-Q5",
+      "paper": 4,
+      "set": 4,
+      "week": 1,
+      "topic": "Conceptual Analysis (IESDS & Roughgarden Bound)",
+      "difficulty": "Foundational",
+      "type": "mcq",
+      "marks": 4,
+      "prompt": "Conceptual Yes/No with penalty scoring: <strong>Correct = +2 pts, Don't Know = +1 pt, Incorrect = 0 pts</strong>.",
+      "subparts": [
+        {
+          "id": "P4-Q5-a",
+          "label": "(a)",
+          "marks": 2,
+          "prompt": "In a finite normal-form game, can the iterated elimination of strictly dominated strategies ever eliminate a pure-strategy Nash equilibrium?",
+          "options": [
+            "Yes",
+            "No",
+            "Don't know"
+          ],
+          "answer": "No",
+          "explanation": "<strong>NO:</strong> Strictly dominated strategies receive probability 0 in every Nash equilibrium. Iterated elimination of strictly dominated strategies preserves the complete set of all Nash equilibria (both pure and mixed) without exception!"
+        },
+        {
+          "id": "P4-Q5-b",
+          "label": "(b)",
+          "marks": 2,
+          "prompt": "In a non-atomic routing game with arbitrary graph topology and affine latency functions ($c_e(x) = a_e x + b_e, a_e \\ge 0, b_e \\ge 0$), can the Price of Anarchy ever exceed 4/3?",
+          "options": [
+            "Yes",
+            "No",
+            "Don't know"
+          ],
+          "answer": "No",
+          "explanation": "<strong>NO:</strong> By the Roughgarden-Tardos (2002) Theorem, the Price of Anarchy in any non-atomic congestion game with affine latency functions is strictly bounded above by 4/3, regardless of the network topology or flow rate!"
+        }
+      ],
+      "solution": "<div class=\"sol-body\">\n<p><strong>(a) Answer: NO (+2 Marks).</strong>\nIterated elimination of strictly dominated strategies never eliminates any Nash equilibrium. Since strictly dominated strategies are never played in equilibrium, removing them leaves the equilibrium set completely intact.</p>\n<p><strong>(b) Answer: NO (+2 Marks).</strong>\nThe Roughgarden-Tardos Theorem establishes that for all non-atomic routing games with affine latency functions, the Price of Anarchy is at most $4/3$. Pigou's network achieves this upper bound, and no network can exceed it.</p>\n</div>",
+      "reference": "(a) No. IESDS preserves all Nash equilibria without exception. (b) No. Roughgarden-Tardos theorem bounds non-atomic affine PoA at 4/3.",
+      "rubric": [
+        "2 marks: Correct No on (a) citing equilibrium invariance under strict dominance elimination",
+        "2 marks: Correct No on (b) citing Roughgarden-Tardos 4/3 upper bound"
+      ]
+    },
+    {
+      "id": "P4-Q6",
+      "paper": 4,
+      "set": 4,
+      "week": 3,
+      "topic": "Proof that Median Mechanism is Strategyproof for Odd n",
+      "difficulty": "Challenging",
+      "type": "proof",
+      "marks": 8,
+      "prompt": "Consider facility location on the real line $\\mathbb{R}$ with an odd number of agents $n = 2k + 1$. Each agent $i \\in \\{1, \\dots, n\\}$ reports location $x_i \\in \\mathbb{R}$. The median mechanism places the facility at:\n$$f(x) = x_{(k+1)}$$\nwhere $x_{(1)} \\le x_{(2)} \\le \\dots \\le x_{(n)}$ are the sorted reports.\n\n<strong>Prove that the median mechanism is strategyproof: for every agent $i$, true location $x_i$, misreport $x_i'$, and reports of other agents $x_{-i}$,</strong>\n$$|f(x_i, x_{-i}) - x_i| \\le |f(x_i', x_{-i}) - x_i|$$",
+      "blueprint": "<div class=\"proof-blueprint\">\n<h4>Proof Blueprint (Exact Assignment Style)</h4>\n<p><strong>Step 1: Setup and Definitions</strong><br>\nLet $n = 2k + 1$ be odd. Fix an arbitrary agent $i$ with true location $x_i \\in \\mathbb{R}$.\nFix arbitrary reports of all other $n-1 = 2k$ agents $x_{-i} = (x_j)_{j \\ne i}$.\nSort the other $2k$ reports in non-decreasing order:\n$$y_1 \\le y_2 \\le \\dots \\le y_k \\le y_{k+1} \\le \\dots \\le y_{2k}$$</p>\n\n<p><strong>Step 2: Mechanism Output as a Clamped Function</strong><br>\nWhen agent $i$ reports $r \\in \\mathbb{R}$, her report is inserted into the sorted list of the $2k$ other reports to form the full set of $2k+1$ reports.\nThe $(k+1)$-th smallest element of this combined set is given by:\n$$f(r, x_{-i}) = \\begin{cases} y_k & \\text{if } r < y_k \\\\ r & \\text{if } y_k \\le r \\le y_{k+1} \\\\ y_{k+1} & \\text{if } r > y_{k+1} \\end{cases}$$\nThat is, $f(r, x_{-i}) = \\text{median}(r, y_k, y_{k+1}) = \\min(\\max(r, y_k), y_{k+1})$.\nNotice that the output is clamped between $y_k$ and $y_{k+1}$.</p>\n\n<p><strong>Step 3: Case Analysis Based on True Location $x_i$</strong></p>\n<p><strong>Case 1: $y_k \\le x_i \\le y_{k+1}$ (True location inside clamping interval)</strong><br>\nUnder truthful reporting $r = x_i$, the facility is placed at $f(x_i, x_{-i}) = x_i$.\nAgent $i$'s cost is $|x_i - x_i| = 0$.\nSince cost is non-negative, no misreport can strictly decrease her cost below 0.</p>\n\n<p><strong>Case 2: $x_i < y_k$ (True location strictly left of clamping interval)</strong><br>\nUnder truthful reporting $r = x_i < y_k$, the facility is placed at $f(x_i, x_{-i}) = y_k$.\nAgent $i$'s cost is $|y_k - x_i| = y_k - x_i > 0$.\nNow consider any misreport $r \\ne x_i$:\n<ul>\n<li>If $r \\le y_k$: the facility remains at $y_k$, so cost is unchanged: $|y_k - x_i| = y_k - x_i$.</li>\n<li>If $r > y_k$: the facility is placed at $\\min(r, y_{k+1}) > y_k$.\nSince the facility moves strictly further to the right, the new distance is:\n$$|f(r, x_{-i}) - x_i| = f(r, x_{-i}) - x_i > y_k - x_i$$\nwhich strictly increases her cost!</li>\n</ul>\nHence, no misreport can strictly decrease agent $i$'s cost in Case 2.</p>\n\n<p><strong>Case 3: $x_i > y_{k+1}$ (True location strictly right of clamping interval)</strong><br>\nUnder truthful reporting $r = x_i > y_{k+1}$, the facility is placed at $f(x_i, x_{-i}) = y_{k+1}$.\nAgent $i$'s cost is $x_i - y_{k+1} > 0$.\nNow consider any misreport $r \\ne x_i$:\n<ul>\n<li>If $r \\ge y_{k+1}$: the facility remains at $y_{k+1}$, so cost is unchanged.</li>\n<li>If $r < y_{k+1}$: the facility is placed at $\\max(r, y_k) < y_{k+1}$.\nSince the facility moves strictly further to the left, the distance increases:\n$$|f(r, x_{-i}) - x_i| = x_i - f(r, x_{-i}) > x_i - y_{k+1}$$\nstrictly increasing her cost!</li>\n</ul>\nHence, no misreport can strictly decrease agent $i$'s cost in Case 3.</p>\n\n<p><strong>Conclusion:</strong> In all three cases, for every true location $x_i$, every alternative report $x_i'$, and every profile of other reports $x_{-i}$, we have:\n$$|f(x_i, x_{-i}) - x_i| \\le |f(x_i', x_{-i}) - x_i|$$\nTherefore, truthful reporting is a weakly dominant strategy, and the median mechanism is strategyproof. $\\blacksquare$</p>\n</div>",
+      "reference": "Sort other 2k reports: y1 <= ... <= y_{2k}. The median of all 2k+1 reports is clamped: f(r) = y_k if r < y_k, r if y_k <= r <= y_{k+1}, and y_{k+1} if r > y_{k+1}. Case 1: y_k <= x_i <= y_{k+1} -> truthful f = x_i, cost 0. Case 2: x_i < y_k -> truthful f = y_k; reporting r <= y_k gives y_k, reporting r > y_k moves facility further right, strictly increasing cost. Case 3: x_i > y_{k+1} -> symmetric, misreporting can only move facility further left. Thus median mechanism is strategyproof.",
+      "rubric": [
+        "2 marks: Sorts other 2k reports and defines the clamping interval [y_k, y_{k+1}]",
+        "2 marks: Correctly derives clamped median formula f(r) = min(max(r, y_k), y_{k+1})",
+        "2 marks: Analyzes Case 1 (inside interval, cost 0) and Case 2 (left of interval, facility at y_k, misreporting can only move it right)",
+        "2 marks: Analyzes Case 3 (right of interval) and concludes strategyproofness for all profiles"
+      ]
+    },
+    {
+      "id": "P5-Q1",
+      "paper": 5,
+      "set": 5,
+      "week": 1,
+      "topic": "Game Theory & Public Good Dilemma",
+      "difficulty": "Intermediate",
+      "type": "short",
+      "marks": 8,
+      "prompt": "Three players simultaneously decide whether to contribute to an open-source library ($s_i = 1$) or not ($s_i = 0$). Utility of player $i \\in \\{1, 2, 3\\}$ is:\n$$u_i(s_1, s_2, s_3) = 2(s_1 + s_2 + s_3) - 3 s_i$$",
+      "subparts": [
+        {
+          "id": "P5-Q1-a",
+          "label": "(a)",
+          "marks": 2,
+          "prompt": "Prove that $s_i = 0$ is a strictly dominant strategy for every player $i$.",
+          "placeholder": "e.g. u_i(1, s_{-i}) - u_i(0, s_{-i}) = 2 - 3 = -1 < 0",
+          "accepted": [
+            "u_i(1, s_{-i}) - u_i(0, s_{-i}) = -1 < 0",
+            "contributing yields 2 - 3 = -1 < 0",
+            "diff is 2 - 3 = -1",
+            "-1 < 0, strictly dominant"
+          ]
+        },
+        {
+          "id": "P5-Q1-b",
+          "label": "(b)",
+          "marks": 2,
+          "prompt": "Determine all Nash equilibria of this game.",
+          "placeholder": "e.g. (0, 0, 0)",
+          "accepted": [
+            "(0, 0, 0)",
+            "(0,0,0)",
+            "0, 0, 0",
+            "all defect: (0, 0, 0)"
+          ]
+        },
+        {
+          "id": "P5-Q1-c",
+          "label": "(c)",
+          "marks": 2,
+          "prompt": "Compute total social welfare $\\sum_{i=1}^3 u_i$ at the Nash equilibrium, and compare it to socially optimal welfare under $(1, 1, 1)$.",
+          "placeholder": "e.g. Equilibrium welfare = 0; Optimal welfare = 9",
+          "accepted": [
+            "equilibrium welfare = 0, optimal welfare = 9",
+            "0, 9",
+            "0 and 9",
+            "welfare 0 vs 9"
+          ]
+        },
+        {
+          "id": "P5-Q1-d",
+          "label": "(d)",
+          "marks": 2,
+          "prompt": "Suppose return per unit contributed increases from 2 to $\\beta$. For what range of $\\beta$ does contributing ($s_i = 1$) become strictly dominant?",
+          "placeholder": "e.g. beta > 3",
+          "accepted": [
+            "beta > 3",
+            "b > 3",
+            "\\beta > 3",
+            "> 3"
+          ]
+        }
+      ],
+      "solution": "<div class=\"sol-body\">\n<p><strong>(a) Strict dominance of free-riding ($s_i = 0$):</strong>\nFor any fixed actions $s_{-i}$ of other players:\n- If $s_i = 1$: $u_i = 2(1 + \\sum_{j \\ne i} s_j) - 3 = 2\\sum_{j \\ne i} s_j - 1$.\n- If $s_i = 0$: $u_i = 2(0 + \\sum_{j \\ne i} s_j) - 0 = 2\\sum_{j \\ne i} s_j$.\nDifference: $u_i(1, s_{-i}) - u_i(0, s_{-i}) = -1 < 0$.\nContributing always lowers payoff by 1 regardless of others' actions. Hence $s_i = 0$ is strictly dominant.</p>\n<p><strong>(b) Nash equilibria:</strong>\nSince $s_i = 0$ is strictly dominant for all players, $(0, 0, 0)$ is the unique Nash equilibrium.</p>\n<p><strong>(c) Social welfare comparison:</strong>\n- At $(0, 0, 0)$: each gets $u_i = 0 \\implies \\text{Total Welfare} = 0$.\n- At $(1, 1, 1)$: each gets $u_i = 2(3) - 3 = 3 \\implies \\text{Total Welfare} = 3 \\times 3 = 9$.\nIndividual free-riding destroys 9 units of potential social surplus!</p>\n<p><strong>(d) Changing marginal return $\\beta$:</strong>\nDifference: $u_i(1, s_{-i}) - u_i(0, s_{-i}) = \\beta - 3$.\nContributing is strictly dominant if and only if $\\beta - 3 > 0 \\implies \\beta > 3$.</p>\n<div class=\"edge-box\"><strong>The Edge / Pro-Tip Insight:</strong> This is the classic n-player Prisoner's Dilemma. Notice social return is $3\\beta$, which exceeds individual cost 3 whenever $\\beta > 1$, yet players free-ride unless private return alone exceeds cost ($\\beta > 3$).</div>\n</div>",
+      "reference": "(a) u_i(1) - u_i(0) = 2 - 3 = -1 < 0, so 0 strictly dominates 1. (b) Unique NE: (0, 0, 0). (c) Equilibrium welfare = 0; Optimal welfare = 9. (d) Contributing is strictly dominant iff beta > 3.",
+      "rubric": [
+        "2 marks: Proves difference in payoffs is -1, establishing strict dominance of 0",
+        "2 marks: Concludes unique NE is (0, 0, 0)",
+        "2 marks: Calculates welfare 0 vs 9",
+        "2 marks: Sets beta - 3 > 0 and derives beta > 3"
+      ]
+    },
+    {
+      "id": "P5-Q2",
+      "paper": 5,
+      "set": 5,
+      "week": 2,
+      "topic": "VCG for Public Project & Budget Deficit",
+      "difficulty": "Intermediate",
+      "type": "short",
+      "marks": 8,
+      "prompt": "A town of 3 residents must decide whether to build a flood barrier ($y = 1$) or not ($y = 0$). Total cost is $C = 120$. Private valuations if built:\n$$v_1 = 70, \\quad v_2 = 50, \\quad v_3 = 30$$\nIf not built ($y = 0$), all values and costs are 0. The town uses VCG with Clarke pivot taxes.",
+      "subparts": [
+        {
+          "id": "P5-Q2-a",
+          "label": "(a)",
+          "marks": 2,
+          "prompt": "Does the VCG mechanism build the barrier ($y^* = 1$)? What is the net social surplus?",
+          "placeholder": "e.g. Yes (y* = 1); net social surplus = 30",
+          "accepted": [
+            "yes (y* = 1); net social surplus = 30",
+            "yes, surplus = 30",
+            "yes, 30",
+            "y* = 1, surplus 30"
+          ]
+        },
+        {
+          "id": "P5-Q2-b",
+          "label": "(b)",
+          "marks": 3,
+          "prompt": "Calculate the Clarke pivot tax charged to each of the three residents.",
+          "placeholder": "e.g. p1 = 40, p2 = 20, p3 = 0",
+          "accepted": [
+            "p1 = 40, p2 = 20, p3 = 0",
+            "p1=40, p2=20, p3=0",
+            "40, 20, 0",
+            "p1: 40, p2: 20, p3: 0"
+          ]
+        },
+        {
+          "id": "P5-Q2-c",
+          "label": "(c)",
+          "marks": 1,
+          "prompt": "What is the net utility of each resident?",
+          "placeholder": "e.g. u1 = 30, u2 = 30, u3 = 30",
+          "accepted": [
+            "u1 = 30, u2 = 30, u3 = 30",
+            "u1=30, u2=30, u3=30",
+            "30, 30, 30",
+            "all 30"
+          ]
+        },
+        {
+          "id": "P5-Q2-d",
+          "label": "(d)",
+          "marks": 2,
+          "prompt": "What is the total tax revenue collected by the mechanism? Does the mechanism run a budget surplus or deficit, and of what amount?",
+          "placeholder": "e.g. Revenue = 60; Deficit of 60",
+          "accepted": [
+            "revenue = 60; deficit of 60",
+            "60, deficit 60",
+            "total tax 60, deficit of 60",
+            "deficit of 60"
+          ]
+        }
+      ],
+      "solution": "<div class=\"sol-body\">\n<p><strong>(a) Social efficiency decision:</strong>\n- Welfare if not built ($y = 0$): $0$.\n- Welfare if built ($y = 1$): $(70 + 50 + 30) - 120 = 150 - 120 = +30 > 0$.\nThe VCG mechanism chooses $y^* = 1$ (build barrier). Net surplus $= +30$.</p>\n<p><strong>(b) Clarke pivot taxes:</strong>\nFormula: $p_i = \\max(0, C - \\sum_{j \\ne i} v_j)$.\n- Resident 1: Without 1, $v_2 + v_3 = 50 + 30 = 80 < 120$. Barrier would not be built. Resident 1 is pivotal! $p_1 = 120 - 80 = 40$.\n- Resident 2: Without 2, $v_1 + v_3 = 70 + 30 = 100 < 120$. Barrier would not be built. Resident 2 is pivotal! $p_2 = 120 - 100 = 20$.\n- Resident 3: Without 3, $v_1 + v_2 = 70 + 50 = 120 \\ge 120$. Barrier would still be built. Resident 3 is not pivotal! $p_3 = 0$.\nTaxes: $p_1 = 40, p_2 = 20, p_3 = 0$.</p>\n<p><strong>(c) Net utilities:</strong>\n$u_1 = 70 - 40 = 30$, $u_2 = 50 - 20 = 30$, $u_3 = 30 - 0 = 30$.</p>\n<p><strong>(d) Budget Deficit:</strong>\nTotal tax collected $= 40 + 20 + 0 = 60$.\nTotal project cost $= 120$.\nThe mechanism runs a <strong>deficit of 60</strong>!</p>\n<div class=\"edge-box\"><strong>The Edge / Pro-Tip Insight:</strong> In combinatorial auctions with no reserve, VCG yields non-negative revenue. But in public goods projects with fixed costs, VCG Clarke taxes almost always run a massive budget deficit!</div>\n</div>",
+      "reference": "(a) Yes, build (y* = 1); net surplus = +30. (b) p1 = 40, p2 = 20, p3 = 0. (c) u1 = 30, u2 = 30, u3 = 30. (d) Total tax = 60; Deficit of 60 (cost 120 - revenue 60).",
+      "rubric": [
+        "2 marks: Verifies 150 > 120 so y*=1, and surplus = 30",
+        "3 marks: Correctly evaluates pivotal shortfalls: p1=40, p2=20, p3=0",
+        "1 mark: Computes net utilities 30 each",
+        "2 marks: Identifies total tax 60 and resulting deficit of 60"
+      ]
+    },
+    {
+      "id": "P5-Q3",
+      "paper": 5,
+      "set": 5,
+      "week": 3,
+      "topic": "Facility Location: Lower Bound Geometric Proof",
+      "difficulty": "Challenging",
+      "type": "short",
+      "marks": 6,
+      "prompt": "Consider two agents on $[0, 1]$ with $x_1 = 0$ and $x_2 = 1$. Suppose a deterministic mechanism $f$ achieves an approximation ratio strictly less than 2 for maximum cost.",
+      "subparts": [
+        {
+          "id": "P5-Q3-a",
+          "label": "(a)",
+          "marks": 2,
+          "prompt": "What is the optimal maximum cost for profile $(0, 1)$, and what open interval must $f(0, 1)$ lie in if the approximation ratio is strictly less than 2?",
+          "placeholder": "e.g. Optimal = 1/2; f(0, 1) in (0, 1)",
+          "accepted": [
+            "optimal = 1/2; f(0, 1) in (0, 1)",
+            "1/2, (0, 1)",
+            "opt = 1/2, f in (0, 1)",
+            "1/2; (0, 1)"
+          ]
+        },
+        {
+          "id": "P5-Q3-b",
+          "label": "(b)",
+          "marks": 2,
+          "prompt": "Let $f(0, 1) = t \\in (0, 1)$. Now consider the profile $(0, t)$. Show that to maintain an approximation ratio strictly less than 2, $f(0, t)$ must satisfy $f(0, t) < t$.",
+          "placeholder": "e.g. Optimal max cost is t/2; ratio < 2 implies max cost < t, so f(0, t) in (0, t) meaning f(0, t) < t",
+          "accepted": [
+            "optimal max cost is t/2; ratio < 2 implies f(0, t) in (0, t)",
+            "opt is t/2, so f(0, t) < t",
+            "f(0, t) in (0, t)",
+            "max cost < t forces f(0, t) < t"
+          ]
+        },
+        {
+          "id": "P5-Q3-c",
+          "label": "(c)",
+          "marks": 2,
+          "prompt": "Explain why Agent 2 at location $t$ can strictly profit by misreporting $1$ instead of $t$, completing the proof that ratio < 2 is impossible for deterministic strategyproof mechanisms.",
+          "placeholder": "e.g. Truthful cost is t - f(0, t) > 0; reporting 1 gives f(0, 1) = t, yielding cost 0!",
+          "accepted": [
+            "truthful cost is t - f(0, t) > 0; reporting 1 gives f(0, 1) = t, yielding cost 0",
+            "reporting 1 places facility at t giving cost 0",
+            "cost drops from t - f(0, t) > 0 to 0"
+          ]
+        }
+      ],
+      "solution": "<div class=\"sol-body\">\n<p><strong>(a) Profile $(0, 1)$:</strong>\nOptimal location is the midpoint $1/2$, giving optimal max cost $1/2$.\nIf the approximation ratio is $< 2$, then $\\max(|f - 0|, |f - 1|) < 2 \\times (1/2) = 1$.\nSince $|f - 0| < 1 \\implies f < 1$ and $|f - 1| < 1 \\implies f > 0$, we must have:\n$$f(0, 1) = t \\in (0, 1)$$</p>\n<p><strong>(b) Profile $(0, t)$:</strong>\nFor profile $(0, t)$, optimal max cost is $t/2$.\nAn approximation ratio $< 2$ requires max cost $< 2 \\times (t/2) = t$.\nThis requires $|f(0, t) - 0| < t \\implies f(0, t) < t$, and $|f(0, t) - t| < t \\implies f(0, t) > 0$.\nThus $f(0, t) \\in (0, t)$, which strictly implies:\n$$f(0, t) < t$$</p>\n<p><strong>(c) The Contradiction / Beneficial Misreport:</strong>\nSuppose Agent 2's true location is $t$ (while Agent 1 is at $0$):\n- If Agent 2 reports truthfully ($t$): the facility is placed at $f(0, t) < t$. Agent 2's cost is:\n  $$|f(0, t) - t| = t - f(0, t) > 0$$\n- If Agent 2 misreports $x_2' = 1$: the mechanism places the facility at $f(0, 1) = t$, exactly on Agent 2's true location!\n  Agent 2's cost becomes:\n  $$|t - t| = 0 < t - f(0, t)$$\nAgent 2 strictly profits by misreporting! This contradicts strategyproofness.\nTherefore, <strong>no deterministic strategyproof mechanism can achieve an approximation ratio strictly less than 2</strong>!</p>\n<div class=\"edge-box\"><strong>The Edge / Pro-Tip Insight:</strong> This 3-step proof by contradiction is the definitive lower bound argument for facility location. Know it cold!</div>\n</div>",
+      "reference": "(a) Optimal = 1/2; ratio < 2 implies max cost < 1, so f(0, 1) in (0, 1). (b) At (0, t), optimal is t/2; ratio < 2 implies f(0, t) in (0, t), so f(0, t) < t. (c) Agent 2 at t has truthful cost t - f(0, t) > 0; misreporting 1 moves facility to f(0, 1) = t, giving cost 0, breaking strategyproofness.",
+      "rubric": [
+        "2 marks: Identifies optimal 1/2 and proves f(0, 1) must lie strictly in (0, 1)",
+        "2 marks: Derives optimal t/2 at (0, t) and proves f(0, t) < t",
+        "2 marks: Demonstrates misreport 1 yields cost 0 vs >0, establishing contradiction"
+      ]
+    },
+    {
+      "id": "P5-Q4",
+      "paper": 5,
+      "set": 5,
+      "week": 3,
+      "topic": "Non-Atomic Routing with 3 Parallel Paths",
+      "difficulty": "Intermediate",
+      "type": "short",
+      "marks": 6,
+      "prompt": "Six units of non-atomic traffic ($r = 6$) route between $s$ and $t$ across 3 parallel paths:\n- Path 1: $c_1(x) = x + 4$\n- Path 2: $c_2(x) = 2x + 1$\n- Path 3: $c_3(x) = 3x$",
+      "subparts": [
+        {
+          "id": "P5-Q4-a",
+          "label": "(a)",
+          "marks": 2,
+          "prompt": "Show that in the Wardrop equilibrium, all three paths must carry strictly positive flow ($x_1 > 0, x_2 > 0, x_3 > 0$).",
+          "placeholder": "e.g. If x1 = 0, splitting 6 units on paths 2 and 3 gives latency 7.8 > c1(0) = 4, so path 1 must be used",
+          "accepted": [
+            "splitting 6 units on paths 2 and 3 gives latency 7.8 > c1(0) = 4",
+            "latency on paths 2 and 3 is 7.8 > 4",
+            "7.8 > 4, so path 1 carries flow",
+            "c1(0) = 4 < 7.8"
+          ]
+        },
+        {
+          "id": "P5-Q4-b",
+          "label": "(b)",
+          "marks": 2,
+          "prompt": "Determine the equilibrium flow vector $(x_1, x_2, x_3)$ and the common travel latency $L$.",
+          "placeholder": "e.g. (19/11, 26/11, 21/11), L = 63/11",
+          "accepted": [
+            "(19/11, 26/11, 21/11), l = 63/11",
+            "19/11, 26/11, 21/11; 63/11",
+            "x1=19/11, x2=26/11, x3=21/11, L=63/11",
+            "1.727, 2.364, 1.909; 5.727"
+          ]
+        },
+        {
+          "id": "P5-Q4-c",
+          "label": "(c)",
+          "marks": 2,
+          "prompt": "Calculate the total equilibrium system cost $\\sum_i x_i c_i(x_i)$.",
+          "placeholder": "e.g. 378/11 approx 34.364",
+          "accepted": [
+            "378/11",
+            "34.364",
+            "34.36",
+            "378 / 11"
+          ]
+        }
+      ],
+      "solution": "<div class=\"sol-body\">\n<p><strong>(a) Verifying all paths are active:</strong>\nSuppose Path 1 carried $x_1 = 0$. Then $c_1(0) = 0 + 4 = 4$.\nThe 6 units would split between Paths 2 and 3:\n$2x_2 + 1 = 3x_3$ and $x_2 + x_3 = 6 \\implies 2(6 - x_3) + 1 = 3x_3 \\implies 13 = 5x_3 \\implies x_3 = 2.6, x_2 = 3.4$.\nThe latency on Paths 2 and 3 would be $3(2.6) = 7.8$.\nSince $7.8 > 4 = c_1(0)$, commuters would strictly prefer to divert to Path 1!\nHence, Path 1 cannot have zero flow; all 3 paths carry strictly positive flow.</p>\n<p><strong>(b) Wardrop equilibrium flow:</strong>\nAll 3 paths have equal latency $L$:\n- $x_1 + 4 = L \\implies x_1 = L - 4$\n- $2x_2 + 1 = L \\implies x_2 = \\frac{L - 1}{2}$\n- $3x_3 = L \\implies x_3 = \\frac{L}{3}$\nTotal flow constraint:\n$$(L - 4) + \\frac{L - 1}{2} + \\frac{L}{3} = 6$$\nMultiply by 6:\n$$6(L - 4) + 3(L - 1) + 2L = 36 \\implies 11L - 27 = 36 \\implies 11L = 63 \\implies L = \\frac{63}{11} \\approx 5.727$$\nFlows:\n- $x_1 = \\frac{63}{11} - 4 = \\frac{19}{11} \\approx 1.727$\n- $x_2 = \\frac{63/11 - 1}{2} = \\frac{26}{11} \\approx 2.364$\n- $x_3 = \\frac{63/11}{3} = \\frac{21}{11} \\approx 1.909$\nFlow vector: $(\\frac{19}{11}, \\frac{26}{11}, \\frac{21}{11})$ with common latency $L = \\frac{63}{11}$.</p>\n<p><strong>(c) Total system cost:</strong>\nSince every commuter experiences latency $L = \\frac{63}{11}$, total system cost is:\n$$\\text{Total Cost} = r \\times L = 6 \\times \\frac{63}{11} = \\frac{378}{11} \\approx 34.364$$\n<div class=\"edge-box\"><strong>The Edge / Pro-Tip Insight:</strong> When all paths are active, total cost is ALWAYS simply total flow times common equilibrium latency: $r \\times L$. You never need to compute each edge's cost individually!</div>\n</div>",
+      "reference": "(a) If x1=0, latency on paths 2 and 3 is 7.8 > c1(0)=4, so path 1 must carry flow. (b) x1 = 19/11, x2 = 26/11, x3 = 21/11, latency L = 63/11 approx 5.727. (c) Total cost = 6 * (63/11) = 378/11 approx 34.364.",
+      "rubric": [
+        "2 marks: Tests x1=0 and shows resulting latency 7.8 > 4, proving all paths active",
+        "2 marks: Inverts latency functions and solves (L-4)+(L-1)/2+L/3=6 to find L=63/11 and flows",
+        "2 marks: Computes total cost 6 * 63/11 = 378/11"
+      ]
+    },
+    {
+      "id": "P5-Q5",
+      "paper": 5,
+      "set": 5,
+      "week": 2,
+      "topic": "Conceptual Analysis (Third-Price Auctions & Routing Uniqueness)",
+      "difficulty": "Foundational",
+      "type": "mcq",
+      "marks": 4,
+      "prompt": "Conceptual Yes/No with penalty scoring: <strong>Correct = +2 pts, Don't Know = +1 pt, Incorrect = 0 pts</strong>.",
+      "subparts": [
+        {
+          "id": "P5-Q5-a",
+          "label": "(a)",
+          "marks": 2,
+          "prompt": "In a third-price sealed-bid single-item auction with 3 or more bidders, is truthful bidding a weakly dominant strategy for every bidder?",
+          "options": [
+            "Yes",
+            "No",
+            "Don't know"
+          ],
+          "answer": "No",
+          "explanation": "<strong>NO:</strong> As proved in Assignment 2 Q3, a third-price auction is NOT strategyproof! A bidder with value below the top bid can profitably bid above the top bid to win the item while only paying the third-highest bid."
+        },
+        {
+          "id": "P5-Q5-b",
+          "label": "(b)",
+          "marks": 2,
+          "prompt": "In an unweighted atomic routing game on parallel links with non-decreasing latency functions, can there ever exist a unique pure-strategy Nash equilibrium?",
+          "options": [
+            "Yes",
+            "No",
+            "Don't know"
+          ],
+          "answer": "Yes",
+          "explanation": "<strong>YES:</strong> When one edge dominates all others or when the Rosenthal potential function has a unique strict global minimizer (as seen in Paper 4 Question 4 with flow (2, 2)), the pure Nash equilibrium is strictly unique!"
+        }
+      ],
+      "solution": "<div class=\"sol-body\">\n<p><strong>(a) Answer: NO (+2 Marks).</strong>\nThird-price auctions are not strategyproof. For example, if $v_1 = 10, v_2 = 9, v_3 = 1$: Bidder 2 loses under truthful bidding (utility 0). If Bidder 2 bids $11$, she wins and pays $1$, getting utility $9 - 1 = 8 > 0$!</p>\n<p><strong>(b) Answer: YES (+2 Marks).</strong>\nMany atomic routing games have a unique pure Nash equilibrium (e.g. Paper 4 Question 4 where $(2, 2)$ is the only pure equilibrium, or when one route has lower latency for all traffic).</p>\n</div>",
+      "reference": "(a) No. Third-price auctions incentivize overbidding to win at the low 3rd price. (b) Yes. Unique strict minimizer of Rosenthal potential produces unique pure NE.",
+      "rubric": [
+        "2 marks: Correct No on (a) citing profitable overbidding in third-price auction",
+        "2 marks: Correct Yes on (b) citing existence of unique potential minimizer"
+      ]
+    },
+    {
+      "id": "P5-Q6",
+      "paper": 5,
+      "set": 5,
+      "week": 2,
+      "topic": "General Mathematical Proof of VCG Truthfulness (DSIC)",
+      "difficulty": "Challenging",
+      "type": "proof",
+      "marks": 8,
+      "prompt": "Consider a general mechanism design setting with a finite set of outcomes $O$ and $n$ agents with quasi-linear utilities $u_i(o) = v_i(o) - p_i$. The VCG mechanism (Clarke pivot rule) selects an outcome $o^* \\in \\arg\\max_{o \\in O} \\sum_{j=1}^n b_j(o)$ and charges each agent $i$:\n$$p_i = \\max_{o \\in O} \\sum_{j \\ne i} b_j(o) - \\sum_{j \\ne i} b_j(o^*)$$\n\n<strong>Prove that truthful reporting ($b_i = v_i$) is a weakly dominant strategy for every agent $i$, regardless of what reports $b_{-i}$ other agents submit (even if others report falsely).</strong>",
+      "blueprint": "<div class=\"proof-blueprint\">\n<h4>Proof Blueprint (Exact Assignment Style)</h4>\n<p><strong>Step 1: Setup and Agent Utility Expression</strong><br>\nFix an arbitrary agent $i \\in \\{1, \\dots, n\\}$, her true valuation function $v_i: O \\to \\mathbb{R}$, and fix arbitrary reports $b_{-i} = (b_j)_{j \\ne i}$ submitted by all other agents.<br>\nSuppose agent $i$ reports $b_i$. The mechanism chooses outcome $o^* = o^*(b_i, b_{-i})$ maximizing reported welfare:\n$$o^* \\in \\arg\\max_{o \\in O} \\left( b_i(o) + \\sum_{j \\ne i} b_j(o) \\right)$$\nAgent $i$'s Clarke pivot payment is:\n$$p_i(b_i, b_{-i}) = \\max_{o \\in O} \\sum_{j \\ne i} b_j(o) - \\sum_{j \\ne i} b_j(o^*)$$\nSubstituting this payment into agent $i$'s true quasi-linear utility $u_i = v_i(o^*) - p_i$:\n$$u_i(b_i, b_{-i}) = v_i(o^*) + \\sum_{j \\ne i} b_j(o^*) - \\max_{o \\in O} \\sum_{j \\ne i} b_j(o)$$\n</p>\n\n<p><strong>Step 2: Decomposition and Independence of the Second Term</strong><br>\nDefine the benchmark term:\n$$H(b_{-i}) = \\max_{o \\in O} \\sum_{j \\ne i} b_j(o)$$\nNotice that $H(b_{-i})$ depends <strong>exclusively</strong> on the reports $b_{-i}$ of the other agents, and is <strong>completely independent of agent $i$'s own report $b_i$</strong>.<br>\nTherefore, choosing $b_i$ to maximize $u_i(b_i, b_{-i})$ is mathematically equivalent to choosing $b_i$ to maximize:\n$$W_i(o^*) = v_i(o^*) + \\sum_{j \\ne i} b_j(o^*)$$\n</p>\n\n<p><strong>Step 3: Comparing Truthful Reporting Against Arbitrary Misreports</strong><br>\nSuppose agent $i$ reports truthfully, $b_i = v_i$.\nUnder truthful reporting, the VCG mechanism by definition chooses an outcome $o^* \\in O$ that maximizes reported welfare:\n$$o^* \\in \\arg\\max_{o \\in O} \\left( v_i(o) + \\sum_{j \\ne i} b_j(o) \\right)$$\nThus, for ANY feasible outcome $o \\in O$:\n$$v_i(o^*) + \\sum_{j \\ne i} b_j(o^*) \\ge v_i(o) + \\sum_{j \\ne i} b_j(o)$$\n\nNow suppose agent $i$ submits an arbitrary false report $b_i' \\ne v_i$.\nThe mechanism selects some outcome $o' = o^*(b_i', b_{-i}) \\in O$.\nSince $o' \\in O$ is a feasible outcome, the inequality above immediately gives:\n$$v_i(o^*) + \\sum_{j \\ne i} b_j(o^*) \\ge v_i(o') + \\sum_{j \\ne i} b_j(o')$$\nSubtracting the identical constant $H(b_{-i})$ from both sides:\n$$\\left[ v_i(o^*) + \\sum_{j \\ne i} b_j(o^*) \\right] - H(b_{-i}) \\ge \\left[ v_i(o') + \\sum_{j \\ne i} b_j(o') \\right] - H(b_{-i})$$\n$$\\implies u_i(v_i, b_{-i}) \\ge u_i(b_i', b_{-i})$$\n</p>\n\n<p><strong>Conclusion:</strong>\nSince this inequality holds for every possible misreport $b_i'$, every true valuation $v_i$, and every profile of opposing reports $b_{-i}$ (whether truthful or not), truthful reporting $b_i = v_i$ is a weakly dominant strategy for every agent.\nHence, the VCG mechanism is Dominant Strategy Incentive Compatible (DSIC). $\\blacksquare$</p>\n</div>",
+      "reference": "Agent i's true utility is u_i = v_i(o*) - p_i = [v_i(o*) + sum_{j!=i} b_j(o*)] - max_o sum_{j!=i} b_j(o). The second term H(b_{-i}) is independent of b_i. When reporting truthfully b_i = v_i, VCG selects o* maximizing v_i(o) + sum_{j!=i} b_j(o). For any misreport b_i' selecting o', v_i(o*) + sum_{j!=i} b_j(o*) >= v_i(o') + sum_{j!=i} b_j(o'). Subtracting H(b_{-i}) yields u_i(v_i, b_{-i}) >= u_i(b_i', b_{-i}). Thus truth-telling is weakly dominant regardless of b_{-i}.",
+      "rubric": [
+        "2 marks: Substitutes VCG payment into quasi-linear utility to express u_i = [v_i(o*) + sum b_j(o*)] - H(b_{-i})",
+        "2 marks: Formally establishes that H(b_{-i}) is completely independent of agent i's own report b_i",
+        "2 marks: Shows truthful reporting aligns the mechanism's objective exactly with agent i's utility maximization",
+        "2 marks: Proves u_i(v_i, b_{-i}) >= u_i(b_i', b_{-i}) for all b_i' and concludes DSIC holds for arbitrary b_{-i}"
+      ]
+    },
+    {
+      "id": "P6-Q1",
+      "paper": 6,
+      "set": 6,
+      "week": 1,
+      "topic": "4x4 Game: Iterated Elimination via Chained Mixed Dominance",
+      "difficulty": "Challenging",
+      "type": "short",
+      "marks": 8,
+      "prompt": "Consider the following two-player 4x4 normal-form game where Player 1 (Row) chooses from $\\{T, M_1, M_2, B\\}$ and Player 2 (Column) chooses from $\\{L, C_1, C_2, R\\}$:\n\n$$\\begin{array}{c|cccc} & L & C_1 & C_2 & R \\\\ \\hline T & (5, 4) & (1, 1) & (6, 2) & (2, 1) \\\\ M_1 & (3, 2) & (3, 2) & (4, 7) & (1, 1) \\\\ M_2 & (2, 1) & (6, 5) & (3, 2) & (1, 2) \\\\ B & (1, 5) & (1, 3) & (2, 3) & (4, 2) \\end{array}$$",
+      "subparts": [
+        {
+          "id": "P6-Q1-a",
+          "label": "(a)",
+          "marks": 2,
+          "prompt": "Verify that NO pure row strictly dominates $M_1$. Prove that the mixed strategy $0.5 T + 0.5 M_2$ strictly dominates $M_1$.",
+          "placeholder": "e.g. Mix yields (3.5, 3.5, 4.5, 1.5) > (3, 3, 4, 1) across all columns",
+          "accepted": [
+            "(3.5, 3.5, 4.5, 1.5) > (3, 3, 4, 1)",
+            "3.5, 3.5, 4.5, 1.5 > 3, 3, 4, 1",
+            "0.5 t + 0.5 m2 yields (3.5, 3.5, 4.5, 1.5) > (3, 3, 4, 1)",
+            "mix gives 3.5, 3.5, 4.5, 1.5"
+          ]
+        },
+        {
+          "id": "P6-Q1-b",
+          "label": "(b)",
+          "marks": 2,
+          "prompt": "In the reduced 3x4 game with rows {T, M2, B}, prove that Column C2 is strictly dominated by the mixture 0.5 L + 0.5 C1. Why was C2 NOT dominated in the original 4x4 game?",
+          "placeholder": "e.g. On {T, M2, B}, 0.5 L + 0.5 C1 = (2.5, 3, 4) > (2, 2, 3). In full game against M1, C2 gives 7 > 2",
+          "accepted": [
+            "(2.5, 3, 4) > (2, 2, 3); against m1, c2 gives 7 > 2",
+            "mix gives (2.5, 3, 4) > (2, 2, 3); on m1 c2 gave 7",
+            "0.5 l + 0.5 c1 gives (2.5, 3, 4) > (2, 2, 3)"
+          ]
+        },
+        {
+          "id": "P6-Q1-c",
+          "label": "(c)",
+          "marks": 2,
+          "prompt": "Continue the iterated elimination process (checking Column R, then Row B). What are the remaining actions for Player 1 and Player 2?",
+          "placeholder": "e.g. Player 1: {T, M2}, Player 2: {L, C1}",
+          "accepted": [
+            "player 1: {t, m2}, player 2: {l, c1}",
+            "p1: {t, m2}, p2: {l, c1}",
+            "{t, m2} and {l, c1}",
+            "t, m2; l, c1"
+          ]
+        },
+        {
+          "id": "P6-Q1-d",
+          "label": "(d)",
+          "marks": 2,
+          "prompt": "Determine all Nash equilibria (pure and mixed) of the original game in simplest form.",
+          "placeholder": "e.g. Pure: (T, L), (M2, C1); Mixed: (4/7 T + 3/7 M2, 5/8 L + 3/8 C1)",
+          "accepted": [
+            "(t, l), (m2, c1), and (4/7 t + 3/7 m2, 5/8 l + 3/8 c1)",
+            "(t, l), (m2, c1), (4/7 t + 3/7 m2, 5/8 l + 3/8 c1)",
+            "(t,l), (m2,c1), (4/7t + 3/7m2, 5/8l + 3/8c1)"
+          ]
+        }
+      ],
+      "solution": "<div class=\"sol-body\">\n<p><strong>(a) Mixed Domination of Row $M_1$:</strong>\n- T vs $M_1$: T gets 1 on $C_1$, which is $< 3$. T does not dominate $M_1$.\n- $M_2$ vs $M_1$: $M_2$ gets 2 on $L$, which is $< 3$. $M_2$ does not dominate $M_1$.\n- B vs $M_1$: B gets 1 on $L$, which is $< 3$. B does not dominate $M_1$.\nNow test mixture $0.5 T + 0.5 M_2$:\n- Against $L$: $0.5(5) + 0.5(2) = 3.5 > 3 = u_1(M_1, L)$\n- Against $C_1$: $0.5(1) + 0.5(6) = 3.5 > 3 = u_1(M_1, C_1)$\n- Against $C_2$: $0.5(6) + 0.5(3) = 4.5 > 4 = u_1(M_1, C_2)$\n- Against $R$: $0.5(2) + 0.5(1) = 1.5 > 1 = u_1(M_1, R)$\nAcross ALL four columns, $(3.5, 3.5, 4.5, 1.5) > (3, 3, 4, 1)$. Row $M_1$ is strictly dominated! Eliminate $M_1$.</p>\n\n<p><strong>(b) Domination of Column $C_2$:</strong>\nRemaining rows: $\\{T, M_2, B\\}$.\nPlayer 2 evaluates $0.5 L + 0.5 C_1$:\n- Against $T$: $0.5(4) + 0.5(1) = 2.5 > 2 = u_2(T, C_2)$\n- Against $M_2$: $0.5(1) + 0.5(5) = 3.0 > 2 = u_2(M_2, C_2)$\n- Against $B$: $0.5(5) + 0.5(3) = 4.0 > 3 = u_2(B, C_2)$\nThus on the reduced game, $0.5 L + 0.5 C_1$ strictly dominates $C_2$ ($2.5 > 2, 3 > 2, 4 > 3$).\nIn the original 4x4 game, against row $M_1$, column $C_2$ gave payoff $7$, while $0.5 L + 0.5 C_1$ gave only $0.5(2) + 0.5(2) = 2 < 7$. So $C_2$ could NOT be eliminated before $M_1$!</p>\n\n<p><strong>(c) Subsequent Iterated Elimination:</strong>\n1. Column $R$ against $0.5 L + 0.5 C_1$: yields $(1, 2, 2)$, which is strictly dominated by $(2.5, 3, 4)$! Eliminate $R$.\n2. Remaining game has rows $\\{T, M_2, B\\}$ and columns $\\{L, C_1\\}$:\n- Row $B$ yields payoffs $(1, 1)$. Row $M_2$ yields $(2, 6)$.\nSince $2 > 1$ and $6 > 1$, Row $M_2$ strictly dominates Row $B$! Eliminate $B$.\nRemaining actions: Player 1 has $\\{T, M_2\\}$, Player 2 has $\\{L, C_1\\}$.</p>\n\n<p><strong>(d) All Nash Equilibria:</strong>\nIn the $2 \\times 2$ game:\n$$\\begin{array}{c|cc} & L & C_1 \\\\ \\hline T & (5, 4) & (1, 1) \\\\ M_2 & (2, 1) & (6, 5) \\end{array}$$\n- Pure NE: $(T, L)$ and $(M_2, C_1)$.\n- Mixed NE:\n  - P1 indifference: $5q + 1(1-q) = 2q + 6(1-q) \\implies 4q + 1 = 6 - 4q \\implies 8q = 5 \\implies q = 5/8$.\n  - P2 indifference: $4p + 1(1-p) = 1p + 5(1-p) \\implies 3p + 1 = 5 - 4p \\implies 7p = 4 \\implies p = 4/7$.\nAll Nash equilibria: $(T, L)$, $(M_2, C_1)$, and $(\\frac{4}{7} T + \\frac{3}{7} M_2, \\frac{5}{8} L + \\frac{3}{8} C_1)$.</p>\n<div class=\"edge-box\"><strong>The Edge / Pro-Tip Insight:</strong> Notice the chaining effect! Column $C_2$ was protected by Row $M_1$'s high payoff (7). Once $M_1$ was eliminated by a mixed strategy, $C_2$ fell, which in turn collapsed $R$ and $B$, effortlessly reducing a 4x4 matrix down to a solvable 2x2!</div>\n</div>",
+      "reference": "(a) 0.5 T + 0.5 M2 gives (3.5, 3.5, 4.5, 1.5) > (3, 3, 4, 1) across all cols. (b) 0.5 L + 0.5 C1 gives (2.5, 3, 4) > (2, 2, 3) on {T, M2, B}; against M1 it gave 2 < 7. (c) Col R is dominated by 0.5 L + 0.5 C1; Row B is dominated by M2. Remaining: P1 {T, M2}, P2 {L, C1}. (d) Pure: (T, L), (M2, C1); Mixed: (4/7 T + 3/7 M2, 5/8 L + 3/8 C1).",
+      "rubric": [
+        "2 marks: Verifies pure row failures and proves 0.5 T + 0.5 M2 > M1 across all 4 columns",
+        "2 marks: Shows 0.5 L + 0.5 C1 > C2 on {T, M2, B} and notes it failed on M1 (2 < 7)",
+        "2 marks: Eliminates Col R then Row B, reaching {T, M2} and {L, C1}",
+        "2 marks: Identifies pure NE (T, L), (M2, C1) and solves mixed NE p=4/7, q=5/8"
+      ]
+    },
+    {
+      "id": "P6-Q2",
+      "paper": 6,
+      "set": 6,
+      "week": 3,
+      "topic": "Generalized Symmetric Randomized Facility Location Boundary Theorem",
+      "difficulty": "Challenging",
+      "type": "proof",
+      "marks": 8,
+      "prompt": "Consider two agents on the real line $\\mathbb{R}$ with true locations $x_1 \\le x_2$ and distance $d = x_2 - x_1 > 0$. Consider the family of symmetric 3-point randomized mechanisms $f_p$ parameterized by $p \\in (0, 1/2)$:\n$$f_p(x) = \\begin{cases} x_1 & \\text{with probability } p \\\\ x_2 & \\text{with probability } p \\\\ \\frac{x_1 + x_2}{2} & \\text{with probability } 1 - 2p \\end{cases}$$\n*(Context: In Assignment 3 Q1e you studied $p = 1/6$; in Week 3 Lecture you studied $p = 1/4$.)*\n\n<strong>(a) (5 Marks) Prove that $f_p$ is strategyproof in expectation if and only if $p \\ge 1/4$.</strong>\nSpecifically: prove that if $p < 1/4$, an agent can strictly reduce her expected cost by misreporting outward; and prove that if $p \\ge 1/4$, no unilateral misreport can strictly decrease her expected cost.\n\n<strong>(b) (3 Marks) Prove that among all strategyproof mechanisms in this family ($p \\in [1/4, 1/2]$), the worst-case maximum-cost approximation ratio is exactly $\\text{Ratio}(p) = 2p + 1$, and conclude that $p = 1/4$ is the unique optimal strategyproof mechanism achieving the lower bound ratio of $3/2$.</strong>",
+      "blueprint": "<div class=\"proof-blueprint\">\n<h4>Proof Blueprint (Exact Assignment Style)</h4>\n<p><strong>Part (a): Strategyproofness Boundary ($p \\ge 1/4$)</strong></p>\n\n<p><strong>Step 1: Truthful Expected Cost</strong><br>\nLet $x_1 \\le x_2$ and $d = x_2 - x_1 > 0$. Under truthful reporting:\n- With probability $p$, the facility is at $x_1$: Agent 1's cost is $|x_1 - x_1| = 0$.\n- With probability $p$, the facility is at $x_2$: Agent 1's cost is $|x_2 - x_1| = d$.\n- With probability $1 - 2p$, the facility is at $\\frac{x_1 + x_2}{2}$: Agent 1's cost is $\\frac{d}{2}$.\nAgent 1's expected cost under truthful reporting is:\n$$\\mathbb{E}[\\text{Cost}_1(\\text{truth})] = p(0) + p(d) + (1 - 2p)\\frac{d}{2} = \\left( p + \\frac{1 - 2p}{2} \\right) d = \\frac{d}{2}$$\nNotice that this truthful expected cost is identically $\\frac{d}{2}$ for ALL $p \\in (0, 1/2)$!</p>\n\n<p><strong>Step 2: Analysis of Outward Deviation ($x_1' = x_1 - \\delta$ with $\\delta > 0$)</strong><br>\nSuppose Agent 1 reports $x_1' = x_1 - \\delta < x_1$.\nThe reported positions are $x_1'$ and $x_2$. The new midpoint is $\\frac{x_1' + x_2}{2} = \\frac{x_1 - \\delta + x_2}{2} = x_1 + \\frac{d - \\delta}{2}$.\nFor any small $\\delta \\in (0, d)$, Agent 1's true distances to the three possible facility locations are:\n- At $x_1'$: distance is $|x_1 - (x_1 - \\delta)| = \\delta$.\n- At $x_2$: distance is $d$.\n- At midpoint: distance is $\\left| \\left( x_1 + \\frac{d - \\delta}{2} \\right) - x_1 \\right| = \\frac{d - \\delta}{2}$.\nAgent 1's new expected cost is:\n$$\\mathbb{E}[\\text{Cost}_1(x_1')] = p(\\delta) + p(d) + (1 - 2p)\\left( \\frac{d - \\delta}{2} \\right)$$\n$$= p\\delta + pd + \\frac{1 - 2p}{2}d - \\frac{1 - 2p}{2}\\delta = \\frac{d}{2} + \\delta \\left( p - \\frac{1 - 2p}{2} \\right) = \\frac{d}{2} + \\delta \\left( 2p - \\frac{1}{2} \\right)$$\nExamining the coefficient of $\\delta$:\n$$\\Delta \\mathbb{E}[\\text{Cost}_1] = \\delta \\left( 2p - \\frac{1}{2} \\right)$$\n- If $p < 1/4$: then $2p - 1/2 < 0$. Choosing any $\\delta > 0$ strictly reduces expected cost! (e.g. For $p = 1/6$ in A3 Q1e, $2(1/6) - 1/2 = -1/6 < 0$, yielding profit $\\delta/6$).\nThus, $f_p$ is NOT strategyproof for any $p < 1/4$.\n- If $p \\ge 1/4$: then $2p - 1/2 \\ge 0$, so $\\delta(2p - 1/2) \\ge 0$. Outward deviation never strictly reduces expected cost.</p>\n\n<p><strong>Step 3: Analysis of Inward Deviation ($x_1' = x_1 + \\delta$ with $0 < \\delta < d$)</strong><br>\nIf Agent 1 reports inward $x_1' = x_1 + \\delta$:\n- At $x_1'$: distance is $\\delta$.\n- At $x_2$: distance is $d$.\n- At midpoint: distance is $\\frac{d + \\delta}{2}$.\n$$\\mathbb{E}[\\text{Cost}_1] = p\\delta + pd + (1 - 2p)\\frac{d + \\delta}{2} = \\frac{d}{2} + \\delta \\left( p + \\frac{1 - 2p}{2} \\right) = \\frac{d}{2} + \\frac{\\delta}{2} > \\frac{d}{2}$$\nInward deviation strictly increases expected cost for all $p$.<br>\nReporting past Agent 2 ($x_1' > x_2$) places the facility even further right, giving strictly greater cost.<br>\nBy symmetry, the exact same analysis holds for Agent 2.<br>\nTherefore, $f_p$ is strategyproof in expectation if and only if $p \\ge 1/4$. $\\blacksquare$</p>\n\n<p><strong>Part (b): Approximation Ratio and Optimality of $p = 1/4$</strong></p>\n<p>The optimal maximum cost is achieved at the midpoint $\\frac{x_1 + x_2}{2}$, where optimal maximum cost is $\\text{OPT} = \\frac{d}{2}$.<br>\nUnder mechanism $f_p$:\n- With probability $p$, facility is at $x_1$: maximum cost is $|x_1 - x_2| = d$.\n- With probability $p$, facility is at $x_2$: maximum cost is $|x_2 - x_1| = d$.\n- With probability $1 - 2p$, facility is at midpoint: maximum cost is $\\frac{d}{2}$.\nThe expected maximum cost is:\n$$\\mathbb{E}[\\text{MaxCost}(f_p)] = p(d) + p(d) + (1 - 2p)\\frac{d}{2} = 2pd + \\frac{d}{2} - pd = \\left( p + \\frac{1}{2} \\right) d$$\nThe approximation ratio is:\n$$\\text{Ratio}(p) = \\frac{\\mathbb{E}[\\text{MaxCost}(f_p)]}{\\text{OPT}} = \\frac{\\left( p + \\frac{1}{2} \\right) d}{\\frac{d}{2}} = 2p + 1$$\nNotice that $\\text{Ratio}(p) = 2p + 1$ is strictly increasing in $p$ on $[1/4, 1/2]$:\n- At $p = 1/4$: $\\text{Ratio}(1/4) = 2(1/4) + 1 = \\frac{3}{2}$.\n- At $p = 1/2$ (Random Dictatorship): $\\text{Ratio}(1/2) = 2(1/2) + 1 = 2$.\nSince $p \\ge 1/4$ is required for strategyproofness, the minimum possible approximation ratio among all strategyproof mechanisms in this family is achieved uniquely at $p = 1/4$, yielding the optimal ratio of $3/2$. $\\blacksquare$</p>\n</div>",
+      "reference": "Part (a): Truthful expected cost is d/2. Outward deviation x1' = x1 - delta gives E[cost] = d/2 + delta(2p - 1/2). If p < 1/4, 2p - 1/2 < 0 so outward misreport strictly profits. If p >= 1/4, outward gives delta(2p - 1/2) >= 0 and inward gives delta/2 > 0, so no deviation profits. Part (b): E[MaxCost] = (p + 1/2)d, while OPT = d/2. Ratio(p) = 2p + 1. Strictly increasing in p, so minimum over strategyproof range [1/4, 1/2] is at p = 1/4, giving ratio 3/2.",
+      "rubric": [
+        "2 marks: Formally evaluates truthful expected cost d/2 and shows it is independent of p",
+        "2 marks: Derives the outward deviation formula d/2 + delta(2p - 1/2) and proves p < 1/4 is strictly manipulable",
+        "1 mark: Shows inward deviation costs d/2 + delta/2 > d/2, establishing strategyproofness iff p >= 1/4",
+        "2 marks: Derives expected maximum cost (p + 1/2)d and approximation ratio Ratio(p) = 2p + 1",
+        "1 mark: Concludes p = 1/4 uniquely minimizes Ratio(p) over [1/4, 1/2] to achieve 3/2"
+      ]
+    },
+    {
+      "id": "P6-Q3",
+      "paper": 6,
+      "set": 6,
+      "week": 3,
+      "topic": "Convergence of Asynchronous BR Dynamics vs. Simultaneous Cycling in Congestion Games",
+      "difficulty": "Challenging",
+      "type": "proof",
+      "marks": 8,
+      "prompt": "Consider an unweighted atomic congestion game $\\Gamma = (N, E, (S_i)_{i \\in N}, (c_e)_{e \\in E})$ with finite players $N$ and non-decreasing latency functions $c_e: \\mathbb{N} \\to \\mathbb{R}_{\\ge 0}$.\n\n<strong>(a) (5 Marks) Asynchronous Best-Response Dynamics (Cycle Impossibility):</strong>\nSuppose the game is played dynamically: at each step $t \\ge 0$, if strategy profile $s^t$ is not a Nash equilibrium, an arbitrary single player $i$ with a profitable deviation unilaterally switches to a strictly better strategy $s_i^{t+1}$ such that $C_i(s_i^{t+1}, s_{-i}^t) < C_i(s_i^t, s_{-i}^t)$, while all other players remain fixed ($s_{-i}^{t+1} = s_{-i}^t$).\n<strong>Prove using Rosenthal's potential function $\\Phi(s) = \\sum_{e \\in E} \\sum_{k=1}^{f_e(s)} c_e(k)$ that this asynchronous process can never cycle, and must terminate at a pure Nash equilibrium in a finite number of steps.</strong>\n\n<strong>(b) (3 Marks) Simultaneous Best-Response Dynamics (Infinite Cycling Counterexample):</strong>\nNow suppose players update <em>simultaneously</em>: at each step $t$, all players with a profitable deviation simultaneously switch to their best response against $s^t$.\n<strong>Prove that simultaneous best-response dynamics can cycle indefinitely without ever converging to a Nash equilibrium.</strong> Construct an explicit 2-player, 2-edge congestion game, identify the pure Nash equilibrium, and demonstrate an initial state that enters a permanent 2-cycle $(s^0 \\leftrightarrow s^1)$.",
+      "blueprint": "<div class=\"proof-blueprint\">\n<h4>Proof Blueprint (Exact Assignment Style)</h4>\n<p><strong>Part (a): Asynchronous Best-Response Dynamics & Cycle Impossibility</strong></p>\n\n<p><strong>Step 1: Rosenthal's Potential as a Strict Lyapunov Function</strong><br>\nRecall Rosenthal's potential function for strategy profile $s \\in S = \\prod_{j=1}^n S_j$:\n$$\\Phi(s) = \\sum_{e \\in E} \\sum_{k=1}^{f_e(s)} c_e(k)$$\nBy the exact potential property (as proved in Paper 2 Question 6), for any single player $i$ unilaterally switching from $s_i^t$ to $s_i^{t+1}$:\n$$\\Phi(s^{t+1}) - \\Phi(s^t) = C_i(s_i^{t+1}, s_{-i}^t) - C_i(s_i^t, s_{-i}^t)$$\n</p>\n\n<p><strong>Step 2: Strict Monotonicity Along Unilateral Improvement Paths</strong><br>\nIn asynchronous dynamics, player $i$ moves if and only if the deviation is strictly profitable:\n$$C_i(s_i^{t+1}, s_{-i}^t) < C_i(s_i^t, s_{-i}^t) \\iff C_i(s_i^{t+1}, s_{-i}^t) - C_i(s_i^t, s_{-i}^t) < 0$$\nApplying the exact potential identity:\n$$\\Phi(s^{t+1}) - \\Phi(s^t) < 0 \\iff \\Phi(s^{t+1}) < \\Phi(s^t)$$\nThus, the potential function $\\Phi$ strictly decreases at EVERY single step of the dynamics:\n$$\\Phi(s^0) > \\Phi(s^1) > \\Phi(s^2) > \\dots$$\n</p>\n\n<p><strong>Step 3: Impossibility of Cycles and Finite Termination</strong><br>\n1. <strong>Cycle Impossibility:</strong> Suppose for contradiction that the sequence of states enters a cycle:\n$$s^{t} \\to s^{t+1} \\to \\dots \\to s^{t+K} = s^t \\quad (K \\ge 1)$$\nThen by strict monotonicity:\n$$\\Phi(s^t) > \\Phi(s^{t+1}) > \\dots > \\Phi(s^{t+K}) = \\Phi(s^t)$$\n$$\\implies \\Phi(s^t) > \\Phi(s^t)$$\nwhich is a direct contradiction! Hence, no state can ever be visited more than once, and cycles are impossible.<br>\n2. <strong>Finite Termination:</strong> The strategy profile space $S = \\prod_{i=1}^n S_i$ is a finite set because each player has a finite number of available paths. Since $S$ is finite, there are at most $|S| < \\infty$ distinct strategy profiles. Since each step visits a strictly new profile, the process cannot continue indefinitely. It must terminate after at most $|S|$ steps.<br>\n3. <strong>Equilibrium at Termination:</strong> The process terminates only when NO player has a strictly profitable unilateral deviation. By definition, a strategy profile where no player has a profitable unilateral deviation is a pure-strategy Nash equilibrium. $\\blacksquare$</p>\n\n<p><strong>Part (b): Simultaneous Best-Response Dynamics & Infinite Cycling</strong></p>\n\n<p><strong>Game Construction:</strong><br>\nConsider $n = 2$ players routing 1 unit each between $s$ and $t$ across two parallel edges $E = \\{e_1, e_2\\}$.\nLet the latency functions be:\n$$c_1(x) = \\begin{cases} 1 & \\text{if } x = 1 \\\\ 10 & \\text{if } x = 2 \\end{cases}, \\qquad c_2(x) = \\begin{cases} 1 & \\text{if } x = 1 \\\\ 10 & \\text{if } x = 2 \\end{cases}$$\n(Both functions are strictly non-decreasing).\nStrategy sets: $S_1 = S_2 = \\{e_1, e_2\\}$.</p>\n\n<p><strong>Pure Nash Equilibria:</strong><br>\nThe profiles $(e_1, e_2)$ and $(e_2, e_1)$ are pure Nash equilibria: each player experiences latency $1$, and unilaterally switching would induce load $x = 2$ on the other edge, giving latency $10 > 1$. Neither player wants to deviate.</p>\n\n<p><strong>Demonstrating the Infinite 2-Cycle:</strong><br>\nStart at initial profile $s^0 = (e_1, e_1)$ (both players on edge 1):\n- Current latency for both players is $c_1(2) = 10$.\n- Player 1 evaluates switching to $e_2$: she would face load $1$ on $e_2$, experiencing latency $c_2(1) = 1 < 10$. Hence, $e_2$ is Player 1's unique best response.\n- Player 2 symmetrically evaluates switching to $e_2$: she would face load $1$ on $e_2$, experiencing latency $c_2(1) = 1 < 10$. Hence, $e_2$ is Player 2's unique best response.\nUnder <strong>simultaneous</strong> updating, BOTH players switch to $e_2$ at the exact same instant!</p>\n<p>The resulting state at $t = 1$ is:\n$$s^1 = (e_2, e_2)$$\nAt state $s^1 = (e_2, e_2)$:\n- Current latency for both players is $c_2(2) = 10$.\n- Player 1 evaluates switching to $e_1$: latency would be $c_1(1) = 1 < 10$. Best response is $e_1$.\n- Player 2 evaluates switching to $e_1$: latency would be $c_1(1) = 1 < 10$. Best response is $e_1$.\nUnder simultaneous updating, BOTH players switch back to $e_1$!</p>\n<p>The resulting state at $t = 2$ is:\n$$s^2 = (e_1, e_1) = s^0$$\nThe dynamics enter a permanent, infinite 2-cycle:\n$$(e_1, e_1) \\longleftrightarrow (e_2, e_2)$$\nnever reaching either pure Nash equilibrium $(e_1, e_2)$ or $(e_2, e_1)$! $\\blacksquare$</p>\n</div>",
+      "reference": "Part (a): Potential property gives Phi(s^{t+1}) - Phi(s^t) = C_i(s_i^{t+1}, s_{-i}^t) - C_i(s_i^t, s_{-i}^t) < 0. Phi strictly decreases at every step. In a cycle, Phi(s^t) > Phi(s^t), contradiction. Since S is finite, sequence must terminate at a state with no profitable deviations, which is a pure NE. Part (b): 2 players on parallel edges e1, e2 with c(1)=1, c(2)=10. At (e1, e1) both pay 10 and best-respond to e2. Simultaneous move yields (e2, e2). At (e2, e2) both pay 10 and best-respond to e1. Simultaneous move yields (e1, e1). Indefinite 2-cycle, never reaching pure NE (e1, e2).",
+      "rubric": [
+        "2 marks: Formulates exact potential identity Phi(s^{t+1}) - Phi(s^t) = Delta C_i < 0 for asynchronous moves",
+        "2 marks: Uses strict monotonicity to prove cycle impossibility by contradiction (Phi(s) > Phi(s))",
+        "1 mark: Invokes finiteness of strategy space S to establish finite termination at a pure Nash equilibrium",
+        "2 marks: Constructs valid 2-player 2-edge congestion game and defines non-decreasing latencies (e.g. c(1)=1, c(2)=10)",
+        "1 mark: Explicitly verifies the permanent 2-cycle (e1, e1) <-> (e2, e2) under simultaneous updates"
+      ]
+    }
+  ]
+}
