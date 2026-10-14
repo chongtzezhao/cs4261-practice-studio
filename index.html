@@ -65,12 +65,12 @@
 
     <main class="shell">
       <section class="hero">
-        <div class="eyebrow">Midterm practice · Weeks 1–3</div>
+        <div class="eyebrow">Midterm 1 + Midterm 2 · Practice bank</div>
         <h1>Practice the ideas.<br /><em>Prove the mechanisms.</em></h1>
         <p class="hero-copy">
-          33 questions across game theory, auctions, facility location, and
-          routing. Work through five practice papers and a capstone set in
-          random order, with instant answer checks and worked proof blueprints.
+          Practice both midterms, from games and auctions to bargaining, stable
+          matching, and fair allocation. Filter by midterm and concept, check
+          your calculations, and compare your proofs with worked solutions.
         </p>
         <div class="hero-meta">
           <span id="load-status" class="status-dot">Loading question bank…</span
@@ -86,6 +86,12 @@
             <span>Practice map</span
             ><span class="count-pill" id="statShown">—</span>
           </div>
+          <label for="midtermFilter">Midterm</label>
+          <select id="midtermFilter">
+            <option value="all">Both midterms</option>
+            <option value="1">Midterm 1</option>
+            <option value="2">Midterm 2</option>
+          </select>
           <label for="typeFilter">Question type</label>
           <select id="typeFilter">
             <option value="all">All questions</option>
@@ -103,6 +109,10 @@
           <label for="topicFilter">Topic</label>
           <select id="topicFilter">
             <option value="all">All topics</option>
+          </select>
+          <label for="tagFilter">Concept tag</label>
+          <select id="tagFilter">
+            <option value="all">All concepts</option>
           </select>
           <label for="practiceSet">Practice set</label>
           <select id="practiceSet">
@@ -200,7 +210,7 @@
     <footer class="site-footer">
       <span
         >CS4261 / CS5461 Algorithmic Mechanism Design · Midterm Practice</span
-      ><span class="mono">6 SETS · 33 QUESTIONS · 224 MARKS</span>
+      ><span class="mono">9 SETS · 52 QUESTIONS · 340 MARKS</span>
     </footer>
   </body>
 </html>

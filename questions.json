@@ -73,7 +73,12 @@
           "misconception": "Trap: confusing p and q! Player 1's probability p is determined by Player 2's payoffs (to make P2 indifferent), while Player 2's probability q is determined by Player 1's payoffs."
         }
       ],
-      "solution": "<p><strong>Complete Breakdown:</strong> Action T is strictly dominated by 0.5 M + 0.5 B. Eliminating T leaves columns {L, C, R}, where column R is strictly dominated by L and C. In the resulting 2x2 game, mutual best responses give pure equilibria (M, L) and (B, C), and indifference equations yield the mixed equilibrium (2/3 M + 1/3 B, 1/2 L + 1/2 C).</p>"
+      "solution": "<p><strong>Complete Breakdown:</strong> Action T is strictly dominated by 0.5 M + 0.5 B. Eliminating T leaves columns {L, C, R}, where column R is strictly dominated by L and C. In the resulting 2x2 game, mutual best responses give pure equilibria (M, L) and (B, C), and indifference equations yield the mixed equilibrium (2/3 M + 1/3 B, 1/2 L + 1/2 C).</p>",
+      "midterm": 1,
+      "tags": [
+        "Game theory",
+        "Dominance"
+      ]
     },
     {
       "id": "P1-Q2",
@@ -147,7 +152,13 @@
           "misconception": "Deep VCG insight: Even though Bidder 1 won nothing, her presence exerted price pressure, forcing Bidder 2's payment up from 4 to 7!"
         }
       ],
-      "solution": "<p><strong>Complete Breakdown:</strong> Social welfare is maximized by allocating X to Bidder 2 (value 8) and Y to Bidder 3 (value 7) for total welfare 15. Clarke pivot payments charge externalities: p1 = 0, p2 = 14 - 7 = 7, p3 = 14 - 8 = 6. Net utilities are u1 = 0, u2 = 1, u3 = 1. Total revenue is 13. Without Bidder 1, Bidder 2's payment drops to 4.</p>"
+      "solution": "<p><strong>Complete Breakdown:</strong> Social welfare is maximized by allocating X to Bidder 2 (value 8) and Y to Bidder 3 (value 7) for total welfare 15. Clarke pivot payments charge externalities: p1 = 0, p2 = 14 - 7 = 7, p3 = 14 - 8 = 6. Net utilities are u1 = 0, u2 = 1, u3 = 1. Total revenue is 13. Without Bidder 1, Bidder 2's payment drops to 4.</p>",
+      "midterm": 1,
+      "tags": [
+        "Auctions",
+        "VCG",
+        "Strategyproofness"
+      ]
     },
     {
       "id": "P1-Q3",
@@ -206,7 +217,11 @@
           "misconception": "Trap: confusing the maximum cost approximation ratio (4/3) with the total cost ratio or the deterministic strategyproof lower bound (2). The ratio here is (2/3)/(1/2) = 4/3."
         }
       ],
-      "solution": "<p><strong>Complete Breakdown:</strong> At (0, 3, 6), f = 4 giving total cost 7 vs optimal 6. The mechanism is NOT strategyproof because Agent 3 can report 9 to pull the facility to 6, reducing cost from 2 to 0. The max-cost approximation ratio is ((2/3)d)/(d/2) = 4/3.</p>"
+      "solution": "<p><strong>Complete Breakdown:</strong> At (0, 3, 6), f = 4 giving total cost 7 vs optimal 6. The mechanism is NOT strategyproof because Agent 3 can report 9 to pull the facility to 6, reducing cost from 2 to 0. The max-cost approximation ratio is ((2/3)d)/(d/2) = 4/3.</p>",
+      "midterm": 1,
+      "tags": [
+        "Facility location"
+      ]
     },
     {
       "id": "P1-Q4",
@@ -265,7 +280,11 @@
           "misconception": "Trap: blindly answering 4/3 because 4/3 is the theoretical maximum bound for linear latencies. The question asks for the EXACT PoA of this specific game, which is 28/27!"
         }
       ],
-      "solution": "<p><strong>Complete Breakdown:</strong> Wardrop equilibrium equates path latencies: 2x1 + 1 = (1-x1) + 2 => x1 = 2/3, x2 = 1/3, latency = 7/3. Social optimum minimizes x1(2x1+1) + x2(x2+2), giving x1* = 1/2, x2* = 1/2 with cost 9/4. PoA = (7/3)/(9/4) = 28/27 ≈ 1.037.</p>"
+      "solution": "<p><strong>Complete Breakdown:</strong> Wardrop equilibrium equates path latencies: 2x1 + 1 = (1-x1) + 2 => x1 = 2/3, x2 = 1/3, latency = 7/3. Social optimum minimizes x1(2x1+1) + x2(x2+2), giving x1* = 1/2, x2* = 1/2 with cost 9/4. PoA = (7/3)/(9/4) = 28/27 ≈ 1.037.</p>",
+      "midterm": 1,
+      "tags": [
+        "Routing"
+      ]
     },
     {
       "id": "P1-Q5",
@@ -307,7 +326,12 @@
           "misconception": "Trap: over-generalizing Braess's paradox to think that adding edges always hurts or cannot help everyone. Braess's paradox is a cautionary counterexample, not an impossibility theorem!"
         }
       ],
-      "solution": "<p><strong>Answers:</strong> (a) Yes (+2 Marks). (b) Yes (+2 Marks).</p>"
+      "solution": "<p><strong>Answers:</strong> (a) Yes (+2 Marks). (b) Yes (+2 Marks).</p>",
+      "midterm": 1,
+      "tags": [
+        "Auctions",
+        "Routing"
+      ]
     },
     {
       "id": "P1-Q6",
@@ -381,7 +405,12 @@
           "misconception": "Common exam pitfall: claiming truthful bidding is 'strictly' dominant. If an opponent bids 1,000,000, bidding 10 or 20 both yield utility 0 (indifference). Dominance is weak, not strict!"
         }
       ],
-      "solution": "<p><strong>Complete Proof Rationale:</strong> Define clearing price P = max(r, max_{j!=i} b_j). If v_i > P, bidding v_i wins at price P yielding v_i - P > 0; misreporting to lose gives 0 < v_i - P. If v_i < P, bidding v_i loses giving 0; misreporting to win pays P giving v_i - P < 0. In all cases, truthful bidding weakly dominates all other bids.</p>"
+      "solution": "<p><strong>Complete Proof Rationale:</strong> Define clearing price P = max(r, max_{j!=i} b_j). If v_i > P, bidding v_i wins at price P yielding v_i - P > 0; misreporting to lose gives 0 < v_i - P. If v_i < P, bidding v_i loses giving 0; misreporting to win pays P giving v_i - P < 0. In all cases, truthful bidding weakly dominates all other bids.</p>",
+      "midterm": 1,
+      "tags": [
+        "Auctions",
+        "Strategyproofness"
+      ]
     },
     {
       "id": "P2-Q1",
@@ -440,6 +469,11 @@
         "2 marks: Identifies unique pure equilibrium (D, D)",
         "2 marks: Explains C is weakly dominated by D, but not strictly dominated due to equality at D",
         "4 marks: Formally derives both continua (p C + (1-p) D, D) and (D, q C + (1-q) D) and rules out interior mixtures"
+      ],
+      "midterm": 1,
+      "tags": [
+        "Game theory",
+        "Nash equilibrium"
       ]
     },
     {
@@ -515,6 +549,11 @@
         "2 marks: Computes welfare 140 and revenue 90",
         "2 marks: Explains why keeping both items cannot lower payments below 45",
         "2 marks: Demonstrates B2 bidding 0 raises joint surplus from 50 to 60"
+      ],
+      "midterm": 1,
+      "tags": [
+        "Auctions",
+        "VCG"
       ]
     },
     {
@@ -572,6 +611,10 @@
         "2 marks: Correctly evaluates expected location 5 and expected costs 5 for both agents",
         "2 marks: Concludes Yes and explains invariance of expected cost d/2 under misreporting",
         "2 marks: Calculates expected max cost 3d/4, optimal max cost d/2, and ratio 3/2"
+      ],
+      "midterm": 1,
+      "tags": [
+        "Facility location"
       ]
     },
     {
@@ -631,6 +674,11 @@
         "2 marks: Correctly evaluates potential function: 6, 6, 9",
         "2 marks: Identifies all pure equilibria: (e1, e1) and (e1, e2), (e2, e1)",
         "2 marks: Calculates worst equilibrium cost 8, optimal cost 6, and PoA 4/3"
+      ],
+      "midterm": 1,
+      "tags": [
+        "Routing",
+        "Potential games"
       ]
     },
     {
@@ -676,6 +724,11 @@
       "rubric": [
         "2 marks: Correct No on (a) recognizing games may have no pure Nash equilibria",
         "2 marks: Correct No on (b) citing Christodoulou-Koutsoupias bound of 5/2"
+      ],
+      "midterm": 1,
+      "tags": [
+        "Game theory",
+        "Dominance"
       ]
     },
     {
@@ -695,6 +748,13 @@
         "3 marks: Rigorously proves the exact potential identity Phi(s') - Phi(s*) = C_i(s') - C_i(s*) for unilateral deviations",
         "2 marks: Uses the global minimality of s* to deduce Phi(s') - Phi(s*) >= 0",
         "1 mark: Concludes C_i(s*) <= C_i(s') for all players and strategies, confirming pure Nash equilibrium"
+      ],
+      "midterm": 1,
+      "tags": [
+        "Game theory",
+        "Nash equilibrium",
+        "Routing",
+        "Potential games"
       ]
     },
     {
@@ -769,6 +829,11 @@
         "2 marks: Identifies D strictly dominated by U in reduced game",
         "2 marks: Identifies pure equilibria (U, L) and (M, C)",
         "2 marks: Computes mixed NE p=2/3, q=2/3 and states all three equilibria"
+      ],
+      "midterm": 1,
+      "tags": [
+        "Game theory",
+        "Dominance"
       ]
     },
     {
@@ -840,6 +905,12 @@
         "3 marks: Computes new allocation A->2, B->3, payments p1=p2=p3=0, revenue 0",
         "1 mark: States welfare doubles (12 to 24) and revenue collapses to 0",
         "2 marks: Explains externality drops to 0 because B1 serves as a perfect backup"
+      ],
+      "midterm": 1,
+      "tags": [
+        "Auctions",
+        "VCG",
+        "Strategyproofness"
       ]
     },
     {
@@ -898,6 +969,10 @@
         "2 marks: Correctly evaluates total costs 16, 14, 14 and identifies optimal tie",
         "2 marks: Correctly evaluates max costs 8, 7, 4 and identifies f3 as optimal",
         "2 marks: Correctly states f1, f2 are SP, while f3 is not and gives a valid profitable misreport"
+      ],
+      "midterm": 1,
+      "tags": [
+        "Facility location"
       ]
     },
     {
@@ -957,6 +1032,10 @@
         "2 marks: Finds initial symmetric flow 0.5 each with latency 1.5",
         "2 marks: Shows all flow routes on s->u->v->t with latency 2.0",
         "2 marks: Computes ratio 4/3 and explains selfish congestion externality"
+      ],
+      "midterm": 1,
+      "tags": [
+        "Routing"
       ]
     },
     {
@@ -1002,6 +1081,10 @@
       "rubric": [
         "2 marks: Correct No on (a) explaining selfish vs social mismatch",
         "2 marks: Correct Yes on (b) explaining equivalence of Japanese auction and Vickrey"
+      ],
+      "midterm": 1,
+      "tags": [
+        "Auctions"
       ]
     },
     {
@@ -1020,6 +1103,11 @@
         "3 marks: Complete numerical counterexample showing truthful cost vs reduced cost under deviation",
         "3 marks: Formally sets (x1 + x2')/2 = x2 and derives the exact optimal misreport x2' = 2x2 - x1",
         "2 marks: Demonstrates truthful cost |x1-x2|/2 > 0 and proves cost drops to 0 for both agents"
+      ],
+      "midterm": 1,
+      "tags": [
+        "Facility location",
+        "Strategyproofness"
       ]
     },
     {
@@ -1095,6 +1183,11 @@
         "3 marks: Correctly equates expected payoffs to find p=2/7 and q=4/7",
         "1 mark: Computes expected payoffs 12/7 and 10/7",
         "2 marks: Explains p=2/7 is unchanged because P1's mixture is governed by P2's payoffs"
+      ],
+      "midterm": 1,
+      "tags": [
+        "Game theory",
+        "Nash equilibrium"
       ]
     },
     {
@@ -1170,6 +1263,10 @@
         "2 marks: Identifies winner B1 and winning bid 48 or 52",
         "2 marks: Compares 2 messages (Japanese) vs 50 messages (English)",
         "2 marks: Explains bid shading yields strictly positive utility vs 0 under truthful bidding"
+      ],
+      "midterm": 1,
+      "tags": [
+        "Auctions"
       ]
     },
     {
@@ -1228,6 +1325,10 @@
         "2 marks: Derives total cost sum showing y cancels out to (x4-x1)+(x3-x2)",
         "2 marks: Explains lower median monotonicity and inability of agents to shift it beneficially",
         "2 marks: Correctly concludes No for midpoint-of-medians and supplies a valid profitable misreport"
+      ],
+      "midterm": 1,
+      "tags": [
+        "Facility location"
       ]
     },
     {
@@ -1286,6 +1387,10 @@
         "2 marks: Correctly computes latency tables for all loads 1 to 4",
         "2 marks: Verifies deviations using post-deviation loads to find unique NE (2, 2)",
         "2 marks: Calculates social costs to confirm (2, 2) is optimal and PoA = 1"
+      ],
+      "midterm": 1,
+      "tags": [
+        "Routing"
       ]
     },
     {
@@ -1331,6 +1436,10 @@
       "rubric": [
         "2 marks: Correct No on (a) citing equilibrium invariance under strict dominance elimination",
         "2 marks: Correct No on (b) citing Roughgarden-Tardos 4/3 upper bound"
+      ],
+      "midterm": 1,
+      "tags": [
+        "Dominance"
       ]
     },
     {
@@ -1350,6 +1459,11 @@
         "2 marks: Correctly derives clamped median formula f(r) = min(max(r, y_k), y_{k+1})",
         "2 marks: Analyzes Case 1 (inside interval, cost 0) and Case 2 (left of interval, facility at y_k, misreporting can only move it right)",
         "2 marks: Analyzes Case 3 (right of interval) and concludes strategyproofness for all profiles"
+      ],
+      "midterm": 1,
+      "tags": [
+        "Facility location",
+        "Strategyproofness"
       ]
     },
     {
@@ -1423,6 +1537,10 @@
         "2 marks: Concludes unique NE is (0, 0, 0)",
         "2 marks: Calculates welfare 0 vs 9",
         "2 marks: Sets beta - 3 > 0 and derives beta > 3"
+      ],
+      "midterm": 1,
+      "tags": [
+        "Game theory"
       ]
     },
     {
@@ -1496,6 +1614,11 @@
         "3 marks: Correctly evaluates pivotal shortfalls: p1=40, p2=20, p3=0",
         "1 mark: Computes net utilities 30 each",
         "2 marks: Identifies total tax 60 and resulting deficit of 60"
+      ],
+      "midterm": 1,
+      "tags": [
+        "Auctions",
+        "VCG"
       ]
     },
     {
@@ -1554,6 +1677,10 @@
         "2 marks: Identifies optimal 1/2 and proves f(0, 1) must lie strictly in (0, 1)",
         "2 marks: Derives optimal t/2 at (0, t) and proves f(0, t) < t",
         "2 marks: Demonstrates misreport 1 yields cost 0 vs >0, establishing contradiction"
+      ],
+      "midterm": 1,
+      "tags": [
+        "Facility location"
       ]
     },
     {
@@ -1613,6 +1740,10 @@
         "2 marks: Tests x1=0 and shows resulting latency 7.8 > 4, proving all paths active",
         "2 marks: Inverts latency functions and solves (L-4)+(L-1)/2+L/3=6 to find L=63/11 and flows",
         "2 marks: Computes total cost 6 * 63/11 = 378/11"
+      ],
+      "midterm": 1,
+      "tags": [
+        "Routing"
       ]
     },
     {
@@ -1658,6 +1789,11 @@
       "rubric": [
         "2 marks: Correct No on (a) citing profitable overbidding in third-price auction",
         "2 marks: Correct Yes on (b) citing existence of unique potential minimizer"
+      ],
+      "midterm": 1,
+      "tags": [
+        "Auctions",
+        "Routing"
       ]
     },
     {
@@ -1677,6 +1813,12 @@
         "2 marks: Formally establishes that H(b_{-i}) is completely independent of agent i's own report b_i",
         "2 marks: Shows truthful reporting aligns the mechanism's objective exactly with agent i's utility maximization",
         "2 marks: Proves u_i(v_i, b_{-i}) >= u_i(b_i', b_{-i}) for all b_i' and concludes DSIC holds for arbitrary b_{-i}"
+      ],
+      "midterm": 1,
+      "tags": [
+        "Auctions",
+        "VCG",
+        "Strategyproofness"
       ]
     },
     {
@@ -1748,6 +1890,11 @@
         "2 marks: Shows 0.5 L + 0.5 C1 > C2 on {T, M2, B} and notes it failed on M1 (2 < 7)",
         "2 marks: Eliminates Col R then Row B, reaching {T, M2} and {L, C1}",
         "2 marks: Identifies pure NE (T, L), (M2, C1) and solves mixed NE p=4/7, q=5/8"
+      ],
+      "midterm": 1,
+      "tags": [
+        "Game theory",
+        "Dominance"
       ]
     },
     {
@@ -1768,6 +1915,11 @@
         "1 mark: Shows inward deviation costs d/2 + delta/2 > d/2, establishing strategyproofness iff p >= 1/4",
         "2 marks: Derives expected maximum cost (p + 1/2)d and approximation ratio Ratio(p) = 2p + 1",
         "1 mark: Concludes p = 1/4 uniquely minimizes Ratio(p) over [1/4, 1/2] to achieve 3/2"
+      ],
+      "midterm": 1,
+      "tags": [
+        "Facility location",
+        "Strategyproofness"
       ]
     },
     {
@@ -1788,6 +1940,1472 @@
         "1 mark: Invokes finiteness of strategy space S to establish finite termination at a pure Nash equilibrium",
         "2 marks: Constructs valid 2-player 2-edge congestion game and defines non-decreasing latencies (e.g. c(1)=1, c(2)=10)",
         "1 mark: Explicitly verifies the permanent 2-cycle (e1, e1) <-> (e2, e2) under simultaneous updates"
+      ],
+      "midterm": 1,
+      "tags": [
+        "Game theory",
+        "Nash equilibrium",
+        "Routing",
+        "Potential games"
+      ]
+    },
+    {
+      "id": "M2-P1-Q1",
+      "midterm": 2,
+      "paper": 1,
+      "set": 7,
+      "week": 4,
+      "topic": "Induced Subgraph Games: Shapley Value and Core",
+      "difficulty": "Intermediate",
+      "type": "short",
+      "marks": 8,
+      "tags": [
+        "Cooperative games",
+        "Induced subgraph game",
+        "Shapley value",
+        "Core"
+      ],
+      "sources": [
+        {
+          "title": "Week 4–5 lecture · Cooperative games",
+          "document": "week4-5-lecture.pdf",
+          "pages": [
+            5,
+            21,
+            22,
+            23,
+            24,
+            25,
+            38,
+            39
+          ]
+        }
+      ],
+      "origin": "Adapted practice",
+      "prompt": "Let $N=\\{1,2,3\\}$ be the vertices of an undirected graph with edge weights $w_{12}=4$, $w_{13}=-1$, and $w_{23}=3$. In the induced subgraph game, $v(S)$ is the sum of weights of edges whose two endpoints lie in $S$.",
+      "subparts": [
+        {
+          "id": "M2-P1-Q1-a",
+          "label": "(a)",
+          "marks": 2,
+          "prompt": "Compute $(v(\\{1,2\\}),v(\\{1,3\\}),v(\\{2,3\\}),v(N))$ in that order.",
+          "placeholder": "Your answer…",
+          "accepted": [
+            "(4, -1, 3, 6)",
+            "4, -1, 3, 6"
+          ]
+        },
+        {
+          "id": "M2-P1-Q1-b",
+          "label": "(b)",
+          "marks": 2,
+          "prompt": "Compute the Shapley payoff vector $(\\phi_1,\\phi_2,\\phi_3)$.",
+          "placeholder": "Your answer…",
+          "accepted": [
+            "(3/2, 7/2, 1)",
+            "3/2, 7/2, 1",
+            "(1.5, 3.5, 1)",
+            "1.5, 3.5, 1"
+          ]
+        },
+        {
+          "id": "M2-P1-Q1-c",
+          "label": "(c)",
+          "marks": 2,
+          "prompt": "Compute the cut weights for $S=\\{1\\},\\{2\\},\\{3\\}$ in that order. A cut sums weights of edges between $S$ and $N\\setminus S$.",
+          "placeholder": "Your answer…",
+          "accepted": [
+            "(3, 7, 2)",
+            "3, 7, 2"
+          ]
+        },
+        {
+          "id": "M2-P1-Q1-d",
+          "label": "(d)",
+          "marks": 2,
+          "prompt": "Is the core empty or nonempty? Give one core payoff vector.",
+          "placeholder": "Your answer…",
+          "accepted": [
+            "nonempty; (3/2, 7/2, 1)",
+            "nonempty, (3/2, 7/2, 1)",
+            "nonempty; (1.5, 3.5, 1)",
+            "nonempty, (1.5, 3.5, 1)"
+          ]
+        }
+      ],
+      "solution": "<p><strong>(a)</strong> The pair values are their edge weights. The grand coalition has value $4-1+3=6$.</p><p><strong>(b)</strong> Each edge contributes half its weight to each endpoint: $\\phi=(3/2,7/2,1)$.</p><p><strong>(c)</strong> The singleton cuts are $4-1=3$, $4+3=7$, and $-1+3=2$. Their complements have the same cut weights, so all cuts are nonnegative.</p><p><strong>(d)</strong> The core is nonempty. The proposed vector is efficient, has nonnegative coordinates, and its pair sums are $5$, $5/2$, and $9/2$, respectively at least $4$, $-1$, and $3$. A negative edge alone does not force the core to be empty: the lecture criterion concerns cuts.</p>",
+      "reference": "Values (4,-1,3,6); Shapley (3/2,7/2,1); cuts (3,7,2); core nonempty with (3/2,7/2,1)."
+    },
+    {
+      "id": "M2-P1-Q2",
+      "midterm": 2,
+      "paper": 1,
+      "set": 7,
+      "week": 5,
+      "topic": "Weighted Voting Games: Veto Players and Pivotality",
+      "difficulty": "Intermediate",
+      "type": "short",
+      "marks": 8,
+      "tags": [
+        "Cooperative games",
+        "Weighted voting game",
+        "Core",
+        "Shapley value"
+      ],
+      "sources": [
+        {
+          "title": "Week 4–5 lecture · Cooperative games",
+          "document": "week4-5-lecture.pdf",
+          "pages": [
+            7,
+            18,
+            20,
+            31,
+            32
+          ]
+        },
+        {
+          "title": "Assignment 4",
+          "document": "assignment4.pdf",
+          "pages": [
+            1
+          ],
+          "sections": [
+            "Q2(b)"
+          ]
+        },
+        {
+          "title": "Assignment 5",
+          "document": "assignment5.pdf",
+          "pages": [
+            1
+          ],
+          "sections": [
+            "Q1(b)",
+            "Q2"
+          ]
+        }
+      ],
+      "origin": "Adapted practice",
+      "prompt": "Four players have voting weights $(1,2,3,4)$ and quota $q=9$. A coalition has value $1$ if its total weight is at least $9$, and $0$ otherwise.",
+      "subparts": [
+        {
+          "id": "M2-P1-Q2-a",
+          "label": "(a)",
+          "marks": 2,
+          "prompt": "List the veto players in increasing order.",
+          "placeholder": "Your answer…",
+          "accepted": [
+            "2, 3, 4",
+            "{2, 3, 4}",
+            "(2, 3, 4)"
+          ]
+        },
+        {
+          "id": "M2-P1-Q2-b",
+          "label": "(b)",
+          "marks": 2,
+          "prompt": "Describe the core by finding the constants $a$ and $b$ in $x_1=a$, $x_2,x_3,x_4\\ge0$, and $x_2+x_3+x_4=b$. Enter $(a,b)$.",
+          "placeholder": "Your answer…",
+          "accepted": [
+            "0, 1",
+            "(0, 1)"
+          ]
+        },
+        {
+          "id": "M2-P1-Q2-c",
+          "label": "(c)",
+          "marks": 2,
+          "prompt": "Compute the Shapley vector $(\\phi_1,\\phi_2,\\phi_3,\\phi_4)$.",
+          "placeholder": "Your answer…",
+          "accepted": [
+            "(0, 1/3, 1/3, 1/3)",
+            "0, 1/3, 1/3, 1/3"
+          ]
+        },
+        {
+          "id": "M2-P1-Q2-d",
+          "label": "(d)",
+          "marks": 2,
+          "prompt": "Does $(1/4,1/4,1/4,1/4)$ belong to the core? If not, identify a blocking coalition (enter “no; {…}”).",
+          "placeholder": "Your answer…",
+          "accepted": [
+            "no; {2, 3, 4}",
+            "no, {2, 3, 4}",
+            "no; (2, 3, 4)"
+          ]
+        }
+      ],
+      "solution": "<p><strong>(a)</strong> Without player 2, 3, or 4, the remaining total weight is below 9. Without player 1 it is exactly 9. Thus 2, 3, and 4 are veto players.</p><p><strong>(b)</strong> The winning coalition $\\{2,3,4\\}$ needs payoff at least 1. Efficiency and nonnegativity force $x_1=0$ and $x_2+x_3+x_4=1$. These conditions are also sufficient.</p><p><strong>(c)</strong> Player 1 is a dummy: winning requires all of players 2, 3, and 4. Each of these three is equally likely to be last among them in a random order, hence pivotal with probability $1/3$.</p><p><strong>(d)</strong> The equal vector gives coalition $\\{2,3,4\\}$ only $3/4<1$, so the coalition blocks it.</p>",
+      "reference": "Veto players 2,3,4; core x1=0, x2+x3+x4=1, all nonnegative; Shapley (0,1/3,1/3,1/3); equal vector blocked by {2,3,4}."
+    },
+    {
+      "id": "M2-P1-Q3",
+      "midterm": 2,
+      "paper": 1,
+      "set": 7,
+      "week": 7,
+      "topic": "Bargaining on a Curved Frontier",
+      "difficulty": "Intermediate",
+      "type": "short",
+      "marks": 6,
+      "tags": [
+        "Bargaining",
+        "Nash welfare",
+        "Utilitarian welfare",
+        "Boundary checks"
+      ],
+      "sources": [
+        {
+          "title": "Week 7 lecture · Stable matching and bargaining",
+          "document": "week7-lecture.pdf",
+          "pages": [
+            52,
+            55,
+            56
+          ]
+        },
+        {
+          "title": "Assignment 7",
+          "document": "assignment7.pdf",
+          "pages": [
+            2
+          ],
+          "sections": [
+            "Q3(a)",
+            "Q3(b)"
+          ]
+        }
+      ],
+      "origin": "Adapted practice",
+      "prompt": "Two agents have utilities $u_1=x$ and $u_2=y$, disagreement utilities $(0,0)$, and feasible frontier $S=\\{(x,y)\\in\\mathbb R_{\\ge0}^2:4x+\\sqrt y=1\\}$. Use the Nash-product maximizer on this frontier.",
+      "subparts": [
+        {
+          "id": "M2-P1-Q3-a",
+          "label": "(a)",
+          "marks": 2,
+          "prompt": "Find the Nash-product maximizing pair (x,y).",
+          "placeholder": "Your answer…",
+          "accepted": [
+            "(1/12, 4/9)",
+            "1/12, 4/9"
+          ]
+        },
+        {
+          "id": "M2-P1-Q3-b",
+          "label": "(b)",
+          "marks": 2,
+          "prompt": "Find the utilitarian-welfare maximizing pair (x,y).",
+          "placeholder": "Your answer…",
+          "accepted": [
+            "(0, 1)",
+            "0, 1"
+          ]
+        },
+        {
+          "id": "M2-P1-Q3-c",
+          "label": "(c)",
+          "marks": 2,
+          "prompt": "What is the Nash product at the pair from part (a)?",
+          "placeholder": "Your answer…",
+          "accepted": [
+            "1/27",
+            "0.037037"
+          ]
+        }
+      ],
+      "solution": "<p>The constraint gives $y=(1-4x)^2$ with $0\\le x\\le1/4$.</p><p><strong>(a)</strong> The product is $P(x)=x(1-4x)^2$. Its derivative is $(1-4x)(1-12x)$, so the interior maximum is $x=1/12$, $y=4/9$. Both endpoints give product zero.</p><p><strong>(b)</strong> The sum is $W(x)=16x^2-7x+1$, a convex quadratic. Compare endpoints: $W(0)=1$ and $W(1/4)=1/4$. The maximum is $(0,1)$; a stationary point is not the maximum.</p><p><strong>(c)</strong> $(1/12)(4/9)=1/27$.</p>",
+      "reference": "Nash-product pair (1/12,4/9); utilitarian pair (0,1); Nash product 1/27. Check the endpoints."
+    },
+    {
+      "id": "M2-P1-Q4",
+      "midterm": 2,
+      "paper": 1,
+      "set": 7,
+      "week": 7,
+      "topic": "Stable Matching: Blocking Pairs and Deferred Acceptance",
+      "difficulty": "Intermediate",
+      "type": "short",
+      "marks": 6,
+      "tags": [
+        "Stable matching",
+        "Blocking pair",
+        "Gale–Shapley",
+        "Proposer optimality"
+      ],
+      "sources": [
+        {
+          "title": "Week 7 lecture · Stable matching and bargaining",
+          "document": "week7-lecture.pdf",
+          "pages": [
+            21,
+            23,
+            32,
+            33,
+            36,
+            39
+          ]
+        },
+        {
+          "title": "Assignment 7",
+          "document": "assignment7.pdf",
+          "pages": [
+            1
+          ],
+          "sections": [
+            "Q1(a)",
+            "Q1(b)",
+            "Q1(c)"
+          ]
+        }
+      ],
+      "origin": "Adapted practice",
+      "prompt": "<p>There are four students and four hospitals, each with one place. All preference lists are strict and complete.</p><p>Students:<br>$A:Z\\succ W\\succ Y\\succ X$<br>$B:Z\\succ Y\\succ W\\succ X$<br>$C:X\\succ Y\\succ Z\\succ W$<br>$D:W\\succ Y\\succ X\\succ Z$</p><p>Hospitals:<br>$W:A\\succ B\\succ C\\succ D$<br>$X:B\\succ D\\succ A\\succ C$<br>$Y:B\\succ A\\succ C\\succ D$<br>$Z:D\\succ C\\succ B\\succ A$</p>",
+      "subparts": [
+        {
+          "id": "M2-P1-Q4-a",
+          "label": "(a)",
+          "marks": 2,
+          "prompt": "List all blocking pairs of $\\{(A,Z),(B,Y),(C,X),(D,W)\\}$.",
+          "placeholder": "Your answer…",
+          "accepted": [
+            "(B, Z)",
+            "(b,z)",
+            "B, Z"
+          ]
+        },
+        {
+          "id": "M2-P1-Q4-b",
+          "label": "(b)",
+          "marks": 2,
+          "prompt": "Run student-proposing Gale–Shapley. Enter the hospitals assigned to (A,B,C,D), in that order.",
+          "placeholder": "Your answer…",
+          "accepted": [
+            "(W, Z, X, Y)",
+            "W, Z, X, Y"
+          ]
+        },
+        {
+          "id": "M2-P1-Q4-c",
+          "label": "(c)",
+          "marks": 2,
+          "prompt": "Which student is hospital Z’s best partner among all stable matchings?",
+          "placeholder": "Your answer…",
+          "accepted": [
+            "C",
+            "student C"
+          ]
+        }
+      ],
+      "solution": "<p><strong>(a)</strong> The only blocking pair is $(B,Z)$: B prefers Z to Y, and Z prefers B to A. No other pair satisfies both strict preferences.</p><p><strong>(b)</strong> Initially A and B propose to Z (Z keeps B), C to X, and D to W. A next proposes to W, which prefers A to D. D next proposes to Y. The result is $(A,W),(B,Z),(C,X),(D,Y)$.</p><p><strong>(c)</strong> The complete stable matchings, written as A,B,C,D’s hospitals, are $(W,Y,Z,X)$, $(W,Z,X,Y)$, and $(W,Z,Y,X)$. Hospital Z gets C in the first and B in the other two. Z prefers C to B, so C is its best stable partner. Student-proposing Gale–Shapley is hospital-pessimal, not hospital-optimal.</p>",
+      "reference": "Only blocking pair (B,Z). Student-proposing output (W,Z,X,Y). Hospital Z’s best stable partner is C, attained at (W,Y,Z,X)."
+    },
+    {
+      "id": "M2-P1-Q5",
+      "midterm": 2,
+      "paper": 1,
+      "set": 7,
+      "week": 8,
+      "topic": "Fairness Diagnostic: EF1, EFX, and Efficiency",
+      "difficulty": "Intermediate",
+      "type": "mcq",
+      "marks": 4,
+      "tags": [
+        "Fair allocation",
+        "EF1",
+        "EFX",
+        "Utilitarian welfare"
+      ],
+      "sources": [
+        {
+          "title": "Week 8 lecture · Fair allocation of indivisible goods",
+          "document": "week8-lecture.pdf",
+          "pages": [
+            9,
+            22,
+            23
+          ]
+        }
+      ],
+      "origin": "Adapted practice",
+      "prompt": "All valuations are additive and nonnegative. Answer Yes or No; “Don't know” earns 1 mark per subpart.",
+      "subparts": [
+        {
+          "id": "M2-P1-Q5-a",
+          "label": "(a)",
+          "marks": 2,
+          "prompt": "Two agents value $(g_1,g_2,g_3)$ at $(2,2,3)$ and $(4,4,1)$. Is $A_1=\\{g_1\\}$, $A_2=\\{g_2,g_3\\}$ EF1 but not EFX?",
+          "options": [
+            "Yes",
+            "No",
+            "Don't know"
+          ],
+          "answer": "Yes",
+          "explanation": "Agent 1 has value 2 and values agent 2's bundle at 5. Removing $g_3$ leaves 2, so EF1 holds; removing $g_2$ leaves 3, so EFX fails. Agent 2 does not envy agent 1."
+        },
+        {
+          "id": "M2-P1-Q5-b",
+          "label": "(b)",
+          "marks": 2,
+          "prompt": "Two agents value four goods at $(10,10,10,3)$ and $(9,9,9,10)$. Does assigning every good to its highest-value agent necessarily produce an EF1 allocation?",
+          "options": [
+            "Yes",
+            "No",
+            "Don't know"
+          ],
+          "answer": "No",
+          "explanation": "This maximizes the sum: agent 1 gets the first three goods and agent 2 gets the fourth. Agent 2 has value 10 but values the other bundle at 27. Removing any one good leaves 18>10, so EF1 fails."
+        }
+      ],
+      "solution": "<p>EF1 requires <em>some</em> good in the envied bundle to remove envy. EFX requires <em>every</em> good to do so under the lecture definition. Maximizing the sum of utilities can leave persistent envy even after removing one good.</p>",
+      "reference": "(a) Yes: EF1 but not EFX. (b) No: agent 2 still envies after removing any one of the first three goods."
+    },
+    {
+      "id": "M2-P1-Q6",
+      "midterm": 2,
+      "paper": 1,
+      "set": 7,
+      "week": 8,
+      "topic": "Proof: Round-Robin Produces an EF1 Allocation",
+      "difficulty": "Challenging",
+      "type": "proof",
+      "marks": 8,
+      "tags": [
+        "Fair allocation",
+        "Round-robin",
+        "EF1",
+        "Proof"
+      ],
+      "sources": [
+        {
+          "title": "Week 8 lecture · Fair allocation of indivisible goods",
+          "document": "week8-lecture.pdf",
+          "pages": [
+            5,
+            10,
+            11
+          ]
+        }
+      ],
+      "origin": "Adapted practice",
+      "prompt": "There are $n$ agents with additive, nonnegative valuations. In a fixed cyclic order $1,2,\\ldots,n$, each agent picks a remaining good of maximum value to herself, until no goods remain. Prove that the final allocation is EF1. Handle both relative orders of an arbitrary pair of agents and an incomplete final round.",
+      "blueprint": "<div class=\"proof-blueprint\"><h4>Worked proof</h4><p><strong>1. Fix a pair and label picks</strong><br>Fix distinct agents i,j. Let $a_t$ be i's t-th pick and $b_t$ j's t-th pick. Compare bundles using $v_i$, not $v_j$. Nonnegativity lets us ignore unmatched extra goods in i's bundle.</p><p><strong>2. When i picks before j</strong><br>Whenever $b_t$ exists, $a_t$ exists and i chose while $b_t$ was still available. Thus $v_i(a_t)\\ge v_i(b_t)$. Summing shows $v_i(A_i)\\ge v_i(A_j)$, even if i has an extra pick in the last round.</p><p><strong>3. When j picks before i</strong><br>Remove j's first pick $b_1$. Whenever $b_{t+1}$ exists, $a_t$ exists and i chose it before j picked $b_{t+1}$. Therefore $v_i(a_t)\\ge v_i(b_{t+1})$. Summing gives $v_i(A_i)\\ge v_i(A_j\\setminus\\{b_1\\})$. This also handles an incomplete last round.</p><p><strong>4. Conclude EF1</strong><br>For each ordered pair, either i has no envy or removing j's first good eliminates it. Empty bundles cause no envy under nonnegative valuations. Hence for every nonempty $A_j$ there exists a good g with $v_i(A_i)\\ge v_i(A_j\\setminus\\{g\\})$, which is EF1.</p></div>",
+      "rubric": [
+        "2 marks: Fixes an arbitrary pair and uses the observer’s additive valuation.",
+        "2 marks: Pairs same-round picks when i precedes j.",
+        "3 marks: Pairs i’s t-th pick with j’s (t+1)-th pick and removes j’s first good.",
+        "1 mark: Handles the incomplete round and empty bundles, then concludes EF1."
+      ],
+      "reference": "Compare using vi. If i precedes j, pair same-round picks. If j precedes i, remove j’s first good and pair a_t with b_(t+1). Additivity and nonnegativity yield EF1, including an incomplete final round."
+    },
+    {
+      "id": "M2-P2-Q1",
+      "midterm": 2,
+      "paper": 2,
+      "set": 8,
+      "week": 6,
+      "topic": "Parametric Cooperative Game: Monotonicity and a Singleton Core",
+      "difficulty": "Intermediate",
+      "type": "short",
+      "marks": 8,
+      "tags": [
+        "Cooperative games",
+        "Monotonicity",
+        "Core",
+        "Shapley value"
+      ],
+      "sources": [
+        {
+          "title": "Week 4–5 lecture · Cooperative games",
+          "document": "week4-5-lecture.pdf",
+          "pages": [
+            10,
+            13,
+            14,
+            15,
+            31,
+            32
+          ]
+        },
+        {
+          "title": "Assignment 6",
+          "document": "assignment6.pdf",
+          "pages": [
+            1
+          ],
+          "sections": [
+            "Q1(a)",
+            "Q1(b)"
+          ]
+        },
+        {
+          "title": "Assignment 5",
+          "document": "assignment5.pdf",
+          "pages": [
+            1
+          ],
+          "sections": [
+            "Q2"
+          ]
+        }
+      ],
+      "origin": "Adapted practice",
+      "prompt": "Let $N=\\{1,2,3\\}$ and $c>0$. Values are $v(\\emptyset)=0$, $(v(\\{1\\}),v(\\{2\\}),v(\\{3\\}))=(1,2,3)$, $v(\\{1,2\\})=4$, $v(\\{1,3\\})=5$, $v(\\{2,3\\})=c$, and $v(N)=7$.",
+      "subparts": [
+        {
+          "id": "M2-P2-Q1-a",
+          "label": "(a)",
+          "marks": 2,
+          "prompt": "For which values of c is the game monotone? Enter a closed interval.",
+          "placeholder": "Your answer…",
+          "accepted": [
+            "[3, 7]",
+            "3 <= c <= 7",
+            "3 ≤ c ≤ 7"
+          ]
+        },
+        {
+          "id": "M2-P2-Q1-b",
+          "label": "(b)",
+          "marks": 2,
+          "prompt": "For which values of c is the game monotone and its core contains exactly one vector?",
+          "placeholder": "Your answer…",
+          "accepted": [
+            "[3, 5]",
+            "3 <= c <= 5",
+            "3 ≤ c ≤ 5"
+          ]
+        },
+        {
+          "id": "M2-P2-Q1-c",
+          "label": "(c)",
+          "marks": 2,
+          "prompt": "At c=5, give the unique core payoff vector.",
+          "placeholder": "Your answer…",
+          "accepted": [
+            "(2, 2, 3)",
+            "2, 2, 3"
+          ]
+        },
+        {
+          "id": "M2-P2-Q1-d",
+          "label": "(d)",
+          "marks": 2,
+          "prompt": "At c=5, compute the Shapley payoff vector.",
+          "placeholder": "Your answer…",
+          "accepted": [
+            "(5/3, 13/6, 19/6)",
+            "5/3, 13/6, 19/6"
+          ]
+        }
+      ],
+      "solution": "<p><strong>(a)</strong> The only varying inclusions require $3\\le c\\le7$.</p><p><strong>(b,c)</strong> Efficiency gives $x_1+x_2+x_3=7$. From $x_1+x_3\\ge5$ we get $x_2\\le2$, while individual rationality requires $x_2\\ge2$. Thus $x_2=2$. Next $x_1+x_2\\ge4$ gives $x_1\\ge2$, and $x_3\\ge3$ gives $x_1\\le2$. Therefore every core vector must be $(2,2,3)$. It satisfies the remaining coalition inequality exactly when $c\\le5$. Combining with monotonicity gives $c\\in[3,5]$.</p><p><strong>(d)</strong> Average marginal contributions over six permutations: $\\phi_1=(10-c)/3$, $\\phi_2=(8+c)/6$, $\\phi_3=(14+c)/6$. At c=5 this is $(5/3,13/6,19/6)$. This Shapley vector is not in the core: coalition $\\{1,2\\}$ receives $23/6<4$. A nonempty core does not guarantee Shapley membership.</p>",
+      "reference": "Monotone for c in [3,7]. Monotone singleton core for c in [3,5], vector (2,2,3). At c=5 Shapley=(5/3,13/6,19/6), blocked by {1,2}."
+    },
+    {
+      "id": "M2-P2-Q2",
+      "midterm": 2,
+      "paper": 2,
+      "set": 8,
+      "week": 8,
+      "topic": "Round-Robin, Maximin Shares, and Fairness Checks",
+      "difficulty": "Intermediate",
+      "type": "short",
+      "marks": 8,
+      "tags": [
+        "Fair allocation",
+        "Round-robin",
+        "Maximin share",
+        "EF1",
+        "EFX",
+        "Envy-freeness"
+      ],
+      "sources": [
+        {
+          "title": "Week 8 lecture · Fair allocation of indivisible goods",
+          "document": "week8-lecture.pdf",
+          "pages": [
+            5,
+            6,
+            10,
+            11,
+            22,
+            25,
+            26
+          ]
+        }
+      ],
+      "origin": "Adapted practice",
+      "prompt": "<p>There are three agents and four goods. Values are additive and nonnegative:</p>$$\\begin{array}{c|rrrr}&g_1&g_2&g_3&g_4\\\\\\hline1&11&10&5&1\\\\2&1&6&1&2\\\\3&8&7&4&9\\end{array}$$",
+      "subparts": [
+        {
+          "id": "M2-P2-Q2-a",
+          "label": "(a)",
+          "marks": 2,
+          "prompt": "Compute the maximin shares (MMS1,MMS2,MMS3) for a partition into three bundles.",
+          "placeholder": "Your answer…",
+          "accepted": [
+            "(6, 2, 8)",
+            "6, 2, 8"
+          ]
+        },
+        {
+          "id": "M2-P2-Q2-b",
+          "label": "(b)",
+          "marks": 2,
+          "prompt": "Run round-robin in order 1,2,3. Enter the final bundles (A1; A2; A3).",
+          "placeholder": "Your answer…",
+          "accepted": [
+            "{g1,g3}; {g2}; {g4}",
+            "{g1, g3}; {g2}; {g4}",
+            "(g1,g3); (g2); (g4)"
+          ]
+        },
+        {
+          "id": "M2-P2-Q2-c",
+          "label": "(c)",
+          "marks": 2,
+          "prompt": "Compute the agents’ own utilities (v1(A1),v2(A2),v3(A3)).",
+          "placeholder": "Your answer…",
+          "accepted": [
+            "(16, 6, 9)",
+            "16, 6, 9"
+          ]
+        },
+        {
+          "id": "M2-P2-Q2-d",
+          "label": "(d)",
+          "marks": 2,
+          "prompt": "Is the result envy-free? Is it EFX? Enter (Yes/No, Yes/No) in that order.",
+          "placeholder": "Your answer…",
+          "accepted": [
+            "(No, Yes)",
+            "No, Yes",
+            "no, yes"
+          ]
+        }
+      ],
+      "solution": "<p><strong>(a)</strong> Partitions attaining the shares are $\\{g_1\\},\\{g_2\\},\\{g_3,g_4\\}$ for agent 1 (minimum 6), $\\{g_1,g_3\\},\\{g_2\\},\\{g_4\\}$ for agent 2 (minimum 2), and $\\{g_1\\},\\{g_2,g_3\\},\\{g_4\\}$ for agent 3 (minimum 8). With four goods and three nonempty bundles, at least two bundles are singletons. Exceeding 6, 2, or 8, respectively, would force two singleton bundles that leave too little value for the third; these shares are optimal.</p><p><strong>(b,c)</strong> The picks are $g_1,g_2,g_4,g_3$, giving $A_1=\\{g_1,g_3\\}$, $A_2=\\{g_2\\}$, $A_3=\\{g_4\\}$ and utilities $(16,6,9)$.</p><p><strong>(d)</strong> Agent 3 values agent 1's bundle at $8+4=12>9$, so the result is not envy-free. Removing either good from that bundle leaves value 4 or 8, at most 9. The other agents have no envy. Thus it is EFX (and hence EF1). This particular round-robin output is EFX; round-robin does not guarantee EFX in general.</p>",
+      "reference": "MMS=(6,2,8); bundles {g1,g3};{g2};{g4}; own utilities (16,6,9); not envy-free but EFX."
+    },
+    {
+      "id": "M2-P2-Q3",
+      "midterm": 2,
+      "paper": 2,
+      "set": 8,
+      "week": 7,
+      "topic": "Comparing Utilitarian, Egalitarian, and Nash Welfare",
+      "difficulty": "Intermediate",
+      "type": "short",
+      "marks": 6,
+      "tags": [
+        "Bargaining",
+        "Utilitarian welfare",
+        "Egalitarian welfare",
+        "Nash welfare"
+      ],
+      "sources": [
+        {
+          "title": "Week 7 lecture · Stable matching and bargaining",
+          "document": "week7-lecture.pdf",
+          "pages": [
+            45,
+            52,
+            55,
+            56
+          ]
+        },
+        {
+          "title": "Assignment 7",
+          "document": "assignment7.pdf",
+          "pages": [
+            2
+          ],
+          "sections": [
+            "Q3"
+          ]
+        }
+      ],
+      "origin": "Adapted practice",
+      "prompt": "Utilities are $u_1=x$, $u_2=y$. The feasible set is $x,y\\ge0$ and $x+2y\\le12$, with disagreement utilities $(0,0)$.",
+      "subparts": [
+        {
+          "id": "M2-P2-Q3-a",
+          "label": "(a)",
+          "marks": 2,
+          "prompt": "Find the utilitarian optimum (x,y).",
+          "placeholder": "Your answer…",
+          "accepted": [
+            "(12, 0)",
+            "12, 0"
+          ]
+        },
+        {
+          "id": "M2-P2-Q3-b",
+          "label": "(b)",
+          "marks": 2,
+          "prompt": "Find the egalitarian optimum maximizing min(x,y).",
+          "placeholder": "Your answer…",
+          "accepted": [
+            "(4, 4)",
+            "4, 4"
+          ]
+        },
+        {
+          "id": "M2-P2-Q3-c",
+          "label": "(c)",
+          "marks": 2,
+          "prompt": "Find the Nash-product optimum (x,y).",
+          "placeholder": "Your answer…",
+          "accepted": [
+            "(6, 3)",
+            "6, 3"
+          ]
+        }
+      ],
+      "solution": "<p><strong>(a)</strong> On the frontier, $y=(12-x)/2$ and $x+y=6+x/2$, maximized at $(12,0)$.</p><p><strong>(b)</strong> To achieve a minimum utility t, both utilities must be at least t, requiring $3t\\le12$. The upper bound t=4 is attained uniquely at $(4,4)$.</p><p><strong>(c)</strong> The product is $x(12-x)/2$, with derivative $6-x$. Its maximum is at x=6,y=3 with product 18; the endpoints have product zero. All three optima lie on the Pareto frontier but differ because their objectives differ.</p>",
+      "reference": "Utilitarian (12,0); egalitarian (4,4); Nash-product (6,3)."
+    },
+    {
+      "id": "M2-P2-Q4",
+      "midterm": 2,
+      "paper": 2,
+      "set": 8,
+      "week": 7,
+      "topic": "Stable Matching: Comparing the Two Proposing Sides",
+      "difficulty": "Intermediate",
+      "type": "short",
+      "marks": 6,
+      "tags": [
+        "Stable matching",
+        "Gale–Shapley",
+        "Proposer optimality"
+      ],
+      "sources": [
+        {
+          "title": "Week 7 lecture · Stable matching and bargaining",
+          "document": "week7-lecture.pdf",
+          "pages": [
+            21,
+            23,
+            36,
+            39
+          ]
+        },
+        {
+          "title": "Assignment 7",
+          "document": "assignment7.pdf",
+          "pages": [
+            1
+          ],
+          "sections": [
+            "Q1(b)",
+            "Q1(d)"
+          ]
+        }
+      ],
+      "origin": "Adapted practice",
+      "prompt": "<p>Students: $A:X\\succ Y\\succ Z$, $B:Y\\succ X\\succ Z$, $C:X\\succ Y\\succ Z$.</p><p>Hospitals: $X:B\\succ A\\succ C$, $Y:A\\succ B\\succ C$, $Z:C\\succ A\\succ B$.</p><p>All lists are strict and complete; each hospital has one place.</p>",
+      "subparts": [
+        {
+          "id": "M2-P2-Q4-a",
+          "label": "(a)",
+          "marks": 2,
+          "prompt": "Run student-proposing Gale–Shapley. Enter A,B,C’s hospitals.",
+          "placeholder": "Your answer…",
+          "accepted": [
+            "(X, Y, Z)",
+            "X, Y, Z"
+          ]
+        },
+        {
+          "id": "M2-P2-Q4-b",
+          "label": "(b)",
+          "marks": 2,
+          "prompt": "Run hospital-proposing Gale–Shapley. Enter A,B,C’s hospitals.",
+          "placeholder": "Your answer…",
+          "accepted": [
+            "(Y, X, Z)",
+            "Y, X, Z"
+          ]
+        },
+        {
+          "id": "M2-P2-Q4-c",
+          "label": "(c)",
+          "marks": 2,
+          "prompt": "How many stable matchings exist for this instance?",
+          "placeholder": "Your answer…",
+          "accepted": [
+            "2"
+          ]
+        }
+      ],
+      "solution": "<p><strong>(a)</strong> A proposes to X, B to Y, and C to X. X keeps A; C is rejected by X then Y and finally accepted by Z. The result is $(A,X),(B,Y),(C,Z)$.</p><p><strong>(b)</strong> X proposes to B, Y to A, and Z to C. Each is accepted immediately: $(A,Y),(B,X),(C,Z)$.</p><p><strong>(c)</strong> C must be assigned to Z in any stable matching. Otherwise whichever of A or B is at Z blocks with C's hospital: that student prefers X or Y to Z and both X and Y prefer A and B to C. The two possible assignments of A,B to X,Y are both stable. Therefore exactly two stable matchings exist.</p>",
+      "reference": "Student-proposing (X,Y,Z); hospital-proposing (Y,X,Z); exactly 2 stable matchings, with C assigned to Z in both."
+    },
+    {
+      "id": "M2-P2-Q5",
+      "midterm": 2,
+      "paper": 2,
+      "set": 8,
+      "week": 5,
+      "topic": "Core Geometry and Shapley Membership",
+      "difficulty": "Intermediate",
+      "type": "mcq",
+      "marks": 4,
+      "tags": [
+        "Cooperative games",
+        "Core",
+        "Shapley value",
+        "Convexity"
+      ],
+      "sources": [
+        {
+          "title": "Week 4–5 lecture · Cooperative games",
+          "document": "week4-5-lecture.pdf",
+          "pages": [
+            13,
+            14,
+            31,
+            32
+          ]
+        },
+        {
+          "title": "Assignment 5",
+          "document": "assignment5.pdf",
+          "pages": [
+            1
+          ],
+          "sections": [
+            "Q2",
+            "Q3(a)",
+            "Q3(b)",
+            "Q3(c)"
+          ]
+        }
+      ],
+      "origin": "Adapted practice",
+      "prompt": "Answer Yes or No for general transferable-utility cooperative games.",
+      "subparts": [
+        {
+          "id": "M2-P2-Q5-a",
+          "label": "(a)",
+          "marks": 2,
+          "prompt": "If a game’s core contains two distinct payoff vectors, must it contain infinitely many payoff vectors?",
+          "options": [
+            "Yes",
+            "No",
+            "Don't know"
+          ],
+          "answer": "Yes",
+          "explanation": "The core is an intersection of linear constraints, hence convex. Every convex combination of the two distinct vectors is in the core, giving a line segment with infinitely many points."
+        },
+        {
+          "id": "M2-P2-Q5-b",
+          "label": "(b)",
+          "marks": 2,
+          "prompt": "If a game has a nonempty core, must its Shapley vector belong to the core?",
+          "options": [
+            "Yes",
+            "No",
+            "Don't know"
+          ],
+          "answer": "No",
+          "explanation": "The parametric game in Paper 2 Question 1 at c=5 has unique core vector (2,2,3), but Shapley vector (5/3,13/6,19/6). Coalition {1,2} gets 23/6<4 and blocks it."
+        }
+      ],
+      "solution": "<p>Convexity of the <em>core as a set</em> follows from linear inequalities, even when the cooperative game is not a convex game. A fair marginal-contribution rule need not satisfy every coalition's stability constraint.</p>",
+      "reference": "(a) Yes: every convex combination of two core vectors is in the core. (b) No: c=5 gives a nonempty core but the Shapley vector is blocked by {1,2}."
+    },
+    {
+      "id": "M2-P2-Q6",
+      "midterm": 2,
+      "paper": 2,
+      "set": 8,
+      "week": 7,
+      "topic": "Proof: A Common Hospital Ranking Gives a Unique Stable Matching",
+      "difficulty": "Challenging",
+      "type": "proof",
+      "marks": 8,
+      "tags": [
+        "Stable matching",
+        "Blocking pair",
+        "Proof"
+      ],
+      "sources": [
+        {
+          "title": "Week 7 lecture · Stable matching and bargaining",
+          "document": "week7-lecture.pdf",
+          "pages": [
+            21,
+            23,
+            32,
+            33
+          ]
+        },
+        {
+          "title": "Assignment 7",
+          "document": "assignment7.pdf",
+          "pages": [
+            2
+          ],
+          "sections": [
+            "Q2"
+          ]
+        }
+      ],
+      "origin": "Adapted practice",
+      "prompt": "There are n students and n hospitals, each with one place. All preferences are strict and complete. Every hospital ranks the students in the same order $s_1\\succ s_2\\succ\\cdots\\succ s_n$. Prove that a unique stable matching exists. Describe how to construct it.",
+      "blueprint": "<div class=\"proof-blueprint\"><h4>Worked proof</h4><p><strong>1. Construct the candidate</strong><br>Process students in the common ranking order. Give $s_1$ her favorite hospital, then $s_2$ her favorite remaining hospital, and so on. Strict preferences make every choice unique.</p><p><strong>2. Show each assignment is forced</strong><br>In any stable matching, $s_1$ must receive her favorite hospital h. Otherwise she prefers h to her assignment, and h prefers her to its assigned student, a blocking pair. After fixing $s_1$, apply the same argument to $s_2$ and her favorite remaining hospital. Inductively, each assignment is forced.</p><p><strong>3. Establish stability</strong><br>Consider a pair $s_i,h$ where $s_i$ prefers h to her constructed assignment. Hospital h was unavailable at her turn, so it is assigned to some $s_j$ with j<i. Hospital h prefers $s_j$ to $s_i$ by the common ranking. The pair cannot block.</p><p><strong>4. Conclude existence and uniqueness</strong><br>The constructed matching has no blocking pair, so it is stable. Every stable matching has all its assignments forced to equal this construction, so there is exactly one.</p></div>",
+      "rubric": [
+        "2 marks: Gives the common-ranking serial construction with unique choices.",
+        "3 marks: Forces the top student’s assignment and extends the argument inductively.",
+        "2 marks: Shows a desired but unavailable hospital prefers its earlier-ranked assigned student.",
+        "1 mark: Concludes both existence and uniqueness under the stated assumptions."
+      ],
+      "reference": "Assign students in the common hospital order to their favorite remaining hospitals. Every assignment is forced by a potential blocking pair. The construction is stable because unavailable preferred hospitals have higher-ranked students, hence the stable matching is unique."
+    },
+    {
+      "id": "M2-D1",
+      "midterm": 2,
+      "paper": null,
+      "set": 9,
+      "week": 8,
+      "topic": "Fair Allocation: Envy-Freeness and Proportionality",
+      "difficulty": "Foundational",
+      "type": "mcq",
+      "marks": 4,
+      "tags": [
+        "Fair allocation",
+        "Envy-freeness",
+        "Proportionality",
+        "Maximin share"
+      ],
+      "sources": [
+        {
+          "title": "Week 8 lecture · Fair allocation of indivisible goods",
+          "document": "week8-lecture.pdf",
+          "pages": [
+            5,
+            6,
+            7,
+            25,
+            26
+          ]
+        }
+      ],
+      "origin": "Adapted practice",
+      "prompt": "Choose the best answer in each subpart.",
+      "subparts": [
+        {
+          "id": "M2-D1-a",
+          "label": "(a)",
+          "marks": 2,
+          "prompt": "For a complete allocation with additive nonnegative valuations, which implication always holds?",
+          "options": [
+            "Proportionality implies envy-freeness for every number of agents.",
+            "EF1 implies proportionality.",
+            "Every allocation is proportional.",
+            "Envy-freeness implies proportionality."
+          ],
+          "answer": 3,
+          "explanation": "Sum $v_i(A_i)\\ge v_i(A_j)$ over all j to obtain $n v_i(A_i)\\ge v_i(G)$. For n≥3 the converse can fail. EF1 does not ensure proportionality."
+        },
+        {
+          "id": "M2-D1-b",
+          "label": "(b)",
+          "marks": 2,
+          "prompt": "Why is $\\mathrm{MMS}_i\\le v_i(G)/n$ for additive valuations?",
+          "options": [
+            "An MMS allocation is always envy-free.",
+            "All partitions have equal-valued bundles.",
+            "The least-valued bundle in any n-way partition cannot exceed the average bundle value.",
+            "Every good has the same value to all agents."
+          ],
+          "answer": 2,
+          "explanation": "For each partition the bundle values sum to $v_i(G)$, so their minimum is at most their average $v_i(G)/n$. Maximizing that minimum over partitions preserves the upper bound."
+        }
+      ],
+      "solution": "<p><strong>(a) Envy-freeness implies proportionality.</strong><br>Sum $v_i(A_i)\\ge v_i(A_j)$ over all j to obtain $n v_i(A_i)\\ge v_i(G)$. For n≥3 the converse can fail. EF1 does not ensure proportionality.</p><p><strong>(b) The least-valued bundle in any n-way partition cannot exceed the average bundle value.</strong><br>For each partition the bundle values sum to $v_i(G)$, so their minimum is at most their average $v_i(G)/n$. Maximizing that minimum over partitions preserves the upper bound.</p>",
+      "reference": "Envy-freeness implies proportionality. Sum $v_i(A_i)\\ge v_i(A_j)$ over all j to obtain $n v_i(A_i)\\ge v_i(G)$. For n≥3 the converse can fail. EF1 does not ensure proportionality.\nThe least-valued bundle in any n-way partition cannot exceed the average bundle value. For each partition the bundle values sum to $v_i(G)$, so their minimum is at most their average $v_i(G)/n$. Maximizing that minimum over partitions preserves the upper bound."
+    },
+    {
+      "id": "M2-D2",
+      "midterm": 2,
+      "paper": null,
+      "set": 9,
+      "week": 8,
+      "topic": "Fair Allocation: Envy-Cycle Elimination",
+      "difficulty": "Foundational",
+      "type": "mcq",
+      "marks": 4,
+      "tags": [
+        "Fair allocation",
+        "Envy-cycle elimination",
+        "EF1"
+      ],
+      "sources": [
+        {
+          "title": "Week 8 lecture · Fair allocation of indivisible goods",
+          "document": "week8-lecture.pdf",
+          "pages": [
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        }
+      ],
+      "origin": "Adapted practice",
+      "prompt": "Choose the best answer in each subpart.",
+      "subparts": [
+        {
+          "id": "M2-D2-a",
+          "label": "(a)",
+          "marks": 2,
+          "prompt": "In the envy graph, $i\\to j$ means i envies j. To whom should the next good be allocated in envy-cycle elimination after removing cycles?",
+          "options": [
+            "Any agent on a remaining envy cycle.",
+            "Always the agent with the largest bundle.",
+            "An agent with no incoming edge.",
+            "An agent with no outgoing edge."
+          ],
+          "answer": 2,
+          "explanation": "No incoming edge means the agent is unenvied. Giving her one new good can create envy that is removed by deleting that good. A finite acyclic directed graph has a vertex with no incoming edge."
+        },
+        {
+          "id": "M2-D2-b",
+          "label": "(b)",
+          "marks": 2,
+          "prompt": "An envy cycle is $1\\to3\\to2\\to1$. How should its bundles rotate?",
+          "options": [
+            "Give all three bundles to agent 1.",
+            "Agent 1 gets old A3; agent 3 gets old A2; agent 2 gets old A1.",
+            "Agent 1 gets old A2; agent 2 gets old A3; agent 3 gets old A1.",
+            "Each agent keeps her bundle and deletes one good."
+          ],
+          "answer": 1,
+          "explanation": "Each agent takes the bundle she envies, following the outgoing edge. Each cycle participant strictly improves in her own valuation; agents outside the cycle keep their bundles."
+        }
+      ],
+      "solution": "<p><strong>(a) An agent with no incoming edge.</strong><br>No incoming edge means the agent is unenvied. Giving her one new good can create envy that is removed by deleting that good. A finite acyclic directed graph has a vertex with no incoming edge.</p><p><strong>(b) Agent 1 gets old A3; agent 3 gets old A2; agent 2 gets old A1.</strong><br>Each agent takes the bundle she envies, following the outgoing edge. Each cycle participant strictly improves in her own valuation; agents outside the cycle keep their bundles.</p>",
+      "reference": "An agent with no incoming edge. No incoming edge means the agent is unenvied. Giving her one new good can create envy that is removed by deleting that good. A finite acyclic directed graph has a vertex with no incoming edge.\nAgent 1 gets old A3; agent 3 gets old A2; agent 2 gets old A1. Each agent takes the bundle she envies, following the outgoing edge. Each cycle participant strictly improves in her own valuation; agents outside the cycle keep their bundles."
+    },
+    {
+      "id": "M2-D3",
+      "midterm": 2,
+      "paper": null,
+      "set": 9,
+      "week": 8,
+      "topic": "Fair Allocation: Maximum Nash Welfare and Pareto Optimality",
+      "difficulty": "Foundational",
+      "type": "mcq",
+      "marks": 4,
+      "tags": [
+        "Fair allocation",
+        "Nash welfare",
+        "EF1",
+        "Pareto optimality"
+      ],
+      "sources": [
+        {
+          "title": "Week 8 lecture · Fair allocation of indivisible goods",
+          "document": "week8-lecture.pdf",
+          "pages": [
+            20,
+            21
+          ]
+        }
+      ],
+      "origin": "Adapted practice",
+      "prompt": "Choose the best answer in each subpart.",
+      "subparts": [
+        {
+          "id": "M2-D3-a",
+          "label": "(a)",
+          "marks": 2,
+          "prompt": "For additive nonnegative valuations, which guarantee does a maximum Nash welfare allocation have, using the lecture’s zero-product tie rule?",
+          "options": [
+            "It maximizes utilitarian welfare as well.",
+            "It is EF1 and Pareto optimal.",
+            "It is always envy-free and proportional.",
+            "It is always EFX."
+          ],
+          "answer": 1,
+          "explanation": "The lecture guarantees EF1 and Pareto optimality for maximum Nash welfare, with the specified rule when some utilities must be zero. These guarantees do not imply envy-freeness, proportionality, or EFX."
+        },
+        {
+          "id": "M2-D3-b",
+          "label": "(b)",
+          "marks": 2,
+          "prompt": "If every complete allocation has Nash product zero, what rule does the lecture prescribe?",
+          "options": [
+            "First maximize the number of agents with positive utility, then their positive-utility product.",
+            "Treat every zero-product allocation as equally good.",
+            "Discard every agent who gets zero utility before allocating.",
+            "Maximize only the largest individual utility."
+          ],
+          "answer": 0,
+          "explanation": "The full product cannot distinguish these allocations. The refinement first maximizes the number of positive-utility agents, then maximizes the product among those agents."
+        }
+      ],
+      "solution": "<p><strong>(a) It is EF1 and Pareto optimal.</strong><br>The lecture guarantees EF1 and Pareto optimality for maximum Nash welfare, with the specified rule when some utilities must be zero. These guarantees do not imply envy-freeness, proportionality, or EFX.</p><p><strong>(b) First maximize the number of agents with positive utility, then their positive-utility product.</strong><br>The full product cannot distinguish these allocations. The refinement first maximizes the number of positive-utility agents, then maximizes the product among those agents.</p>",
+      "reference": "It is EF1 and Pareto optimal. The lecture guarantees EF1 and Pareto optimality for maximum Nash welfare, with the specified rule when some utilities must be zero. These guarantees do not imply envy-freeness, proportionality, or EFX.\nFirst maximize the number of agents with positive utility, then their positive-utility product. The full product cannot distinguish these allocations. The refinement first maximizes the number of positive-utility agents, then maximizes the product among those agents."
+    },
+    {
+      "id": "M2-D4",
+      "midterm": 2,
+      "paper": null,
+      "set": 9,
+      "week": 7,
+      "topic": "Bargaining and Cooperative-Game Definitions",
+      "difficulty": "Foundational",
+      "type": "mcq",
+      "marks": 4,
+      "tags": [
+        "Bargaining",
+        "Nash welfare",
+        "Cooperative games",
+        "Superadditivity",
+        "Convexity"
+      ],
+      "sources": [
+        {
+          "title": "Week 4–5 lecture · Cooperative games",
+          "document": "week4-5-lecture.pdf",
+          "pages": [
+            9,
+            10,
+            29,
+            41
+          ]
+        },
+        {
+          "title": "Week 7 lecture · Stable matching and bargaining",
+          "document": "week7-lecture.pdf",
+          "pages": [
+            45,
+            47,
+            51,
+            52,
+            55
+          ]
+        }
+      ],
+      "origin": "Adapted practice",
+      "prompt": "Choose the best answer in each subpart.",
+      "subparts": [
+        {
+          "id": "M2-D4-a",
+          "label": "(a)",
+          "marks": 2,
+          "prompt": "With disagreement utilities $(d_1,d_2)$, which objective defines the Nash bargaining solution over individually rational feasible outcomes?",
+          "options": [
+            "$(u_1-d_1)(u_2-d_2)$",
+            "$u_1+u_2$",
+            "$\\min(u_1,u_2)$",
+            "$(u_1+d_1)(u_2+d_2)$"
+          ],
+          "answer": 0,
+          "explanation": "Nash bargaining maximizes the product of gains above disagreement, restricting to outcomes with $u_i\\ge d_i$. The product $u_1u_2$ is the special case of zero disagreement utilities."
+        },
+        {
+          "id": "M2-D4-b",
+          "label": "(b)",
+          "marks": 2,
+          "prompt": "Which inequality defines superadditivity for disjoint coalitions S and T?",
+          "options": [
+            "$v(S\\cup T)\\le v(S)+v(T)$",
+            "$v(S)=v(T)$",
+            "$v(S)\\le1$",
+            "$v(S\\cup T)\\ge v(S)+v(T)$"
+          ],
+          "answer": 3,
+          "explanation": "Superadditivity says disjoint coalitions do not lose total value by merging. Convexity is the stronger increasing-marginal-contribution condition; monotonicity compares nested coalitions instead."
+        }
+      ],
+      "solution": "<p><strong>(a) $(u_1-d_1)(u_2-d_2)$</strong><br>Nash bargaining maximizes the product of gains above disagreement, restricting to outcomes with $u_i\\ge d_i$. The product $u_1u_2$ is the special case of zero disagreement utilities.</p><p><strong>(b) $v(S\\cup T)\\ge v(S)+v(T)$</strong><br>Superadditivity says disjoint coalitions do not lose total value by merging. Convexity is the stronger increasing-marginal-contribution condition; monotonicity compares nested coalitions instead.</p>",
+      "reference": "$(u_1-d_1)(u_2-d_2)$ Nash bargaining maximizes the product of gains above disagreement, restricting to outcomes with $u_i\\ge d_i$. The product $u_1u_2$ is the special case of zero disagreement utilities.\n$v(S\\cup T)\\ge v(S)+v(T)$ Superadditivity says disjoint coalitions do not lose total value by merging. Convexity is the stronger increasing-marginal-contribution condition; monotonicity compares nested coalitions instead."
+    },
+    {
+      "midterm": 2,
+      "paper": null,
+      "set": 9,
+      "week": 8,
+      "origin": "Adapted practice",
+      "id": "M2-D5",
+      "topic": "Assignment 8: Welfare, Pareto Improvements, and MMS",
+      "difficulty": "Intermediate",
+      "type": "short",
+      "marks": 8,
+      "tags": [
+        "Fair allocation",
+        "Utilitarian welfare",
+        "Egalitarian welfare",
+        "Maximin share",
+        "Pareto optimality"
+      ],
+      "sources": [
+        {
+          "title": "Assignment 8",
+          "document": "assignment8.pdf",
+          "pages": [
+            1
+          ],
+          "sections": [
+            "Q1(a)",
+            "Q1(b)",
+            "Q1(c)",
+            "Q1(d)"
+          ]
+        },
+        {
+          "title": "Week 8 lecture · Fair allocation of indivisible goods",
+          "document": "week8-lecture.pdf",
+          "pages": [
+            5,
+            9,
+            20,
+            25,
+            26
+          ]
+        }
+      ],
+      "prompt": "<p>Three agents have additive, nonnegative valuations:</p>$$\\begin{array}{c|rrrr}&g_1&g_2&g_3&g_4\\\\\\hline1&40&30&20&10\\\\2&0&40&30&30\\\\3&30&0&20&50\\end{array}$$<p>The specified allocation is $A_1=\\{g_1\\}$, $A_2=\\{g_4\\}$, and $A_3=\\{g_2,g_3\\}$.</p>",
+      "subparts": [
+        {
+          "id": "M2-D5-a",
+          "label": "(a)",
+          "marks": 2,
+          "prompt": "What is the maximum utilitarian welfare over all allocations?",
+          "accepted": [
+            "160"
+          ]
+        },
+        {
+          "id": "M2-D5-b",
+          "label": "(b)",
+          "marks": 2,
+          "prompt": "What is the maximum egalitarian welfare over all allocations?",
+          "accepted": [
+            "40"
+          ]
+        },
+        {
+          "id": "M2-D5-c",
+          "label": "(c)",
+          "marks": 2,
+          "prompt": "Compute the maximin shares (MMS1,MMS2,MMS3).",
+          "accepted": [
+            "(30, 30, 20)",
+            "30, 30, 20"
+          ]
+        },
+        {
+          "id": "M2-D5-d",
+          "label": "(d)",
+          "marks": 2,
+          "prompt": "For the specified allocation A, do all agents receive at least their MMS? Is A Pareto optimal? Enter (Yes/No, Yes/No) in that order.",
+          "accepted": [
+            "(Yes, No)",
+            "Yes, No"
+          ]
+        }
+      ],
+      "solution": "<p><strong>(a)</strong> Give each good to an agent with maximum value: $g_1$ to 1, $g_2,g_3$ to 2, and $g_4$ to 3. The sum is $40+40+30+50=160$.</p><p><strong>(b)</strong> Give $g_1$ to 1, $g_2$ to 2, and $g_3,g_4$ to 3. Utilities are $(40,40,70)$, so minimum welfare 40 is attainable. A minimum above 40 would require all three agents to exceed 40. Four goods split among three nonempty bundles leave at least two singleton bundles, but only $g_4$ has a value above 40 for any agent. This is impossible, so 40 is optimal.</p><p><strong>(c)</strong> Agent 1 can partition into $\\{g_1\\},\\{g_2\\},\\{g_3,g_4\\}$ with minimum 30. Agent 2 can use $\\{g_2\\},\\{g_3\\},\\{g_1,g_4\\}$, also minimum 30. Agent 3 can use $\\{g_1\\},\\{g_3\\},\\{g_2,g_4\\}$ with minimum 20. For agent 1, a minimum above 30 would require at least two singleton goods above 30, but only $g_1$ qualifies. For agent 2 only $g_2$ exceeds 30. For agent 3 only $g_1,g_4$ exceed 20, leaving a bundle of value 20. Hence the MMS vector is $(30,30,20)$.</p><p><strong>(d)</strong> The specified allocation gives $(40,30,20)$, meeting every MMS. It is not Pareto optimal: $B_1=\\{g_1\\}$, $B_2=\\{g_2\\}$, $B_3=\\{g_3,g_4\\}$ gives $(40,40,70)$, improving agents 2 and 3 without hurting agent 1. MMS satisfaction alone does not imply Pareto optimality.</p>",
+      "reference": "Maximum utilitarian welfare 160; maximum egalitarian welfare 40; MMS=(30,30,20). A gives (40,30,20), so it is MMS but not Pareto optimal; allocation {g1};{g2};{g3,g4} Pareto dominates it."
+    },
+    {
+      "midterm": 2,
+      "paper": null,
+      "set": 9,
+      "week": 8,
+      "origin": "Adapted practice",
+      "id": "M2-D6",
+      "topic": "Proof: An Existing MMS Allocation Can Be Pareto Optimal",
+      "difficulty": "Challenging",
+      "type": "proof",
+      "marks": 8,
+      "tags": [
+        "Fair allocation",
+        "Maximin share",
+        "Pareto optimality",
+        "Proof"
+      ],
+      "sources": [
+        {
+          "title": "Assignment 8",
+          "document": "assignment8.pdf",
+          "pages": [
+            1
+          ],
+          "sections": [
+            "Q2"
+          ]
+        },
+        {
+          "title": "Week 8 lecture · Fair allocation of indivisible goods",
+          "document": "week8-lecture.pdf",
+          "pages": [
+            20,
+            25,
+            26
+          ]
+        }
+      ],
+      "prompt": "There are finitely many agents and indivisible goods, with additive nonnegative valuations. Suppose at least one complete allocation gives every agent at least her maximin share. Prove that there exists a complete allocation that is both MMS and Pareto optimal among all complete allocations. Do not assume that every instance has an MMS allocation.",
+      "blueprint": "<div class=\"proof-blueprint\"><h4>Worked proof</h4><p><strong>1. Define the feasible MMS set.</strong><br>Let $\\mathcal M$ be the set of complete allocations A with $v_i(A_i)\\ge\\mathrm{MMS}_i$ for all i. By assumption this set is nonempty. It is finite because there are at most $n^m$ complete assignments of m goods to n agents.</p><p><strong>2. Choose a welfare maximizer within that set.</strong><br>Choose $A^*\\in\\arg\\max_{A\\in\\mathcal M}\\sum_i v_i(A_i)$. A maximizer exists because $\\mathcal M$ is finite and nonempty.</p><p><strong>3. Any Pareto improvement stays MMS.</strong><br>Suppose a complete allocation B Pareto dominates $A^*$. Then $v_i(B_i)\\ge v_i(A_i^*)\\ge\\mathrm{MMS}_i$ for every i, so $B\\in\\mathcal M$.</p><p><strong>4. Derive the contradiction.</strong><br>At least one agent strictly improves and none is worse, so $\\sum_i v_i(B_i)>\\sum_i v_i(A_i^*)$, contradicting maximality within $\\mathcal M$. Thus no complete allocation Pareto dominates $A^*$, which is both MMS and Pareto optimal. The argument is conditional on an MMS allocation existing.</p></div>",
+      "rubric": [
+        "2 marks: Defines a finite, nonempty set of MMS allocations using the assumption.",
+        "2 marks: Selects an allocation maximizing the sum of utilities within that set.",
+        "2 marks: Shows that any Pareto-dominating allocation still satisfies every MMS bound.",
+        "2 marks: Uses strict welfare improvement to contradict maximality and concludes Pareto optimality."
+      ],
+      "reference": "Among the finite nonempty set of MMS allocations, maximize total utility. Any Pareto improvement also meets every MMS bound and strictly raises total utility, a contradiction. Thus the chosen allocation is Pareto optimal and MMS."
+    },
+    {
+      "midterm": 2,
+      "paper": null,
+      "set": 9,
+      "week": 8,
+      "origin": "Adapted practice",
+      "id": "M2-D7",
+      "topic": "Assignment 8: Strong EF1 and Round-Robin",
+      "difficulty": "Intermediate",
+      "type": "mcq",
+      "marks": 4,
+      "tags": [
+        "Fair allocation",
+        "Round-robin",
+        "EF1",
+        "Strong EF1"
+      ],
+      "sources": [
+        {
+          "title": "Assignment 8",
+          "document": "assignment8.pdf",
+          "pages": [
+            1
+          ],
+          "sections": [
+            "Q3"
+          ]
+        },
+        {
+          "title": "Week 8 lecture · Fair allocation of indivisible goods",
+          "document": "week8-lecture.pdf",
+          "pages": [
+            10,
+            11,
+            22
+          ]
+        }
+      ],
+      "prompt": "Strong EF1 (s-EF1) requires that for every nonempty bundle $A_j$, there exists one good $g_j\\in A_j$ such that $v_i(A_i)\\ge v_i(A_j\\setminus\\{g_j\\})$ for every other agent i. Assume additive nonnegative valuations.",
+      "subparts": [
+        {
+          "id": "M2-D7-a",
+          "label": "(a)",
+          "marks": 2,
+          "prompt": "How does the quantifier order differ from ordinary EF1?",
+          "options": [
+            "Ordinary EF1 requires every good to remove all envy.",
+            "Ordinary EF1 and s-EF1 have identical quantifiers.",
+            "Strong EF1 requires one good per envied bundle that works for every observer; ordinary EF1 may use a different good for each observer.",
+            "Strong EF1 requires a different good for every observer, while ordinary EF1 requires the same one."
+          ],
+          "answer": 2,
+          "explanation": "Ordinary EF1 says for every ordered pair $(i,j)$ there exists a suitable good. Strong EF1 says for each j there exists a good that works for all i. Moving the existential quantifier before the observer's universal quantifier makes the requirement stronger."
+        },
+        {
+          "id": "M2-D7-b",
+          "label": "(b)",
+          "marks": 2,
+          "prompt": "Is a fixed-order round-robin allocation always s-EF1? If so, which good can be removed from each nonempty bundle?",
+          "options": [
+            "No; round-robin guarantees only ordinary EF1.",
+            "Yes; remove the first good that the owner picked.",
+            "Yes; remove the last good that the owner picked.",
+            "Yes; remove any good, since round-robin always guarantees EFX."
+          ],
+          "answer": 1,
+          "explanation": "Fix owner j and remove her first pick. Agents earlier in the round-robin order do not envy j even before removal. For any later agent i, i's t-th pick was chosen before j's (t+1)-th pick, so $v_i(a_t)\\ge v_i(b_{t+1})$. Summing gives the required inequality for every observer using the same first good. Nonnegativity handles unmatched goods and empty bundles."
+        }
+      ],
+      "solution": "<p>Strong EF1 asks for a common witness good for each bundle. In round-robin, the owner's first pick is a common witness: earlier agents have no envy, and later agents can compare their picks to the owner's picks starting at the second. This strengthens the usual round-robin EF1 proof.</p>",
+      "reference": "s-EF1 uses one removable good per owner that works for every observer. Fixed cyclic round-robin is s-EF1: remove the owner’s first pick."
+    }
+  ],
+  "practice_sets": [
+    {
+      "id": 1,
+      "midterm": 1,
+      "label": "Midterm 1 · Paper 1"
+    },
+    {
+      "id": 2,
+      "midterm": 1,
+      "label": "Midterm 1 · Paper 2"
+    },
+    {
+      "id": 3,
+      "midterm": 1,
+      "label": "Midterm 1 · Paper 3"
+    },
+    {
+      "id": 4,
+      "midterm": 1,
+      "label": "Midterm 1 · Paper 4"
+    },
+    {
+      "id": 5,
+      "midterm": 1,
+      "label": "Midterm 1 · Paper 5"
+    },
+    {
+      "id": 6,
+      "midterm": 1,
+      "label": "Midterm 1 · Capstone"
+    },
+    {
+      "id": 7,
+      "midterm": 2,
+      "label": "Midterm 2 · Paper 1"
+    },
+    {
+      "id": 8,
+      "midterm": 2,
+      "label": "Midterm 2 · Paper 2"
+    },
+    {
+      "id": 9,
+      "midterm": 2,
+      "label": "Midterm 2 · Topic mastery"
+    }
+  ],
+  "midterms": [
+    {
+      "id": 1,
+      "label": "Midterm 1",
+      "scope": "Weeks 1–3 · Game theory, auctions, facility location, and routing"
+    },
+    {
+      "id": 2,
+      "label": "Midterm 2",
+      "scope": "Cooperative games, bargaining, stable matching, and fair allocation of indivisible goods",
+      "sources": [
+        {
+          "title": "Midterm 2 logistics",
+          "document": "midterm2-logistics.pdf",
+          "pages": [
+            1,
+            2
+          ]
+        }
       ]
     }
   ]

@@ -1,4 +1,5 @@
 let QUESTIONS = [];
+let practiceSets = [];
 let current = 0;
 const revealedSolutions = new Set();
 function freshState() {
@@ -107,6 +108,8 @@ function checkMathMatch(userAns, acceptedList) {
 
 // Filtering
 const practiceSetSelect = document.getElementById("practiceSet");
+const midtermFilter = document.getElementById("midtermFilter");
+const tagFilter = document.getElementById("tagFilter");
 const weekFilter = document.getElementById("weekFilter");
 const typeFilter = document.getElementById("typeFilter");
 const topicFilter = document.getElementById("topicFilter");
@@ -121,6 +124,13 @@ function getFilteredQuestions() {
   const d = diffFilter.value;
 
   return QUESTIONS.filter((q) => {
+    if (
+      midtermFilter.value !== "all" &&
+      String(q.midterm) !== midtermFilter.value
+    )
+      return false;
+    if (tagFilter.value !== "all" && !(q.tags || []).includes(tagFilter.value))
+      return false;
     if (s !== "all" && String(q.set) !== s) return false;
     if (w !== "all" && String(q.week) !== w) return false;
     if (t !== "all" && q.type !== t) return false;
@@ -144,7 +154,8 @@ function renderQuestions() {
     card.className = `question-card ${q.type}`;
     card.id = `card-${q.id}`;
 
-    let setBadgeLabel = q.set <= 5 ? `Paper ${q.set}` : `Set 6: Capstone`;
+    const setBadgeLabel =
+      practiceSets.find((set) => set.id === q.set)?.label || `Set ${q.set}`;
 
     let subpartsHtml = "";
 
@@ -338,7 +349,7 @@ function renderQuestions() {
           <div class="sol-content ${revealedSolutions.has(q.id) ? "is-open" : ""}" id="sol-content-${q.id}">
             ${q.blueprint || ""}
             <div style="margin: 16px 0;">
-              <h4 style="color: var(--gold); margin-bottom: 8px;">8-Mark Grading Rubric:</h4>
+              <h4 style="color: var(--gold); margin-bottom: 8px;">8-Mark Practice Rubric:</h4>
               <ul style="padding-left: 20px; color: var(--text);">
                 ${(q.rubric || []).map((r) => `<li style="margin-bottom: 4px;">${r}</li>`).join("")}
               </ul>
@@ -365,11 +376,13 @@ function renderQuestions() {
 
     card.innerHTML = `
       <div class="question-topline"><span class="mono">QUESTION ${String(idx + 1).padStart(2, "0")} / ${String(list.length).padStart(2, "0")}</span><span class="badge ${q.difficulty === "Challenging" ? "hard" : ""}">${q.difficulty.toUpperCase()}</span></div>
+      <div class="question-tags"><span class="midterm-tag">Midterm ${q.midterm}</span>${(q.tags || []).map((tag) => `<span class="concept-tag">${escapeHtml(tag)}</span>`).join("")}</div>
       <div class="question-topic">${escapeHtml(q.topic)}</div>
       <div class="question-kind">${q.id} · ${setBadgeLabel} · WEEK ${q.week} · ${q.marks} MARKS · ${q.type === "short" ? "CALCULATION" : q.type === "mcq" ? "MULTIPLE CHOICE / YES–NO" : "WRITTEN PROOF"}</div>
       <div class="question-prompt">${q.prompt}</div>
       ${subpartsHtml}
       ${solutionDrawer}
+      ${renderSources(q)}
       <div class="question-actions"><button class="secondary-button" type="button" onclick="go(-1)" ${current === 0 ? "disabled" : ""}>← Previous</button><button class="primary-button" type="button" onclick="go(1)">${current === list.length - 1 ? "Back to first question ↺" : "Next question →"}</button></div>
     `;
 
@@ -401,6 +414,78 @@ function escapeHtml(str) {
         '"': "&quot;",
         "'": "&#39;",
       })[m],
+  );
+}
+
+function sourceLabel(source) {
+  const pages = source.pages?.length
+    ? `PDF ${source.pages.length === 1 ? "p." : "pp."} ${source.pages.join(", ")}`
+    : "";
+  return [source.title, source.document, pages, ...(source.sections || [])]
+    .filter(Boolean)
+    .join(" · ");
+}
+
+function renderSources(q) {
+  if (!q.sources?.length) return "";
+  return `<details class="question-sources"><summary>Course references · ${escapeHtml(q.origin || "Practice")}</summary><ul>${q.sources.map((source) => `<li>${escapeHtml(sourceLabel(source))}</li>`).join("")}</ul><p>Page numbers refer to PDF pages. These are practice questions based on the course materials.</p></details>`;
+}
+
+function replaceOptions(select, entries, allLabel) {
+  const selected = select.value;
+  select.replaceChildren(new Option(allLabel, "all"));
+  for (const [value, label] of entries)
+    select.add(new Option(label, String(value)));
+  if (entries.some(([value]) => String(value) === selected))
+    select.value = selected;
+}
+
+function refreshScopedFilters() {
+  const scoped = QUESTIONS.filter(
+    (q) =>
+      midtermFilter.value === "all" ||
+      String(q.midterm) === midtermFilter.value,
+  );
+  const topics = [...new Set(scoped.map((q) => q.topic))].sort();
+  const tags = [...new Set(scoped.flatMap((q) => q.tags || []))].sort();
+  const weeks = [...new Set(scoped.map((q) => q.week))].sort((a, b) => a - b);
+  const sets = practiceSets.filter(
+    (set) =>
+      midtermFilter.value === "all" ||
+      String(set.midterm) === midtermFilter.value,
+  );
+  const weekLabels = {
+    1: "Game theory",
+    2: "Auctions",
+    3: "Facility location & routing",
+    4: "Cooperative games",
+    5: "Core & Shapley value",
+    6: "Cooperative-game exercises",
+    7: "Stable matching & bargaining",
+    8: "Fair allocation",
+  };
+  replaceOptions(
+    topicFilter,
+    topics.map((topic) => [topic, topic]),
+    "All topics",
+  );
+  replaceOptions(
+    tagFilter,
+    tags.map((tag) => [tag, tag]),
+    "All concepts",
+  );
+  replaceOptions(
+    weekFilter,
+    weeks.map((week) => [
+      week,
+      `Week ${week} · ${weekLabels[week] || "Course material"}`,
+    ]),
+    "All weeks",
+  );
+  replaceOptions(
+    practiceSetSelect,
+    sets.map((set) => [set.id, set.label]),
+    "All sets",
   );
 }
 
@@ -588,24 +673,42 @@ function updateStats() {
 }
 
 function clearFilters() {
-  [practiceSetSelect, weekFilter, typeFilter, diffFilter, topicFilter].forEach(
-    (el) => {
-      el.value = "all";
-    },
-  );
+  [
+    midtermFilter,
+    tagFilter,
+    practiceSetSelect,
+    weekFilter,
+    typeFilter,
+    diffFilter,
+    topicFilter,
+  ].forEach((el) => {
+    el.value = "all";
+  });
   current = 0;
+  refreshScopedFilters();
   renderQuestions();
 }
-[practiceSetSelect, weekFilter, typeFilter, diffFilter, topicFilter].forEach(
-  (el) =>
-    el.addEventListener("change", () => {
-      current = 0;
-      renderQuestions();
-    }),
+[
+  tagFilter,
+  practiceSetSelect,
+  weekFilter,
+  typeFilter,
+  diffFilter,
+  topicFilter,
+].forEach((el) =>
+  el.addEventListener("change", () => {
+    current = 0;
+    renderQuestions();
+  }),
 );
 document
   .getElementById("clearFiltersBtn")
   .addEventListener("click", clearFilters);
+midtermFilter.addEventListener("change", () => {
+  refreshScopedFilters();
+  current = 0;
+  renderQuestions();
+});
 function go(delta) {
   const list = getFilteredQuestions();
   if (!list.length) return;
@@ -696,12 +799,16 @@ document.getElementById("exportMdBtn").addEventListener("click", () => {
   md += `- Total Available Marks: ${shown.reduce((acc, q) => acc + q.marks, 0)}\n\n`;
 
   md += `## Instructions to LLM Grader\n`;
-  md += `You are an expert examiner for NUS CS4261 (Algorithmic Mechanism Design). Grade the student's submission question by question according to the official reference answer, step-by-step logic, and itemized grading rubric provided.\n`;
+  md += `You are an expert examiner for NUS CS4261 (Algorithmic Mechanism Design). Grade the student's submission question by question using the included reference answer, step-by-step logic, and practice rubric.\n`;
   md += `Provide detailed feedback for partial credit, highlight any misconceptions, and return an itemized score table.\n\n`;
 
   shown.forEach((q, i) => {
     md += `---\n\n### Question ${i + 1}: ${q.id} — ${q.topic} (${q.marks} Marks)\n\n`;
     md += `**Setting & Prompt:**\n${q.prompt}\n\n`;
+    md += `**Tags:** Midterm ${q.midterm}; ${(q.tags || []).join("; ")}\n\n`;
+    if (q.sources?.length) {
+      md += `**Course references:**\n${q.sources.map((source) => `- ${sourceLabel(source)}`).join("\n")}\n\n`;
+    }
 
     if (q.subparts) {
       q.subparts.forEach((sp) => {
@@ -738,7 +845,7 @@ document.getElementById("exportMdBtn").addEventListener("click", () => {
       }
     }
 
-    md += `**Official Reference Solution / Blueprint:**\n`;
+    md += `**Reference Solution / Blueprint:**\n`;
     md += `${q.reference || q.solution || q.blueprint || "No reference answer provided."}\n\n`;
 
     if (q.rubric) {
@@ -784,12 +891,8 @@ async function init() {
       throw new Error(`Question bank request failed (${response.status})`);
     const data = await response.json();
     QUESTIONS = shuffled(data.questions);
-    [...new Set(QUESTIONS.map((q) => q.topic))].sort().forEach((topic) => {
-      const option = document.createElement("option");
-      option.value = topic;
-      option.textContent = topic;
-      topicFilter.appendChild(option);
-    });
+    practiceSets = data.practice_sets || [];
+    refreshScopedFilters();
     document.getElementById("load-status").textContent =
       `${QUESTIONS.length} questions ready · randomized`;
     document.getElementById("load-status").classList.add("ready");
